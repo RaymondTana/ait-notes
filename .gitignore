@@ -2,3 +2,4 @@ node_modules/
 _build/
 .DS_Store
 __pycache__/
+update.md
