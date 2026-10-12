@@ -1,0 +1,222 @@
+% Place user-defined commands below.
+
+% Define the \acro command.
+\makeatletter
+\newif\ifFirstPar       \FirstParfalse
+\def\smc{\sc}
+\def\ninepoint{\small}
+\DeclareRobustCommand\SMC{%
+  \ifx\@currsize\normalsize\small\else
+   \ifx\@currsize\small\footnotesize\else
+    \ifx\@currsize\footnotesize\scriptsize\else
+     \ifx\@currsize\large\normalsize\else
+      \ifx\@currsize\Large\large\else
+       \ifx\@currsize\LARGE\Large\else
+        \ifx\@currsize\scriptsize\tiny\else
+         \ifx\@currsize\tiny\tiny\else
+          \ifx\@currsize\huge\LARGE\else
+           \ifx\@currsize\Huge\huge\else
+            \small\SMC@unknown@warning
+ \fi\fi\fi\fi\fi\fi\fi\fi\fi\fi
+}
+\newcommand\SMC@unknown@warning{\TBWarning{\string\SMC: unrecognised
+    text font size command -- using \string\small}}
+\newcommand\textSMC[1]{{\SMC #1}}
+\newcommand\acro[1]{\textSMC{#1}\@}
+
+\makeatother
+
+% command for vectors
+\newcommand{\bv}[1]{\ensuremath{\vec{#1}}}
+% command for unit vectors
+\newcommand{\uv}[2][blank]{%
+\ifthenelse{\equal{#1}{blank}}%
+{\ensuremath{\hat{u}_{#2}}}%
+{}%
+%
+\ifthenelse{\equal{#1}{.}}%
+{\ensuremath{\dot{\hat{u}}_{#2}}}%
+{}%
+%
+\ifthenelse{\equal{#1}{'}}%
+{\ensuremath{\hat{u}'_{#2}}}%
+{}%
+}
+\newcommand{\ui}{\ensuremath{\hat{\imath}}}
+\newcommand{\uj}{\ensuremath{\hat{\jmath}}}
+\newcommand{\uk}{\ensuremath{\hat{k}}}
+
+
+
+\newcommand{\Div}{\mathrm{div}\,}
+
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+\theoremstyle{plain} % Most mathematical statements
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{remark} % Special for remarks
+\newtheorem{remark}[theorem]{Remark}
+
+\theoremstyle{definition} % Upright text
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{fact}[theorem]{Fact}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{observation}[theorem]{Observation}
+
+% above from example
+% below are mine
+
+% Commands
+    % Symbols
+\newcommand{\A}{\ensuremath{\mathcal{A}}}
+\newcommand{\B}{\ensuremath{\mathbb{B}}}
+\newcommand{\C}{\ensuremath{\mathcal{C}}}
+\newcommand{\D}{\ensuremath{\mathcal{D}}}
+\newcommand{\e}{\ensuremath{\epsilon}}
+\newcommand{\F}{\ensuremath{\mathbb{F}}}
+\renewcommand{\H}{\ensuremath{\mathcal{H}}}
+\renewcommand{\L}{\ensuremath{\mathcal{L}}}
+\newcommand{\M}{\ensuremath{\mathcal{M}}}
+\newcommand{\N}{\ensuremath{\mathbb{N}}}
+\renewcommand{\O}{\ensuremath{\mathcal{O}}}
+\renewcommand{\P}{\ensuremath{\mathfrak{p}}}
+\newcommand{\Q}{\ensuremath{\mathbb{Q}}}
+\newcommand{\R}{\ensuremath{\mathbb{R}}}
+\newcommand{\w}{\ensuremath{\omega}}
+\newcommand{\Z}{\ensuremath{\mathbb{Z}}}
+\renewcommand{\Re}{\ensuremath{\text{Re}}}
+\renewcommand{\Im}{\ensuremath{\text{Im}}}
+\newcommand{\GL}{\ensuremath{\text{GL}}}
+\newcommand{\Aut}{\ensuremath{\text{Aut}}}
+\newcommand{\Ann}{\ensuremath{\text{Ann}}}
+\newcommand{\Gal}{\ensuremath{\text{Gal}}}
+\newcommand{\lcm}{\ensuremath{\text{lcm}}}
+\renewcommand{\gcd}{\ensuremath{\text{gcd}}}
+\renewcommand{\^}{\ensuremath{\wedge}}
+\newcommand{\supnorm}{\ensuremath{\triangleright}}
+\newcommand{\supnormeq}{\ensuremath{\trianglerighteq}}
+\newcommand{\subnorm}{\ensuremath{\triangleleft}}
+\newcommand{\subnormeq}{\ensuremath{\trianglelefteq}}
+\newcommand{\weak}{\ensuremath{\rightharpoonup}}
+\newcommand{\weakstar}{\ensuremath{\stackrel{\ast}{\rightharpoonup}}}
+\newcommand{\up}{\ensuremath{\uparrow}}
+\newcommand{\down}{\ensuremath{\downarrow}}
+\newcommand{\OR}{\ensuremath{\vee}}
+\newcommand{\AND}{\ensuremath{\wedge}}
+\newcommand{\bigOR}{\ensuremath{\bigvee}}
+\newcommand{\bigAND}{\ensuremath{\bigwedge}}
+\newcommand{\NOT}{\ensuremath{\lnot}}
+\newcommand{\FV}{\ensuremath{\operatorname{FreeVars}}}
+\newcommand{\length}{\operatorname{length}}
+\newcommand{\dom}{\operatorname{dom}}
+\newcommand{\type}{\operatorname{type}}
+\newcommand{\rng}{\operatorname{rng}}
+\newcommand{\cf}{\operatorname{cf}}
+\newcommand{\Ord}{\operatorname{Ord}}
+\newcommand{\Card}{\operatorname{Card}}
+\newcommand{\Defn}{\operatorname{definition}}
+\newcommand{\TC}{\operatorname{TC}}
+\renewcommand{\Pr}{\operatorname{Pr}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\diam}{\operatorname{diam}}
+\renewcommand{\dim}{\operatorname{dim}}
+\newcommand{\Dim}{\operatorname{Dim}}
+\newcommand{\proves}{\vdash}
+\newcommand{\entails}{\models}
+\newcommand{\Kappa}{\ensuremath{\boldsymbol\kappa}}
+
+    % Templates
+\newcommand{\set}[2]{\ensuremath{\left\{ {#1} : {#2} \right\}}}
+\newcommand{\seq}[1]{\ensuremath{\left\{ {#1} \right\}}}
+\newcommand{\len}[1]{\ensuremath{\operatorname{len}\p{ {#1} }}}
+\newcommand{\abs}[1]{\ensuremath{\left|{#1}\right|}}
+\renewcommand{\d}[3][]{\ensuremath{\frac{d^{#1}{#2}}{d{#3}^{#1}}}}
+\newcommand{\pd}[3][]{\frac{\partial^{#1}{#2}}{\partial{#3}^{#1}}}
+\newcommand{\ang}[1]{\ensuremath{\left<{#1}\right>}}
+\newcommand{\p}[1]{\ensuremath{\left({#1}\right)}}
+\newcommand{\brk}[1]{\ensuremath{\left[{#1}\right]}}
+\newcommand{\bbrk}[1]{\ensuremath{\left\llbracket{#1}\right\rrbracket}}
+\newcommand{\sump}{\ensuremath{\sum_{}^{}{\vphantom{\sum}}'}}
+\newcommand{\eval}[3][]{\ensuremath{\left. {#2} \right\vert_{#3}^{#1}}}
+\newcommand{\restrict}[2]{\ensuremath{{#1}\upharpoonright{#2}}} % restriction for strings or reals
+\newcommand{\littletaller}{\mathchoice{\vphantom{\big|}}{}{}{}}
+\newcommand\restr[2]{{ % restriction for function domains
+  \left.\kern-\nulldelimiterspace % automatically resize the bar with \right
+  #1 % the function
+  \littletaller % pretend it's a little taller at normal size
+  \right|_{#2} % this is the delimiter
+  }}  
+% Define unconditional K
+\newcommand{\K}[2][]{K_{#1}\p{\ensuremath{{#2}}}}
+% Define conditional K (maxmin)
+\newcommand{\Kc}[3][]{K_{#1}\p{\ensuremath{{#2} \mid {#3}}}}
+% % Define conditional K hat (only first argument at precision level) 
+% \newcommand{\hatKc}[3][]{\widehat{K}_{#1}\p{\ensuremath{{#2} \mid {#3}}}}
+
+
+% Define conditional curly/alternative K (minmax)
+\newcommand{\Kcalt}[3][]{\mathcal{K}_{#1}\p{\ensuremath{{#2} \mid {#3}}}}
+% % douwidehat
+% \makeatletter
+% \newcommand{\douwidehat}[2]{%
+%   \sbox0{$\m@th#1\widehat{\hphantom{#2}}$}%
+%   \sbox2{$\m@th#1x$}
+%   \sbox4{$\m@th#1#2$}
+%   \dimen0=\ht0
+%   \advance\dimen0 -.8\ht2
+%   \dimen2=\dp4
+%   \rlap{%
+%     \raisebox{\dimexpr\dimen0-\dimen2}{%
+%       \scalebox{1}[-1]{\box0}%
+%     }%
+%   }%
+%   {#2}%
+% }
+% \makeatother
+% % under widehat hat
+% \newcommand{\uwidehat}[1]{%
+%   \mathpalette\douwidehat{#1}%
+% }
+% Define conditional K' hat
+% \newcommand{\hatKcalt}[3][]{\uwidehat{K}_{#1}\p{\ensuremath{{#2} \mid {#3}}}}
+
+% Define unconditional I (minmin)
+\newcommand{\I}[3][]{I_{#1}\p{\ensuremath{{#2} : {#3}}}}
+% Define conditional I (minmin)
+\newcommand{\Ic}[4][]{I_{#1}\p{\ensuremath{{#2} : {#3} \mid {#4}}}}
+
+% Define conditional curly/alternative I (maxmin)
+\newcommand{\Icalt}[4][]{\mathcal{I}_{#1}\p{\ensuremath{{#2} : {#3} \mid {#4}}}}
+
+% Define unconditional J (Case Lutz)
+\newcommand{\J}[3][]{J_{#1}\p{\ensuremath{{#2} : {#3}}}}
+
+% Define conditional J (minmin)
+\newcommand{\Jc}[4][]{J_{#1}\p{\ensuremath{{#2} : {#3} \mid {#4}}}}
+
+% Define conditional curly/alternative J (maxmin)
+\newcommand{\Jcalt}[4][]{\mathcal{J}_{#1}\p{\ensuremath{{#2} : {#3} \mid {#4}}}}
+
+% Define unconditional m
+\newcommand{\m}[2][]{\mathbf{m}_{#1}\p{\ensuremath{{#2}}}}
+% Define conditional m
+\newcommand{\mc}[3][]{\mathbf{m}\p{\ensuremath{{#2} \mid {#3}}}}
+
+
+\newcommand{\ket}[1]{\ensuremath{\left|{#1}\right>}}
+\newcommand{\bra}[1]{\ensuremath{\left<{#1}\right|}}
+\newcommand{\braket}[2]{\ensuremath{\left<{#1} \middle|{#2} \right>}}
+\newcommand{\obraket}[3]{\ensuremath{\left< {#1} \left| {#2} \right| {#3} \right>}}
+\newcommand{\obraketo}[4]{\ensuremath{\left< {#1} \left| {#2} \middle| {#3} \right| {#4} \right>}}
+\newcommand{\norm}[2][]{\ensuremath{\left|\left| {#2} \right| \right|_{#1}}}
+\newcommand{\floor}[1]{\ensuremath{\left\lfloor{#1}\right\rfloor}}
+\newcommand{\ceil}[1]{\ensuremath{\left\lceil{#1}\right\rceil}}
+\newcommand{\tens}[1]{\mathbin{\mathop{\otimes}\limits_{#1}}}
+\newcommand{\mdim}[2]{\ensuremath{\operatorname{mdim}\p{ {#1} : {#2} }}}
+\newcommand{\Mdim}[2]{\ensuremath{\operatorname{Mdim}\p{ {#1} : {#2} }}}

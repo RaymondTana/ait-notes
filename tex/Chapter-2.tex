@@ -1,0 +1,487 @@
+\chapter{Robustness of Conditional Kolmogorov Complexity}\label{chapter:robustness_conditional_complexity}
+% \epigraph{Geometric properties are characterized by their remaining invariant under the transformations of the principal group.}{Felix Klein \cite{Kle93}}
+
+\section{Robustness of the Lift}
+
+\label{section:Robustness_of_the_Lift}
+
+\subsection{An Alternate Lift}
+
+Recall that in Section~\ref{section:Lifting_Prefix_Complexity_to_Reals}, we specified the standard lift of conditional prefix complexity to Euclidean space. We claim that the order of maximum and minimum in its definition makes no difference asymptotically. That is, suppose we were to alternatively define for $B \subseteq \mathbb{R}^m$ and $C \subseteq \mathbb{R}^n$:
+\begin{align*} 
+    \mathcal{K}(B \mid C) := \min_p \set{\max_q \set{\Kc{p}{q}}{q \in C \cap \mathbb{Q}^n}}{p \in B \cap \mathbb{Q}^m},
+\end{align*}
+and for $x \in \mathbb{R}^m$, $q \in \mathbb{Q}^m$, $y \in \mathbb{R}^n$, and $r, s \in \omega$:
+\begin{align*}
+    \mathcal{K}_{r \mid s}(x \mid y) &:= \mathcal{K}(B_{2^{-r}}(x) \mid B_{2^{-s}}(y)), \text{ and}\\
+    \mathcal{K}_s(p \mid y) &:= \mathcal{K}(\seq{p} \mid B_{2^{-s}}(y)).
+\end{align*}
+
+\begin{theorem}[Robustness of Euclidean Conditional Kolmogorov Complexity]
+    \label{theorem:maxmin_and_minmax_conditional_complexity_equal}
+    Let $m, n \in \omega$. Then, for any $x \in \mathbb{R}^m$, $y \in \mathbb{R}^n$, and $r, s \in \omega$,
+    \begin{align*}
+        \mathcal{K}_{r \mid s}(x \mid y) = K_{r \mid s}(x \mid y),
+    \end{align*}
+    where the equality holds up to $2K(r) + 2K(s) + O_{m, n}(1)$.
+\end{theorem}
+
+We will obtain the above theorem by applying the same proof methods found in \cite{CL14} on the linear sensitivities of $K$ in its precision parameters. In particular, both forms $K$ and $\mathcal{K}$ are well-approximated by dyadic truncation as in Lemma~\ref{maxmin_truncation_for_r_s}. We first recall an important geometric fact from \cite{CL14}. In Euclidean space $\mathbb{R}^m$, it takes a sufficiently small scaling factor $\gamma > 0$ in order to guarantee at least one node
+% knot
+in the lattice $\gamma \mathbb{Z}^m$ lies in a given ball of fixed radius.
+
+\begin{observation}[Observation 3.4 in \cite{CL14}, Observation 3 in \cite{LL18}]
+    \label{observation:grid_in_open_ball}
+    For every $m \in \omega$, $r > 0$, and open ball $B \subseteq \mathbb{R}^m$ of radius $2^{-r}$, 
+    \begin{align*}
+        B \cap 2^{-\p{r + \ceil{\log \sqrt{m}}}} \mathbb{Z}^m \neq \emptyset.
+    \end{align*}
+\end{observation}
+
+Now, we prove linear sensitivities for the alternate lift $\mathcal{K}$.
+
+\begin{lemma}[Linear Sensitivity in the Condition for $\mathcal{K}$]
+    \label{minmax_linear_sensitivity_in_s}
+    For all $m, n \in \omega$, $p \in \mathbb{Q}^m$, $y \in \mathbb{R}^n$, and $s, \Delta s \in \omega$,
+    \begin{align*}
+        \Kcalt[s + \Delta s]{p}{y} \leq \Kcalt[s]{p}{y} \leq \Kcalt[s + \Delta s]{p}{y} + n \Delta s + K(s) + O_n(\log \Delta s) + O_n(1).
+    \end{align*}
+\end{lemma}
+\begin{proof}
+    The first inequality follows by definition. Unpacking the notation, it suffices to show that for any fixed $q \in B_{2^{-s}}(y) \cap \mathbb{Q}^n$,
+    \begin{align*}
+        \Kc{p}{q} \leq \Kcalt[s + \Delta s]{p}{y} + n \Delta s + K(s) + O_n(\log \Delta s) + O_n(1).
+    \end{align*}
+    Note that we have the ability to compute a rational element of the smaller open ball $B_{2^{-(s + \Delta s)}}(y)$ from the fixed, rational element $q$ of the larger open ball $B_{2^{-s}}(y)$: by Observation~\ref{observation:grid_in_open_ball}, there exists an integer tuple $z \in \mathbb{Z}^n$ such that $2^{-s^*} z \in B_{2^{-(s + \Delta s)}}(y - q)$, where $s^* = s + \Delta s + \ceil{\log \sqrt{n}}$. And set $q' := 2^{-s^*} z + q \in B_{2^{-(s + \Delta s)}}(y)$. Notice that
+    \begin{align*}
+        \norm{z} = 2^{s^*} \norm{2^{-s^*}z} \leq 2^{s^*} \p{2^{-s} + 2^{-\p{s + \Delta s}}} = 2^{\ceil{\log \sqrt{n}}} \p{2^{\Delta s} + 1} \leq 2^{\Delta s + \ceil{\log \sqrt{n}} + 1}.
+    \end{align*}
+    By~\eqref{equation:K_bound_int_tuple}, we have
+    \begin{align*}
+        K(z) \leq n \Delta s + O_n(\log \Delta s) + O_n(1).
+    \end{align*}   
+    So, we may conclude
+    \begin{align*}
+        \Kc{p}{q} &\leq \Kc{p}{q'} + \Kc{q'}{q} + O_n(1) \\
+        &\leq \Kcalt[s + \Delta s]{p}{y} + \K{z} + \K{s, \Delta s} + O_n(1)\\
+        &\leq \Kcalt[s + \Delta s]{p}{y} + n \Delta s + K(s) + O_n(\log \Delta s) + O_n(1).
+    \end{align*}    
+\end{proof}
+
+\begin{lemma}[Linear Sensitivity in the Input for $\mathcal{K}$]
+    \label{minmax_linear_sensitivity_in_r}
+    For all $m, n \in \omega$, $x \in \mathbb{R}^m$, $y \in \mathbb{R}^n$, and $r, \Delta r, s \in \omega$,
+    \begin{align*}
+        \Kcalt[r \mid s]{x}{y} \leq \Kcalt[r + \Delta r \mid s]{x}{y} \leq \Kcalt[r \mid s]{x}{y} + m \Delta r + K(r) + O_{m}(\log \Delta r) + O_{m, n}(1).
+    \end{align*}
+\end{lemma}
+\begin{proof}
+    The first inequality follows by definition. Unpacking the notation, it suffices to show for any fixed $p \in B_{2^{-r}}(x) \cap \mathbb{Q}^m$ that 
+    \begin{align*}
+        \Kcalt[r + \Delta r \mid s]{x}{y} \leq \Kcalt[s]{p}{y} + m \Delta r + K(r) + O_{m}(\log \Delta r) + O_{m, n}(1).
+    \end{align*}
+    Note that we have the ability to compute some element of the smaller open ball $B_{2^{-(r + \Delta r)}}(x)$ from a fixed, rational element $p$ of the larger open ball $B_{2^{-r}}(x)$: by Observation~\ref{observation:grid_in_open_ball}, there exists an integer tuple $z \in \mathbb{Z}^m$ for which $2^{-r^*}z \in B_{2^{-(r + \Delta r)}}(x - p)$, where $r^* = r + \Delta r + \ceil{\log \sqrt{m}}$. Then, we take $p' := p + 2^{-r^*} z \in B_{2^{-(r + \Delta r)}}(x)$. Thus, by~\eqref{equation:K_bound_int_tuple},
+    \begin{align*}
+        \Kcalt[r + \Delta r \mid s]{x}{y} &\leq  \Kcalt[s]{p'}{y}\\
+        &\leq \Kcalt[s]{p}{y} + \Kc{p'}{p} + O_{m, n}(1) \\
+        &\leq \Kcalt[s]{p}{y} + \K{z} + \K{r, \Delta r} + O_{m, n}(1)\\
+        &\leq \Kcalt[s]{p}{y} + m \Delta r + K(r) + O_{m}(\log \Delta r) + O_{m, n}(1).
+    \end{align*}
+\end{proof}
+
+\begin{lemma}[Dyadic Truncation Suffices for Condition in $\mathcal{K}$]
+    \label{minmax_truncation_for_s}
+    For all $m, n \in \omega$, $p \in \mathbb{Q}^m$, $y \in \mathbb{R}^n$, and $s \in \omega$,
+    \begin{align*}
+        \abs{\Kcalt[s]{p}{y} - \Kc{p}{\restrict{y}{s}}} \leq \K{s} 
+        % + O_n(\log \log \norm{y}) 
+        + O_n(1).
+    \end{align*}
+\end{lemma}
+\begin{proof}
+    In one direction, we have that $\restrict{y}{s}$ is a rational in a ball about $y$ of radius $2^{-s} \sqrt{n}$. So, $\restrict{y}{s}$ is considered in the evaluation of $\mathcal{K}_{s + \log \sqrt{n}}(p \mid y)$. We appeal to linear sensitivity~\ref{minmax_linear_sensitivity_in_s} in $s$ and use the fact that $\restrict{y}{s} \in B_{2^{-s} \sqrt{n}}(y) \cap \mathbb{Q}^n$ to bound $\mathcal{K}_s(p \mid y)$ from below:
+    \begin{align*}
+        \Kcalt[s]{p}{y} &\geq \Kcalt[s - \log \sqrt{n}]{p}{y} - n \log \sqrt{n} - K(s) - O(\log \log \sqrt{n}) - O(1)\\
+        &\geq \Kc{p}{\restrict{y}{s}} - K(s) - O(n \log n) - O(1).
+    \end{align*}
+    % The extra $O(\log \log \norm{y})$ term comes from having to encode the integer-part of $y$ separately, and then applying~\eqref{equation:K_bound_int_tuple}.
+    In the other direction, unpacking the notation, it suffices to check that:
+    \begin{align*}
+        \Kc{p}{q} \leq \Kc{p}{\restrict{y}{s}} + K(s) + O_n(1)
+    \end{align*}
+    for any fixed $q \in B_{2^{-s}}(y) \cap \mathbb{Q}^n$. Because $\restrict{y}{s} \in B_{2^{-s} (1 + \sqrt{n})}(q) \cap \mathcal{Q}^n_s$ is contained in a set of cardinality no greater than the constant $(2(1 + \sqrt{n}))^n$, we may describe $\restrict{y}{s}$ using $q$, $s$, and a constant number of extra bits depending on $n$. So,
+    \begin{align*}
+        \Kc{p}{q} &\leq \Kc{p}{\restrict{y}{s}} + \Kc{\restrict{y}{s}}{q} + \K{s} + O_n(1) \\
+        &\leq \Kc{p}{\restrict{y}{s}} + K(s) + O_n(1).
+    \end{align*} 
+\end{proof}
+
+\begin{lemma}[Dyadic Truncation Suffices for both Parameters in $\mathcal{K}$]
+    \label{minmax_truncation_for_r_s}
+    For all $m, n \in \omega$, $x \in \mathbb{R}^m$, $y \in \mathbb{R}^n$, and $r, s \in \omega$,
+    \begin{align*}
+        \abs{\Kcalt[r \mid s]{x}{y} - \Kc{\restrict{x}{r}}{\restrict{y}{s}}} \leq K(r) + K(s) + O_{m, n}(1).
+    \end{align*}
+    % O_m(\log \log \norm{x}) + O_n(\log \log \norm{y})
+\end{lemma}
+We could prove this lemma directly using the linear sensitivity of $\mathcal{K}$ in $r$ in Lemma~\ref{minmax_linear_sensitivity_in_r}. But there is a simpler proof using dyadic truncation.
+\begin{proof}
+    Dropping the logarithmic terms in the precision-levels and norms, and using the definitions of $K$ and $\mathcal{K}$:
+    \begin{align*}
+        \Kcalt[r \mid s]{x}{y} &:= \min_p \set{\Kcalt[s]{p}{y}}{p \in B_{2^{-r}}(x) \cap \mathbb{Q}^m}\\
+        &= \min_p \set{\Kc{p}{\restrict{y}{s}}}{p \in B_{2^{-r}}(x) \cap \mathbb{Q}^m} & [\text{Lemma~\ref{minmax_truncation_for_s}}]\\
+        &= \Kc[r]{x}{\restrict{y}{s}} \\
+        &= \Kc{\restrict{x}{r}}{\restrict{y}{s}}. & [\text{Lemma~\ref{maxmin_truncation_for_r}}]
+    \end{align*}
+\end{proof}
+
+Together, the dyadic truncation lemmas~\ref{maxmin_truncation_for_r_s} and~\ref{minmax_truncation_for_r_s} imply that $\Kc{\restrict{x}{r}}{\restrict{y}{s}}$ approximates both $\Kc[r \mid s]{x}{y}$ and $\Kcalt[r \mid s]{x}{y}$ up to logarithmic terms in $r$ and $s$, proving Theorem~\ref{theorem:maxmin_and_minmax_conditional_complexity_equal}.
+
+\subsection{Approximation by $K$-Minimizers}
+
+Conditional complexity is not only well-approximated by dyadic truncation, but also by $K$-minimizers. In particular, we prove conditional versions of the result from \cite{CL14} stating that the lift of conditional complexity to Euclidean space can also be well-approximated by evaluating the conditional complexity of the corresponding $K$-minimizers. This will imply a conditionalized chain rule for conditional complexity. 
+
+Our method makes use of some basic facts established in \cite{CL14} intuitively saying that any $K$-minimizer of an open ball represents the information content essentially possessed by all the other rational points in the ball. 
+
+\begin{lemma}[Lemma 4.3 of \cite{CL14}]
+    \label{K_minimizers_know_least}
+    Let $m, n, \ell \in \omega$, $p \in \mathbb{Q}^m$, $w \in \mathbb{Q}^\ell$, $y \in \mathbb{R}^n$, and $s \in \omega$. If $q \in B_{2^{-s}}(y) \cap \mathbb{Q}^n$ and $q^*$ is a $K$-minimizer of $B_{2^{-s}}(y)$, then
+    \begin{align*}
+        K(p \mid q, w) \leq K(p \mid q^*, w) + K(K(q^*)) + O_n(\log s) + O_n(1).
+    \end{align*}
+\end{lemma}
+
+\begin{corollary}[Corollary 4.4 in \cite{CL14}]
+    \label{corollary:K_minimizer_not_complex}
+    Let $m \in \omega$ and $x \in \mathbb{R}^m$. Suppose $p^* \in \mathbb{Q}^m$ is a $K$-minimizer of $B_{2^{-r}}(x)$, and $p \in B_{2^{-r}}(x) \cap \mathbb{Q}^m$ is some other nearby rational. Then 
+    \begin{align*}
+        K(p^* \mid p) = O_m(\log r) + O_m(1).
+    \end{align*}
+\end{corollary}
+
+Now, we may conclude that $K$-minimizers suffice for computing conditional complexity. We use here that the two lifts of prefix complexity asymptotically agree: $K \approx \mathcal{K}$, where the approximate equality $\approx$ holds up to sub-linear terms in the precision-levels. For the rest of the section, we write (in)equalities up to the logarithmic terms: 
+\begin{align}
+    O_m(\log r) + O_n(\log s) + O_{m, n}(1).
+    \label{equation:logarithmic_factors}
+\end{align}
+
+\begin{proposition}[$K$-minimizers Suffice for Conditional Complexity]
+    \label{lemma:conditional_K_minimizers_suffice}
+    Let $m, n \in \omega$, $x \in \mathbb{R}^m$, $y \in \mathbb{R}^n$, and $r, s \in \omega$. If $p^* \in \mathbb{Q}^m$ and $q^* \in \mathbb{Q}^n$ are each $K$-minimizers of $B_{2^{-r}}(x)$ and $B_{2^{-s}}(y)$, respectively, then
+    \begin{align*}
+        K_{r \mid s}(x \mid y) = K(p^* \mid q^*),
+    \end{align*}
+    where equality holds up to the logarithmic factors given by~\eqref{equation:logarithmic_factors}.
+\end{proposition}
+\begin{proof}
+    Let $(p^*, q^*)$ be the $K$-minimizers for $x$ and $y$ at precisions $r$ and $s$, respectively. Additionally, let $(p', q')$ denote a witness pair to $\Kc[r \mid s]{x}{y}$, and $(p'', q'')$ the same for $\Kcalt[r \mid s]{x}{y}$. Then, dropping any logarithmic terms,
+    \begin{align*}
+        \Kc[r \mid s]{x}{y} &= \Kcalt[r \mid s]{x}{y} & [\text{Theorem~\ref{theorem:maxmin_and_minmax_conditional_complexity_equal}}]\\
+        &= \Kc{p''}{q''}\\
+        &\leq \Kc{p^*}{q''}\\
+        &= \Kc{p^*}{q^*} + \Kc{q^*}{q''}\\
+        &= \Kc{p^*}{q^*} & [\text{Corollary~\ref{corollary:K_minimizer_not_complex}}]\\
+        &= \Kc{p^*}{p'} + \Kc{p'}{q^*}\\
+        &\leq \Kc{p'}{q^*} & [\text{Corollary~\ref{corollary:K_minimizer_not_complex}}]\\
+        &\leq \Kc{p'}{q'}\\
+        &= \Kc[r \mid s]{x}{y}.
+    \end{align*}
+\end{proof}
+
+Now, we aim to prove an approximate, conditional chain rule for $K_{r, s \mid t}$. Theorem~\ref{theorem:chain_rule_mutual_information_r_s} captures the approximate, unconditional chain rule for $K_{r \mid s}$, and it implicitly follows by applying the arguments in Section 4 of \cite{CL14} under the distinct precision-levels $r$ and $s$. We may achieve the conditional version using approximations by $K$-minimizers. 
+
+\begin{lemma}
+    \label{lemma:conditional_pairwise_complexity_by_K_minimizers_and_dyadic_truncation}
+    Let $m, n, \ell \in \omega$, $x \in \mathbb{R}^m$, $y \in \mathbb{R}^n$, $z \in \mathbb{R}^\ell$, and $r, s, t \in \omega$. Denote by $p^*, q^*, w^*$ the $K$-minimizers of $B_{2^{-r}}(x)$, $B_{2^{-s}}(y)$, and $B_{2^{-t}}(z)$, respectively. Then the following equalities hold up to the logarithmic factors given by~\eqref{equation:logarithmic_factors}:
+    \begin{enumerate}[label = (\roman*)]
+        \item $K_{r, s \mid t}(x, y \mid z) = K(p^*, q^* \mid w^*)$,
+        \item $K_{r \mid s, t}(x, y \mid z) = K(p^* \mid q^*, w^*)$.
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    We have two competing notions of $K$-minimizer, now: either unconditional, or conditioned on some extra information $\zeta \in 2^{< \omega}$. Let $p^* \in \mathbb{Q}^m$ be a $K$-minimizer of $B_{2^{-r}}(x)$ and $p^*_\zeta \in \mathbb{Q}^m$ a witness to $K_r(x \mid \zeta)$. We first show that, no matter $\zeta$, the $K$-minimizer $p^*$ also approximately minimizes $K_r(x \mid \zeta)$. By definition,
+    \begin{align}
+        K(p^*_\zeta \mid \zeta) &\leq K(p^* \mid \zeta) \nonumber \\
+        &\leq K(p^*_\zeta \mid \zeta) + K(p^* \mid p^*_\zeta) \nonumber \\
+        &\leq K(p^*_\zeta \mid \zeta) & \nonumber [\text{Lemma~\ref{K_minimizers_know_least}}]\\
+        &= K_r(x \mid \zeta). 
+        \label{K_minimizer_with_condition}
+    \end{align}
+
+    This implies a conditional version of Corollary~\ref{corollary:K_minimizer_not_complex}, where for any $p \in B_{2^{-r}}(x) \cap \mathbb{Q}^m$,
+    \begin{align}
+        K(p^*_\zeta \mid p, \zeta) &\leq K(p^*_\zeta \mid p^*, \zeta) & [\text{Lemma~\ref{K_minimizers_know_least}}] \nonumber \\
+        &= K(p^*_\zeta \mid \zeta) + K(p^* \mid p^*_\zeta, \zeta) - K(p^* \mid \zeta) \nonumber\\
+        &= K(p^* \mid p^*_\zeta, \zeta) & [\text{\eqref{K_minimizer_with_condition}}] \nonumber \\
+        &= 0. & [\text{Corollary~\ref{corollary:K_minimizer_not_complex}}] 
+        \label{K_minimizers_with_condition_know_least_when_conditioned}
+    \end{align}
+
+    Now, we assert $K_{r, s \mid t}(x, y \mid z) \approx K(p^*, q^* \mid w^*)$. Call $w'$ a maximizing witness to $z$ in the definition of $K_{r, s \mid t}(x, y \mid z)$, and let $(p^*_{w'}, q^*_{w'})$ be minimizing witnesses of $K_r(x \mid w')$ and $K_{s}(y \mid w')$, respectively. We follow very similar steps to the proof of Proposition~\ref{lemma:conditional_K_minimizers_suffice}. In one direction:
+    \begin{align*}
+        K_{r, s \mid t}(x, y \mid z) = K_{r, s}(x, y \mid w') &= K(p^*_{w'}, q^*_{w'} \mid w') & [\text{Proposition~\ref{lemma:conditional_K_minimizers_suffice}}]\\
+        &= K(p^*_{w'} \mid w') + K(q^*_{w'} \mid p^*_{w'}, w')\\
+        &= K(p^* \mid w') + K(q^*_{w'} \mid p^*_{w'}, w') & [\text{\eqref{K_minimizer_with_condition}}]\\
+        &\leq K(p^* \mid w') + K(q^*_{w'} \mid p^*, w') & [\text{Lemma~\ref{K_minimizers_know_least}}]\\
+        &= K(q^*_{w'} \mid w') + K(p^* \mid q^*_{w'}, w')\\
+        &\leq K(q^* \mid w') + K(p^* \mid q^*, w') & [\text{Lemma~\ref{K_minimizers_know_least}}]\\
+        &= K(p^*, q^* \mid w')\\
+        &\leq K(p^*, q^* \mid w^*). & [\text{Lemma~\ref{K_minimizers_know_least}}]
+    \end{align*}
+
+    In the reverse direction:
+    \begin{align*}
+        K(p^*, q^* \mid w^*) &\leq K(p^*, q^* \mid w')\\
+        &= K(p^* \mid w') + K(q^* \mid p^*, w')\\
+        &\leq K(p^*_{w'} \mid w') + K(q^* \mid p^*_{w'}, w') + K(p^*_{w'} \mid p^*, w') & [\text{\eqref{K_minimizer_with_condition}}]\\
+        &= K(q^* \mid w') + K(p^*_{w'} \mid q^*, w') & [\text{\eqref{K_minimizers_with_condition_know_least_when_conditioned}}]\\
+        &\leq K(q^*_{w'} \mid w') + K(p^*_{w'} \mid q^*_{w'}, w') + K(q^*_{w'} \mid q^*, w') & [\text{\eqref{K_minimizer_with_condition}}]\\
+        &= K(p^*_{w'}, q^*_{w'} \mid w') & [\text{\eqref{K_minimizers_with_condition_know_least_when_conditioned}}]\\
+        &= K_{r, s \mid t}(x, y \mid z).
+    \end{align*}
+
+    Finally, we move on to proving $K_{r \mid s, t}(x \mid y, z) \approx K(p^* \mid q^*, w^*)$. Let $(q', w')$ be a pair of rationals witnesses for $y$ and $z$ in evaluating $K_{r \mid s, t}(x \mid y, z)$, and let $p^*_{q', w'} \in B_{2^{-r}}(x) \cap \mathbb{Q}^m$ minimize $K_{r}(x \mid q', w')$. Then, 
+    \begin{align*}
+        K_{r \mid s, t}(x \mid y, z) \leq K(p^* \mid q', w') &\leq K(p^* \mid q^*, w^*) & [\text{Lemma~\ref{K_minimizers_know_least}}]\\
+        &\leq K(p^* \mid q', w')\\
+        &= K(p^*_{q', w'} \mid q', w')& [\text{\eqref{K_minimizer_with_condition}}]\\
+        &\leq \Kc{p'}{q', w'} = K_{r \mid s, t}(x \mid y, z).
+    \end{align*}
+\end{proof}
+
+Note that Lemma~\ref{maxmin_truncation_for_r_s} stated with extra conditional information follows from an identical proof to the unconditional version. So, corresponding linear sensitivities hold for $K_{r, s \mid t}(x, y \mid z)$; and dyadic truncation also approximates prefix complexity well in this more general case: $K_{r, s \mid t}(x, y \mid z) \approx K(\restrict{x}{r}, \restrict{y}{s} \mid \restrict{z}{t})$.
+
+The other prefix complexity term from the statement of Lemma~\ref{lemma:conditional_pairwise_complexity_by_K_minimizers_and_dyadic_truncation} is likewise well-approximated through dyadic truncations:
+\begin{align*}
+    K_{r \mid s, t}(x \mid y, z) &= K(p^* \mid q^*, w^*) - K(q^* \mid w^*)\\
+    &= K(\restrict{x}{r}, \restrict{y}{s} \mid \restrict{z}{t}) - K(\restrict{y}{s} \mid \restrict{z}{t}) & [\text{Lemma~\ref{maxmin_truncation_for_r_s}}]\\
+    &= K(\restrict{x}{r} \mid \restrict{y}{s}, \restrict{z}{t}).
+\end{align*}
+
+Finally, Lemma~\ref{lemma:conditional_pairwise_complexity_by_K_minimizers_and_dyadic_truncation} yields the fully conditional chain rule for conditional prefix complexity over Euclidean space.
+
+\begin{theorem}[Conditional Chain Rule for Conditional Complexity]
+    \label{theorem:SOI_conditional_complexity_r_s_t}
+    Let $m, n, \ell \in \omega$, $x \in \mathbb{R}^m$, $y \in \mathbb{R}^n$, $z \in \mathbb{R}^\ell$, and $r, s, t \in \omega$, then the following equalities hold up to the logarithmic factors given by~\eqref{equation:logarithmic_factors}:
+    \begin{align*}
+        K_{r, s \mid t}(x, y \mid z) = K_{r \mid t}(x \mid z) + K_{s \mid r, t}(y \mid x, z).
+    \end{align*}
+    % \begin{enumerate}[label=(\roman*)]
+    %     \item $K_{r, s \mid t}(x, y \mid z) = K_{r \mid t}(x \mid z) + K_{s \mid r, t}(y \mid x, z)$,
+    %     \item $K_{r, s \mid t}(x, y \mid z) = K_{s, r \mid t}(y, x \mid z)$,
+    % \end{enumerate}
+\end{theorem}
+\begin{proof}
+    We simply follow the approximate equalities from the previous result:
+    \begin{align*}
+        K_{r, s \mid t}(x, y \mid z) &= K(p^*, q^* \mid w^*) & [\text{Lemma~\ref{lemma:conditional_pairwise_complexity_by_K_minimizers_and_dyadic_truncation}}]\\
+        &= K(p^* \mid w^*) + K(q^* \mid p^*, w^*)\\
+        &= K_{r \mid t}(x \mid z) + K_{s \mid r, t}(y \mid x, z). & [\text{Lemma~\ref{lemma:conditional_pairwise_complexity_by_K_minimizers_and_dyadic_truncation}}]
+    \end{align*}
+    % \begin{enumerate}[label=(\roman*)]
+    %     \item 
+    %     \item 
+    %     The symmetry of conditional complexity also easily follows from the previous result:
+    %     \begin{align*}
+    %         K_{r, s \mid t}(x, y \mid z) &= K(p^*, q^* \mid w^*) = K(q^*, p^* \mid w^*) = K_{s, r \mid t}(y, x \mid z). & [\text{Lemma~\ref{lemma:conditional_pairwise_complexity_by_K_minimizers_and_dyadic_truncation}}]
+    %     \end{align*}
+    % \end{enumerate}
+\end{proof}
+
+%%---------
+
+\section{Effective Dimension under Uniformly Continuous Maps}
+
+\label{section:Effective_Dimension_under_Uniformly_Continuous_Maps}
+
+\subsection{Uniform and Lipschitz Continuities}
+
+A \textit{uniformly continuous function} is a real function which has a modulus of uniform continuity.
+
+\begin{definition}
+    A \textit{modulus of uniform continuity} for the function $f : \mathbb{R}^m \to \mathbb{R}^n$ is any non-decreasing function $\mu : \omega \to \omega$ such that, for all $x_1, x_2 \in \mathbb{R}^m$ and $r \in \omega$, 
+    \begin{align*}
+        \norm{x_1 - x_2} \leq 2^{-\mu(r)} \implies \norm{f(x_1) - f(x_2)} \leq 2^{-r}.
+    \end{align*}
+\end{definition}
+
+In particular, a uniformly continuous function is called \textit{H{\"o}lder continuous} if it has a modulus of uniform continuity of the form $\mu(r) = \ceil{(r + c) / \alpha}$ where $\alpha > 0$ and $c \in \mathbb{R}$; and \textit{Lipschitz continuous} if it has a modulus of uniform continuity of the form $\mu(r) = r + O(1)$. 
+
+An injection $f: \mathbb{R}^m \to \mathbb{R}^n$ is called \textit{co-uniformly continuous} if it has a uniformly continuous inverse map. We use the prefix ``co'' similarly for maps with H{\"o}lder continuous or Lipschitz continuous inverses. Any modulus of uniform continuity for the inverse of a co-uniformly continuous map $f$ is called an \textit{inverse-modulus} for $f$. A bijection $f : \mathbb{R}^m \to \mathbb{R}^m$ is called \textit{bi-uniformly continuous} if $f$ is both uniformly continuous and co-uniformly continuous. We similarly use ``bi'' in the case of a map and its inverse both being H{\"o}lder or Lipschitz continuous.
+
+Clearly, a map $f: \mathbb{R}^m \to \mathbb{R}^n$ is Lipschitz continuous if and only if there exists $L \geq 0$ such that for each $x_1, x_2 \in \mathbb{R}^m$, 
+\begin{align*}
+    \norm{f(x_1) - f(x_2)} \leq L \cdot \norm{x_1 - x_2}.
+\end{align*}
+We refer to $L$ as a \textit{Lipschitz constant} for $f$.
+
+Likewise, an injection $f: \mathbb{R}^m \to \mathbb{R}^n$ is co-Lipschitz continuous if and only if there exists $C \geq 0$ such that for each $x_1, x_2 \in \mathbb{R}^m$, 
+\begin{align*}
+     C \cdot \norm{x_1 - x_2} \leq \norm{f(x_1) - f(x_2)}.
+\end{align*}
+We refer to $C$ as a \textit{co-Lipschitz constant} for $f$.
+
+More generally, a map $f : \mathbb{R}^m \to \mathbb{R}^n$ is H{\"o}lder continuous if and only if there exist constants $\alpha > 0$ and $L > 0$ such that for each $x_1, x_2 \in \mathbb{R}^m$:
+\begin{align*}
+    \norm{f(x_1) - f(x_2)} \leq L \cdot \norm{x_1 - x_2}^\alpha.
+\end{align*}
+We refer to $\alpha$ as an \textit{exponent} for $f$.
+
+There is also a notion of \textit{local Lipschitz continuity}. Call a function $f : \mathbb{R}^m \to \mathbb{R}^n$ defined on open set to be \textit{locally Lipschitz continuous} if for every $x \in \operatorname{dom}(f)$, there exist an open neighborhood $U \subseteq \operatorname{dom}(f)$ containing $x$ and a constant $L > 0$ such that for each  $x_1, x_2 \in U$, we have
+\begin{align*}
+    \norm{f(x_1) - f(x_2)} \leq L \cdot \norm{x_1 - x_2}.
+\end{align*}
+
+Analogous local definitions exist for the other uniform continuity notions. 
+
+\subsection{Known Results}
+
+Hausdorff dimension is invariant under bi-Lipschitz continuous transformations. This follows from the classical result about Hausdorff dimension under H{\"o}lder continuous transformations (see Proposition 2.2 of \cite{Fal90}). Yet, there is also an effective proof due to J.~Reimann \cite{Rei04}. Reimann further effectivized the result to get a similar statement for effective dimension. In particular, let $f$ be a computable, H{\"o}lder continuous transformation on $2^\omega$ with exponent $\alpha > 0$. Then $f$ is \textit{$\alpha$-expansive}, meaning for any $x \in 2^\omega$, we have $\operatorname{len}(\restrict{f(x)}{r}) \geq \alpha \cdot r$ for all but finitely many $r \in \omega$. This gives for each $x \in 2^\omega$ and $r \in \omega$:
+\begin{align*}
+    K(\restrict{f(x)}{(\alpha \cdot r)}) \leq^+ K(f(\restrict{x}{r})) \leq^+ K(\restrict{x}{r}).
+\end{align*}
+So, for any $X \subseteq 2^\omega$, we have $\dim(f(X)) \leq \dim(X) / \alpha$ in the limit (see Theorem 2.27 of \cite{Rei04}). Thus, effective dimension is invariant under bi-computable, bi-Lipschitz continuous maps. This fact extends to bi-computable maps which are only \textit{locally} bi-Lipschitz continuous.
+
+These basic results mimic the data processing inequalities for mutual dimension by A.~Case and J.~Lutz \cite{CL14}. For instance, recall that Theorem~\ref{theorem:mutual_dimension_invariant_under_computable_bi_Lipshictz} states the mutual dimension between two reals is invariant under computable, bi-Lipschitz maps. Here, we establish analogous results for conditional dimension.
+
+\subsection{Modulus and Data Processing for Conditional Dimension}
+
+We begin our analysis with an analogue of Lemma 6.3 from \cite{CL14}--which applies to the lift of mutual information to Euclidean space--to clarify how conditional prefix complexity behaves under computable, uniformly continuous functions. If $f$ is a computable, Lipschitz continuous map, then there is a computable real number $L \in \mathbb{Q}^+$ serving as a Lipschitz constant for $f$. That is, $f$ has computable modulus $\mu(r) := r + \log L$. With this in mind, we may now state the \textit{modulus and data processing inequalities} for conditional prefix Kolmogorov complexity lifted to Euclidean space.
+
+Recall that we write any (in)equalities for Kolmogorov complexity for the rest of the section up to the sub-linear factors in the precision-levels given by~\eqref{equation:logarithmic_factors}. In contrast, the corresponding (in)equalities for effective dimension are exact.
+
+\begin{lemma}[Forward Modulus and Data Processing Inequalities for Conditional Complexity]
+    \label{lemma:forward_data_processing_conditional}
+    Let $m, n, k \in \omega$, $x \in \mathbb{R}^m$, $y \in \mathbb{R}^n$, and $r, s \in \omega$.
+    
+    \begin{enumerate}[label = (\roman*)]
+        \item If $f: \mathbb{R}^m \to \mathbb{R}^k$ is computable and uniformly continuous with computable modulus $\mu$, then
+        \begin{align*}
+            K_{r \mid s}(f(x) \mid y) \leq K_{\mu(r + 1) \mid s}(x \mid y).
+        \end{align*}
+        In particular, if $f$ is also Lipschitz continuous,
+        \begin{align*}
+            \dim(f(x) \mid y) \leq \dim(x \mid y).
+        \end{align*}
+        \item If $f: \mathbb{R}^n \to \mathbb{R}^k$ is computable and uniformly continuous with computable modulus $\mu$, then
+        \begin{align*}
+            \Kc[r \mid \mu(s + 1)]{x}{y} \leq \Kc[r \mid s]{x}{f(y)}.
+        \end{align*}
+        In particular, if $f$ is also Lipschitz continuous,
+        \begin{align*}
+            \dim(x \mid y) \leq \dim(x \mid f(y)).
+        \end{align*}
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    We start by proving (i). Let $p_{f(x)}^* \in B_{2^{-r}}(f(x))$, $p_x^* \in B_{2^{-\mu(r + 1)}}(x)$ and $q^* \in B_{2^{-s}}(y)$ be $K$-minimizers in their respective open balls. Since $f$ is computable, there is an oracle prefix-free Turing machine $M$ which approximates $f$ arbitrarily well at $p^*_x$ when given $p^*_x$ as an oracle; say, such that for any $r \in \omega$ we have $\abs{M^{p^*_x}(r) - f(p^*_x)} \leq 2^{-(r + 1)}$. Since $\mu$ is a modulus for $f$, $M$ also approximates $f$ arbitrarily well at $x$ when given $p^*_x$ as an oracle, since for any $r$,
+    \begin{align*}
+        \abs{M^{p^*_x}(r) - f(x)} \leq \abs{M^{p^*_x}(r) - f(p^*_x)} + \abs{f(p^*_x) - f(x)} \leq 2^{-(r + 1)} + 2^{-(r + 1)} = 2^{-r}.
+    \end{align*}
+    We use $M^{p^*_x}(r) \in B_{2^{-r}}(f(x))$ to conclude:
+    \begin{align*}
+        \Kc[r \mid s]{f(x)}{y} &= \Kc{p^*_{f(x)}}{q^*} & [\text{Proposition~\ref{lemma:conditional_K_minimizers_suffice}}]\\
+        &\leq\Kc{p^*_{f(x)}}{M^{p^*_x}(r)} +  \Kc{M^{p^*_x}(r)}{q^*}\\
+        &\leq \Kc{M^{p^*_x}(r)}{q^*} & [\text{Corollary~\ref{corollary:K_minimizer_not_complex}}]\\
+        &\leq \Kc{p^*_x}{q^*} & [\text{Theorem~\ref{theorem:bounded_computable_output}}]\\
+        &= \Kc[\mu(r + 1) \mid s]{x}{y}. & [\text{Proposition~\ref{lemma:conditional_K_minimizers_suffice}}]
+    \end{align*}
+    So, if $f$ is indeed Lipschitz continuous, then there is a computable modulus for $f$ of the form $\mu(r) = r + O(1)$, giving
+    \begin{align*}
+        \dim(f(x) \mid y) &= \liminf_{r \to \infty} \frac{K_{r \mid r}(f(x) \mid y)}{r}\\
+        &\leq \liminf_{r \to \infty} \frac{K_{\mu(r + 1) \mid r}(x \mid y)}{r}\\
+        &= \liminf_{r \to \infty} \frac{K_{r + O(1) \mid r}(x \mid y)}{r}\\
+        &= \liminf_{r \to \infty} \frac{K_{r \mid r}(x \mid y)}{r} & [\text{Lemma~\ref{lemma:linearity_with_condition}(i)}]\\
+        &= \dim(x \mid y).
+    \end{align*}
+
+    The proof of (ii) is similar. This time, let $p^* \in B_{2^{-r}}(x)$, $q_y^* \in B_{2^{-\mu(s + 1)}}(y)$, and $q_{f(y)}^* \in B_{2^{-s}}(f(y))$ be $K$-minimizers in their respective open balls. Since $f$ is computable, there is an oracle prefix-free Turing machine $M$ which approximates $f$ arbitrarily well at $q^*_y$ when given $q^*_y$ as an oracle: $\abs{M^{q^*_y}(s) - f(q^*_y)} \leq 2^{-(s + 1)}$. Since $\mu$ is a modulus for $f$, we get that $M$ also approximates $f$ arbitrarily well at $y$ when given $q^*_x$ as an oracle:
+    \begin{align*}
+        \abs{M^{q^*_y}(s) - f(y)} \leq \abs{M^{q^*_y}(s) - f(q^*_s)} + \abs{f(q^*_s) - f(y)} \leq 2^{-(s + 1)} + 2^{-(s + 1)} = 2^{-s}.
+    \end{align*}
+    We use $M^{q^*_y}(s) \in B_{2^{-s}}(f(y))$ to conclude:
+    \begin{align*}
+        \Kc[r \mid \mu(s + 1)]{x}{y} &= \Kc{p^*}{q^*_y} & [\text{Proposition~\ref{lemma:conditional_K_minimizers_suffice}}]\\
+        &= \Kc{p^*}{M^{q^*_y}(s)} + \Kc{M^{q^*_y}(s)}{q^*_y}\\
+        &\leq \Kc{p^*}{M^{q^*_y}(s)} + \Kc{q^*_y}{q^*_y} & [\text{Theorem~\ref{theorem:bounded_computable_output}}]\\
+        &\leq \Kc{p^*}{q^*_{f(y)}} + \Kc{q^*_{f(y)}}{M^{q^*_y}(s)} \\
+        &= \Kc{p^*}{q^*_{f(y)}} & [\text{Corollary~\ref{corollary:K_minimizer_not_complex}}]\\
+        &= \Kc[r \mid s]{x}{f(y)}. & [\text{Proposition~\ref{lemma:conditional_K_minimizers_suffice}}]
+    \end{align*}
+    So, if $f$ is indeed Lipschitz continuous, then there is a computable modulus for $f$ of the form $\mu(r) = r + O(1)$, giving
+    \begin{align*}
+        \dim(x \mid y) &= \liminf_{r \to \infty} \frac{K_{r \mid r}(x \mid y)}{r}\\
+        &= \liminf_{r \to \infty} \frac{K_{r \mid r + O(1)}(x \mid y)}{r} & [\text{Lemma~\ref{lemma:linearity_with_condition}(ii)}]\\
+        &= \liminf_{r \to \infty} \frac{K_{r \mid \mu(r + 1)}(x \mid y)}{r} \\
+        &\leq \liminf_{r \to \infty} \frac{K_{r \mid r}(x \mid f(y))}{r}\\
+        &= \dim(x \mid f(y)).
+    \end{align*}
+\end{proof}
+
+Analogous results hold for when the inverse of a function is computable and uniformly continuous.
+
+\begin{lemma}[Reverse Modulus and Data Processing Inequalities for Conditional Complexity]
+    \label{lemma:reverse_data_processing_conditional}
+    Let $m, n, k \in \omega$, $x \in \mathbb{R}^m$, $y \in \mathbb{R}^n$, and $r, s \in \omega$.
+    \begin{enumerate}[label = (\roman*)]
+        \item If $f: \mathbb{R}^m \to \mathbb{R}^k$ is a co-computable, co-uniformly continuous map with computable inverse-modulus $\mu$, then
+        \begin{align*}
+            K_{r \mid s}(x \mid y) \leq K_{\mu(r + 1) \mid s}(f(x) \mid y).
+        \end{align*}
+        In particular, if $f$ is also co-Lipschitz continuous,
+        \begin{align*}
+            \dim(x \mid y) \leq \dim(f(x) \mid y).
+        \end{align*}
+        \item If $f: \mathbb{R}^n \to \mathbb{R}^k$ is is a co-computable, co-uniformly continuous map with computable inverse-modulus $\mu$, then
+        \begin{align*}
+             \Kc[r \mid \mu(s + 1)]{x}{f(y)} \leq \Kc[r \mid s]{x}{y}.
+        \end{align*}
+        In particular, if $f$ is also co-Lipschitz continuous,
+        \begin{align*}
+            \dim(x \mid f(y)) \leq \dim(x \mid y).
+        \end{align*}
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    Both parts follow by applying the corresponding result in the previous lemma. 
+    \begin{enumerate}[label = (\roman*)]
+        \item Denote $z = f(x) \in \mathbb{R}^k$. Apply Lemma~\ref{lemma:forward_data_processing_conditional}(i) to $f^{-1}$ and $(f^{-1}(z), y)$. 
+        \item Denote $z = f(y) \in \mathbb{R}^k$. Apply Lemma~\ref{lemma:forward_data_processing_conditional}(ii) to $f^{-1}$ and $(x, f^{-1}(z))$.
+    \end{enumerate}
+\end{proof}
+
+\begin{theorem}
+    \label{theorem:conditional_under_biLipschitz}
+    Let $m, n \in \omega$, $x \in \mathbb{R}^m$, and $y \in \mathbb{R}^n$. 
+    \begin{enumerate}[label = (\roman*)]
+        \item If $f: \mathbb{R}^m \to \mathbb{R}^m$ is a bi-computable, bi-Lipschitz continuous map, then
+            \begin{align*}
+                K_{r \mid s}(f(x) \mid y) = K_{r \mid s}(x \mid y); \quad \text{so,} \quad \dim(f(x) \mid y) = \dim(x \mid y).
+            \end{align*}
+        \item If $f: \mathbb{R}^n \to \mathbb{R}^n$ a bi-computable, bi-Lipschitz continuous map, then 
+            \begin{align*}
+                K_{r \mid s}(x \mid f(y)) = K_{r \mid s}(x \mid y); \quad \text{so,} \quad \dim(x \mid f(y)) = \dim(x \mid y).
+            \end{align*}
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    We combine Lemmas~\ref{lemma:forward_data_processing_conditional} and~\ref{lemma:reverse_data_processing_conditional},
+    \begin{enumerate}[label = (\roman*)]
+        \item That $f$ is both Lipschitz continuous and co-Lipschitz continuous implies:
+        \begin{align*}
+            K_{r \mid s}(f(x) \mid y) &\leq K_{r + O(1) \mid s}(x \mid y) & [\text{Lemma~\ref{lemma:forward_data_processing_conditional}(i)}]\\
+            &\leq K_{r \mid s}(x \mid y) & [\text{Lemma~\ref{lemma:linearity_with_condition}(i)}]\\
+            &\leq K_{r + O(1)\mid s}(f(x) \mid y) & [\text{Lemma~\ref{lemma:reverse_data_processing_conditional}(i)}]\\
+            &\leq K_{r \mid s}(f(x) \mid y) & [\text{Lemma~\ref{lemma:linearity_with_condition}(i)}].
+        \end{align*}
+        \item That $f$ is both Lipschitz continuous and co-Lipschitz continuous implies:
+        \begin{align*}
+            K_{r \mid s}(x \mid f(y)) &\leq K_{r \mid s + O(1)}(x \mid f(y)) & [\text{Lemma~\ref{lemma:linearity_with_condition}(ii)}]\\
+            &\leq K_{r \mid s}(x \mid y) & [\text{Lemma~\ref{lemma:reverse_data_processing_conditional}(ii)}]\\
+            &\leq K_{r \mid s + O(1)}(x \mid y) & [\text{Lemma~\ref{lemma:linearity_with_condition}(ii)}]\\
+            &\leq K_{r \mid s}(x \mid f(y)) & [\text{Lemma~\ref{lemma:forward_data_processing_conditional}(ii)}].
+        \end{align*}
+    \end{enumerate}
+\end{proof}
+
+By the properties of Hausdorff dimension, fractal geometry is considered to be the study of fractal properties invariant under the group of bi-Lipschitz continuous transformations \cite{Kle93}. Given the previous result, we may say something similar for effectivized fractal geometry: we study fractal properties which are invariant under the group of bi-computable, bi-Lipschitz continuous transformations \cite{Rei04}.

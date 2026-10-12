@@ -1,0 +1,112 @@
+# MyST project config. Build: `npx myst start` (live preview) or
+# `npx myst build --html` (static site in _build/html).
+version: 1
+project:
+  title: Algorithmic Information Theory
+  description: Notes on algorithmic information theory and effective dimension, ported from Raymond Tana's PhD dissertation.
+  authors:
+    - name: Raymond Tana
+  github: https://github.com/RaymondTana/ait-notes
+  bibliography:
+    - tex/refs.bib
+  # Only equations the PDF numbers carry numbers; the converter sets each one
+  # explicitly (:enumerator:), so turn off MyST's automatic equation numbering.
+  numbering:
+    equation: false
+  # Macros from SupplementaryMaterial/UserDefinedCommands.tex, translated to
+  # KaTeX. KaTeX cannot take optional arguments, so each macro of the form
+  # \Kc[r]{x}{y} gets a twin \KcAt{r}{x}{y}; the converter rewrites calls.
+  math:
+    # symbols
+    '\A': '\mathcal{A}'
+    '\B': '\mathbb{B}'
+    '\C': '\mathcal{C}'
+    '\D': '\mathcal{D}'
+    '\e': '\epsilon'
+    '\F': '\mathbb{F}'
+    '\H': '\mathcal{H}'
+    '\L': '\mathcal{L}'
+    '\M': '\mathcal{M}'
+    '\N': '\mathbb{N}'
+    '\O': '\mathcal{O}'
+    '\P': '\mathfrak{p}'
+    '\Q': '\mathbb{Q}'
+    '\R': '\mathbb{R}'
+    '\w': '\omega'
+    '\Z': '\mathbb{Z}'
+    '\OR': '\vee'
+    '\AND': '\wedge'
+    '\NOT': '\lnot'
+    '\up': '\uparrow'
+    '\down': '\downarrow'
+    '\proves': '\vdash'
+    '\entails': '\models'
+    '\Kappa': '\boldsymbol\kappa'
+    # operators
+    '\length': '\operatorname{length}'
+    '\dom': '\operatorname{dom}'
+    '\rng': '\operatorname{rng}'
+    '\rank': '\operatorname{rank}'
+    '\diam': '\operatorname{diam}'
+    '\dim': '\operatorname{dim}'
+    '\Dim': '\operatorname{Dim}'
+    '\argmin': '\operatorname*{arg\,min}'
+    '\argmax': '\operatorname*{arg\,max}'
+    # templates
+    '\set': '\left\{ {#1} : {#2} \right\}'
+    '\seq': '\left\{ {#1} \right\}'
+    '\len': '\operatorname{len}\left( {#1} \right)'
+    '\abs': '\left|{#1}\right|'
+    '\ang': '\left<{#1}\right>'
+    '\p': '\left({#1}\right)'
+    '\brk': '\left[{#1}\right]'
+    # KaTeX has no \left\llbracket; two \left[ pulled together with negative
+    # space give double brackets that still resize with their contents.
+    '\bbrk': '\left[\!\left[{#1}\right]\!\right]'
+    '\restrict': '{#1}\upharpoonright{#2}'
+    '\floor': '\left\lfloor{#1}\right\rfloor'
+    '\ceil': '\left\lceil{#1}\right\rceil'
+    '\norm': '\left|\left| {#1} \right| \right|'
+    '\normAt': '\left|\left| {#2} \right| \right|_{#1}'
+    '\mdim': '\operatorname{mdim}\left( {#1} : {#2} \right)'
+    '\Mdim': '\operatorname{Mdim}\left( {#1} : {#2} \right)'
+    # complexity notions: \X{...} and \XAt{subscript}{...}
+    '\K': 'K\left({#1}\right)'
+    '\KAt': 'K_{#1}\left({#2}\right)'
+    '\Kc': 'K\left({#1} \mid {#2}\right)'
+    '\KcAt': 'K_{#1}\left({#2} \mid {#3}\right)'
+    '\Kcalt': '\mathcal{K}\left({#1} \mid {#2}\right)'
+    '\KcaltAt': '\mathcal{K}_{#1}\left({#2} \mid {#3}\right)'
+    '\I': 'I\left({#1} : {#2}\right)'
+    '\IAt': 'I_{#1}\left({#2} : {#3}\right)'
+    '\Ic': 'I\left({#1} : {#2} \mid {#3}\right)'
+    '\IcAt': 'I_{#1}\left({#2} : {#3} \mid {#4}\right)'
+    '\Icalt': '\mathcal{I}\left({#1} : {#2} \mid {#3}\right)'
+    '\IcaltAt': '\mathcal{I}_{#1}\left({#2} : {#3} \mid {#4}\right)'
+    '\J': 'J\left({#1} : {#2}\right)'
+    '\JAt': 'J_{#1}\left({#2} : {#3}\right)'
+    '\Jc': 'J\left({#1} : {#2} \mid {#3}\right)'
+    '\JcAt': 'J_{#1}\left({#2} : {#3} \mid {#4}\right)'
+    '\Jcalt': '\mathcal{J}\left({#1} : {#2} \mid {#3}\right)'
+    '\JcaltAt': '\mathcal{J}_{#1}\left({#2} : {#3} \mid {#4}\right)'
+    '\m': '\mathbf{m}\left({#1}\right)'
+    '\mAt': '\mathbf{m}_{#1}\left({#2}\right)'
+    '\mc': '\mathbf{m}\left({#1} \mid {#2}\right)'
+  toc:
+    - file: index.md
+    - title: 'Chapter 1: Introduction'
+      children:
+        - pattern: notes/ch1/*.md
+    - title: 'Chapter 2: Robustness of Conditional Kolmogorov Complexity'
+      children:
+        - pattern: notes/ch2/*.md
+    - title: Appendix
+      children:
+        - file: notes/appendix/background.md
+site:
+  template: book-theme
+  options:
+    style: assets/custom.css
+    logo_text: Raymond Tana
+    logo_url: https://raymondtana.github.io/
+    folders: true

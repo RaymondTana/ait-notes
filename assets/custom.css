@@ -1,0 +1,21 @@
+/* LaTeX's enumerate[label=(\roman*)] -> "(i)", "(ii)", ... */
+.roman-list ol,
+.alpha-list ol {
+  list-style: none;
+  counter-reset: item;
+  padding-left: 2.5em;
+}
+.roman-list ol > li,
+.alpha-list ol > li {
+  counter-increment: item;
+  position: relative;
+}
+.roman-list ol > li::before,
+.alpha-list ol > li::before {
+  position: absolute;
+  left: -2.5em;
+  width: 2em;
+  text-align: right;
+}
+.roman-list ol > li::before { content: "(" counter(item, lower-roman) ")"; }
+.alpha-list ol > li::before { content: "(" counter(item, lower-alpha) ")"; }

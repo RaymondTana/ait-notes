@@ -1,0 +1,14 @@
+{
+  "name": "ait-notes",
+  "version": "1.0.0",
+  "description": "Algorithmic information theory notes (MyST)",
+  "scripts": {
+    "convert": "python3 tools/tex2myst.py > tools/last_report.txt && head -1 tools/last_report.txt",
+    "start": "myst start",
+    "build": "myst build --html"
+  },
+  "dependencies": {
+    "mystmd": "^1.11.0"
+  },
+  "private": true
+}

@@ -1,0 +1,426 @@
+\chapter{Continuous, Absolutely Lipschitz Families}\label{chapter:CALFs}
+% \epigraph{Quote.}{Trustworthy person}
+
+\section{Background}
+
+It is an interesting and difficult problem to describe how effective Hausdorff dimension behaves as a function over Euclidean space. One approach towards a partial characterization involves tracking the effective dimension along function graphs. For instance, given a function $f : \mathbb{R} \to \mathbb{R}$, we ask how $\dim(x, f(x))$ might relate to $\dim(x)$ and $f$? If $f$ is both computable and Lipschitz continuous, Lemma~\ref{lemma:forward_data_processing_conditional}(i) implies $\dim(x, f(x)) = \dim(x)$. But when $f$ is not computable nor Lipschitz continuous, showing a relation is more difficult. It may be that $f$ is parameterized by some real tuple $\boldsymbol{\alpha}$ and computable as a map given $\boldsymbol{\alpha}$ as an oracle. What sort of uniform continuity properties should $f$ possess in order to relate $\dim(x, f(x))$ back to the dimensions of $x$ and the parameters in $\boldsymbol{\alpha}$?
+
+The following theorem was originally proved in 2017 by N.~Lutz and D.~Stull \cite{LS16}. It states that the effective dimension of a point on a line in the Euclidean plane may be bounded from below by a sum of terms depending on the effective dimensions of the input, slope, and intercept.
+
+\begin{theorem}[Theorem 1 in \cite{LS16}] \label{theorem:original_infinitary}
+    For every $a, b, x \in \mathbb{R}$ and $B \in 2^{\leq \omega}$,
+    \begin{align}
+        \label{equation:original_lower_bound_result}
+        \dim^B(x, ax + b) \geq \dim^B(x | a, b) + \min \seq{\dim^B(a, b), \dim^{B, a, b}(x)}.
+    \end{align}
+    In particular, for almost every $x \in \mathbb{R}$, $\dim(x, ax + b) = 1 + \min \seq{\dim(a, b), 1}$.
+\end{theorem}
+
+This is the prototypical example for relating $\dim(x, f(x))$ to the dimensions of $x$ and the parameterization of $f$. Lutz and Stull employed prefix Kolmogorov complexity to prove this result. And as a consequence, they achieved a better lower bound on the classical Hausdorff dimension of generalized sets of Furstenberg type than were known at the time (see Theorem 4.3 of \cite{LS16}). The bound follows from an application of the Point-to-Set Principle~\ref{theorem:PTS_for_H_dimension}. 
+
+The original proof method for Theorem~\ref{theorem:original_infinitary} might be described as following a sequence of three lemmas:
+\begin{itemize}
+    \item \textbf{Inverse Lemma}: Lower-bounding the complexity of a point found in the intersection of many sufficiently complex tubes. 
+    \item \textbf{Enumeration Lemma}: Lower-bounding the complexity of tubes passing through a fixed point.
+    \item \textbf{Oracle Construction}: Building an oracle with knowledge about a fixed tube passing through a fixed point, and not much more. 
+\end{itemize}
+
+A simplified proof of Theorem~\ref{theorem:original_infinitary} might first attempt to ``frontload'' the Kolmogorov complexity methods to achieve a \textit{finitary} theorem on finite binary strings. Then, one could pass to the limit-inferior and obtain an \textit{infinitary} theorem about effective dimensions. This sort of separation of effective methods from the approximation step is made possible by the results covered in Section~\ref{section:Robustness_of_the_Lift}. Initially, A.~Case and J.~Lutz proved prefix complexity could be approximated by $K$-minimizers: see Lemma~4.9 of \cite{CL14}. We confirmed this for conditional complexity as well in Lemma~\ref{lemma:conditional_K_minimizers_suffice}. Together, N.~Lutz and D.~Stull showed that conditional complexity is also approximated by dyadic truncations: see Lemma~A.1 (\ref{maxmin_truncation_for_r}) and Lemma~A.3  (\ref{maxmin_truncation_for_r_s}) of \cite{LS16}. 
+
+A finitary result is not totally straightforward. The following example by Alexander~Shen makes this apparent. Let us call two finitary objects $u$ and $v$ to be \textit{independently random} if:
+\begin{align*}
+    K(u, v) = K(u) + K(v) = \operatorname{len}(u) + \operatorname{len}(v),
+\end{align*}
+% \begin{align*}
+%     K(u) \approx \operatorname{len}(u), \quad K(v) \approx \operatorname{len}(v), \quad \text{and} \quad K(u \mid v) \approx K(v \mid u) \approx 0.
+% \end{align*}
+where each equality holds up to logarithmic terms in the lengths of $u$ and $v$. 
+\begin{example}
+    Fix $r \in \omega$ and the $r$-dyadic reals $a, b, x \in \mathbb{D}_r$ as follows. Take,
+    \begin{align*}
+        a = 0.\underbrace{0\cdots 0}_{\frac{r}{2} \text{-many}} \bar{a}_{\text{rand}}, \quad \text{and} \quad b = 0.\underbrace{0\cdots 0}_{\frac{r}{2} \text{-many}} \bar{b}_{\text{rand}},
+    \end{align*}
+    where the binary strings $\bar{a}_{\text{rand}}, \bar{b}_{\text{rand}} \in 2^{\floor{r / 2}}$ are independently random. And select $x$ to be independently random with respect to the pair $\ang{a, b}$. 
+
+    It remains to see whether $a$, $b$, and $x$ satisfy a finitary version of~\eqref{equation:original_lower_bound_result}. Denote by $y = \restrict{(ax + b)}{r}$. We ask whether
+    \begin{align}
+        \label{equation:natural_hope_lower_bound_result}
+        K(x, y) \stackrel{?}{\geq} K(x \mid a, b) + \min \seq{K(a, b), K(x \mid a, b)}.
+    \end{align}
+
+    Note that $K(y) \leq \frac{r}{2}$ holds up to logarithmic terms in $r$, for the first approximately $\frac{r}{2}$-bits in the binary expansion of $y$ will be zero. Again dropping any logarithmic terms in $r$, we may calculate:
+    \begin{align*}
+        K(x, y) \leq K(x) + K(y) \leq r + \frac{r}{2} &= \frac{3r}{2}\\
+        &< 2r = r + r = K(x \mid a, b) + \min \seq{K(a, b), K(x \mid a, b)}.        
+    \end{align*}
+    So,~\eqref{equation:natural_hope_lower_bound_result} fails for such a choice of $a$, $b$, and $x$ for large enough $r$.
+\end{example}
+
+This example illustrates the main issue in obtaining a finitary theorem from which to derive Theorem~\ref{theorem:original_infinitary}: the line's parameters (or input) may not consistently achieve high complexity across their truncations, possibly producing too simple of an output. Theorem~\ref{theorem:finitary} below only applies to finitary parameters and inputs whose truncations grow at least as fast as some consistent rate. 
+
+% In essence, these results say that the complexity of a real $x$ up to precision-level $r \in \omega$ matches the complexity of the first $r$ bits in the binary expansion of $x$. That is, $K_r(x) \approx K(\restrict{x}{r})$. So the $r$-dyadic truncation is an approximate $K$-minimizer within the open ball $B_{2^{-r}}(x)$ about $x$. And evaluating the complexity of a single rational can be much simpler than evaluating the minimum of complexities across all rationals in an open ball. This approximation by dyadic truncations further holds in the case of conditional complexity. 
+
+% Recall the discussion of Section~\ref{section:Effective_Dimension_under_Uniformly_Continuous_Maps}. Uniformly continuous functions may be characterized as maps which propagate errors in a uniform way. Lipschitz continuous functions do so in a linear way. In \cite{CL14}, A. Case and J. Lutz introduced their \textit{data and modulus processing lemmas} to describe how the algorithmic versions of \textit{mutual information} and \textit{mutual dimension} behave under uniformly continuous transformations. In particular, they show mutual dimension is robust to bi-computable, bi-Lipschitz transformations. We build on their work to conclude that conditional effective Hausdorff dimension is similarly robust to bi-computable, bi-Lipschitz transformations. 
+
+We further consider the continuity and algorithmic properties of the family of planar lines which make Theorem~\ref{theorem:original_infinitary} possible.  Any planar line $f$ may be represented in slope-intercept form: $f(x) = ax + b$, meaning the finite tuple $(a, b) \in \mathbb{R}^2$ serves as a parameterization of $f$ under slope-intercept form. Let $(u, v)$ be the slope-intercept representation of another planar line $g$. The first geometric property is referred to as the \textit{Intersecting Tubes Lemma}, which approximately states that whenever $f(x) = g(x)$ yet $a \neq u$, one may approximate $x$ by the quantity $\frac{b - v}{u - a}$ up to a precision that improves as $a$ and $u$ become more orthogonal as slopes. This could be seen as a consequence of linear functions being co-Lipschitz continuous. Second, when represented in slope-intercept form, the function $f$ is nothing more than the composition of a single multiplication followed by a single addition on some input: $f(x) = ax + b$. Lines thereby have the following property: one may use rational approximations to $a$, $b$, and $x$ to compute a similarly precise approximation to the output, $f(x)$. This property is a bit weaker than Lipschitz continuity for $f$, since the precision to which we can approximate $f(x)$ will also depend (linearly) on the sizes of $\abs{a}$ and $\abs{x}$. We investigate whether any function family which is sufficiently Lipschitz and co-Lipschitz continuous as above should also admit a lower bound result of the same form as in Theorem~\ref{theorem:original_infinitary}. 
+
+% That we employ prefix Kolmogorov complexity makes little difference to the result: many of the standard algorithmic entropies are equivalent up to sublinear terms. But we fix ourselves to prefix Kolmogorov complexity for simplicity of argument. 
+
+\section{Computable Absolutely Lipschitz Families}
+
+\label{section:CALF}
+
+\subsection{Definition of a CALF}
+
+We are interested in capturing the computability and algebraic properties of families of curves or surfaces like the planar lines. So we will only consider maps of the form $\Phi : \mathbb{R}^m \times \mathbb{R}^\ell \to \mathbb{R}^n$, where the first $m$ components of the arguments encode a parameterization of some function in the family, and the following $\ell$ components serve as input. Given any such $\Phi$ and open subsets $\Omega \subseteq \mathbb{R}^m$ and $\Xi \subseteq \mathbb{R}^\ell$ (which we call our \textit{domains}), we might define the family of all parameterized, real-valued functions under $\Phi$ on domain $\Omega \times \Xi$:
+\begin{align*}
+    \mathcal{F}_\Phi(\Omega \times \Xi) = \set{\Phi^{\boldsymbol{\alpha}}}{\boldsymbol{\alpha} \in \Omega},
+\end{align*}
+where $\Phi^{\boldsymbol{\alpha}} : \Xi \to \mathbb{R}^n$ denotes the map $x \mapsto \Phi(\boldsymbol{\alpha}, x)$. And since we are also interested in statements about finitary inputs, we further denote for any $r \in \omega$,
+\begin{align*}
+    \Omega_r := \restrict{\Omega}{r} = \set{\restrict{\boldsymbol{\alpha}}{r}}{\boldsymbol{\alpha} \in \Omega} \subseteq \mathbb{D}^m_r,
+\end{align*}
+and let $\Omega_{<\omega}$ be the union of all $\Omega_r \subseteq \mathbb{D}^m$. Analogous notation will apply for $\Xi$.
+
+Since the domain $\Omega$ is assumed to be open, we have for any $\boldsymbol{\alpha} \in \Omega$ that there exists $r \gg 1$ for which $\restrict{\boldsymbol{\alpha}}{r} \in \Omega_r \cap \Omega$. An analogous statement holds for $\Xi$. This will be useful for reducing our infinitary theorem to the finitary case. 
+
+Locally, certain parameter components may or may not (linearly) depend on the input $x$. Let us fix a way to distinguish between these two behaviors. Fix any two parameters $\boldsymbol{\alpha}, \boldsymbol{\beta} \in \Omega \subseteq \mathbb{R}^m$. A component $0 \leq i < m$ will be considered \textit{roughly constant} for $\Phi$ at $\boldsymbol{\alpha}$ and $\boldsymbol{\beta}$ if, for each $\boldsymbol{\alpha}', \boldsymbol{\beta}'$ which differ from $\boldsymbol{\alpha}, \boldsymbol{\beta}$ only at component $i$, and for all $x \in \Xi$,
+\begin{align*}
+    \norm{(\Phi^{\boldsymbol{\alpha'}}(x) - \Phi^{\boldsymbol{\beta'}}(x)) - (\Phi^{\boldsymbol{\alpha}}(x) - \Phi^{\boldsymbol{\beta}}(x))} \leq 
+    O\p{\norm{\boldsymbol{\alpha}' - \boldsymbol{\alpha}} + \norm{\boldsymbol{\beta}' - \boldsymbol{\beta}}}
+\end{align*}
+independently of $x$. Otherwise, the component $i$ will be considered \textit{co-Lipschitz} for $\Phi$. We collect into the tuple $(\boldsymbol{\alpha} - \boldsymbol{\beta})_{\operatorname{cL}}$ all differences $\boldsymbol{\alpha}_i - \boldsymbol{\beta}_i$ where $i$ is a co-Lipschitz component for $\Phi$ at $\boldsymbol{\alpha}$ and $\boldsymbol{\beta}$.
+
+\begin{definition}
+    A \textit{computable absolutely Lipschitz family (CALF)} on a domain $\Omega \times \Xi \subseteq \mathbb{R}^m \times \mathbb{R}^\ell$ is a partial-computable map $\Phi : \Omega \times \Xi \to \mathbb{R}^n$ such that 
+    \begin{enumerate}[label = (\roman*)]
+        \item $\Phi$ is \textit{scaling Lipschitz continuous}. That is, for all $\boldsymbol{\alpha}, \boldsymbol{\beta} \in \Omega$ and $x_1, x_2 \in \Xi$,
+        \begin{align*}
+            \norm{\Phi^{\boldsymbol{\alpha}}(x_1) - \Phi^{\boldsymbol{\beta}}(x_2)} \leq &\p{O(\norm{x_1}) + O(1) + o(1)} \cdot \norm{\boldsymbol{\alpha} - \boldsymbol{\beta}}\\
+            &+ (O(\norm{\boldsymbol{\alpha}}) + O(1)) \cdot \norm{x_1 - x_2},
+        \end{align*}
+        where the $o(1)$ term vanishes as $\norm{x_1 - x_2} \to 0$.
+        \item $\Phi$ has \textit{scaling co-Lipschitz continuous differences}. That is, for all $\boldsymbol{\alpha}, \boldsymbol{\beta} \in \Omega_{< \omega}$, it holds that $\Phi^{\boldsymbol{\alpha}} - \Phi^{\boldsymbol{\beta}}$ is either constant or \textit{scaling co-Lipschitz continuous}, meaning for all $x_1, x_2 \in \Xi$,
+        \begin{align*}
+            \norm{(\boldsymbol{\alpha} - \boldsymbol{\beta})_{\operatorname{cL}}} \cdot \norm{x_1 - x_2} &= O_{\norm{x_1}, \norm{x_2}}\p{\norm{(\Phi^{\boldsymbol{\alpha}}(x_1) - \Phi^{\boldsymbol{\beta}}(x_1)) - (\Phi^{\boldsymbol{\alpha}}(x_2) - \Phi^{\boldsymbol{\beta}}(x_2))}},
+        \end{align*}
+        where the constant may depend on $\norm{x_1}$ and $\norm{x_2}$;
+        and there is an algorithm deciding this from $\boldsymbol{\alpha}$ and $\boldsymbol{\beta}$.  
+        \item $\Phi$ has \textit{dense intersections}. That is, for all $r \in \omega$, $\boldsymbol{\alpha} \in \Omega_{r}$, and $x \in \Xi$, there is an algorithm using $\restrict{x}{r}$ and $\restrict{\Phi^{\boldsymbol{\alpha}}(x)}{r}$ (as well as $r$, $m$, $n$, $\ell$, and $\restrict{\boldsymbol{\alpha}}{O(1)}$) to compute a $(2^{-r} \cdot  O_{\norm{\boldsymbol{\alpha}}, \norm{x}, m, n}(1))$-approximation to some $\boldsymbol{\beta} \in B_{2^{-r} \cdot O_{\norm{\boldsymbol{\alpha}}, \norm{x}, m, n}(1)}(\boldsymbol{\alpha}) \cap \Omega_r$ satisfying $\Phi^{\boldsymbol{\alpha}} - \Phi^{\boldsymbol{\beta}}$ is scaling co-Lipschitz continuous with $-\log_2 \norm{(\boldsymbol{\alpha} - \boldsymbol{\beta})_{\operatorname{cL}}} \leq r - O_{\norm{\boldsymbol{\alpha}}, \norm{x}, m, n}(1)$.
+    \end{enumerate}
+\end{definition}
+
+\begin{definition}
+    Let $\Phi$ be a CALF on $\Omega \times \Xi$. We fix a measure of similarity between two parameters $\boldsymbol{\alpha}, \boldsymbol{\beta} \in \Omega$ as follows:
+    \begin{align*}
+        S(\boldsymbol{\alpha}, \boldsymbol{\beta}) = -\log \norm{(\boldsymbol{\alpha} - \boldsymbol{\beta})_{\operatorname{cL}}}.
+    \end{align*}
+    % Recasting $\boldsymbol{\alpha}$ and $\boldsymbol{\beta}$ as binary strings from $(2^{\leq \omega})^m$, let $d(\boldsymbol{\alpha}, \boldsymbol{\beta})$ be the standard ultrametric defined as $2^{-\min \set{n}{\boldsymbol{\alpha}(n) \neq \boldsymbol{\beta}(n)}}$ when $\boldsymbol{\alpha} \neq \boldsymbol{\beta}$, and zero otherwise. Then 
+    % \begin{align}
+    %     S(\boldsymbol{\alpha}, \boldsymbol{\beta}) \geq - \log d(\boldsymbol{\alpha}, \boldsymbol{\beta}) - O_m(1),
+    % \end{align}
+    % where the constant only depends on $m$. 
+    In particular, if $\restrict{\boldsymbol{\alpha}}{r} = \restrict{\boldsymbol{\beta}}{r}$, then $S(\boldsymbol{\alpha}, \boldsymbol{\beta}) \geq r - O(1)$. 
+    % That is, the longer the prefix shared between two parameter oracles, the closer those oracles must be in Euclidean distance.
+\end{definition}
+
+\subsection{Standard Example of a CALF}
+
+\begin{example}[Points on Planar Lines]
+    \label{example:lines}
+    Take $\Phi$ to be the computable map on $\mathbb{R}^2 \times \mathbb{R} \to \mathbb{R}$ given by
+    \begin{align*}
+        \Phi(a, b, x) = ax + b.
+    \end{align*}
+    We show that $\Phi$ is a CALF on its domain. The real-function family $\mathcal{F}_\Phi$ associated to this map consists of all the non-vertical, planar lines as expressed in slope-intercept form with parameters $a$ and $b$ and input $x$. Let us fix two sets of slope-intercept parameters $(a, b), (u, v) \in \mathbb{R}^2$ and two inputs $x_1, x_2 \in \mathbb{R}$.
+
+    It is easy to see that $\Phi$ is scaling Lipschitz continuous: we may check using the triangle inequality that: 
+    \begin{align*}
+        \abs{\Phi^{(a, b)}(x_1) - \Phi^{(u, v)}(x_2)} \leq \norm{(a, b) - (u, v)} \cdot \p{\abs{x_1} + 1 + \abs{x_1 - x_2}} + \abs{a} \cdot \abs{x_1 - x_2}.
+    \end{align*}
+
+    Moreover, $\Phi^{(a, b)} - \Phi^{(u, v)}$ is constant if and only if $a = u$. In addition, the slope parameter is a co-Lipschitz parameter, while the intercept parameter is roughly constant in the sense defined above. Indeed, given different choices $a', b', u', v' \in \mathbb{R}$ and any $x \in \mathbb{R}$,
+    \begin{align*}
+        \abs{(\Phi^{(a', b)}(x) - \Phi^{(u', v)}(x)) - (\Phi^{(a, b)}(x) - \Phi^{(u, v)}(x))} &= \abs{(a' - a) - (u' - u)} \abs{x},\\
+        \abs{(\Phi^{(a, b')}(x) - \Phi^{(u, v')}(x)) - (\Phi^{(a, b)}(x) - \Phi^{(u, v)}(x))}&\leq \abs{(b' - b) - (v' - v)} \leq \abs{b' - b} + \abs{v' - v}.
+    \end{align*}
+    Thus, in this example, $\norm{((a, b) - (u, v))_{\operatorname{cL}}} = \abs{a - u}$. It is also straightforward to check that:
+    \begin{align*}
+        \abs{(\Phi^{(a, b)}(x_1) - \Phi^{(u, v)}(x_1)) - (\Phi^{(a, b)}(x_2) - \Phi^{(u, v)}(x_2))} &= \abs{a - u} \cdot \abs{x_1 - x_2}.
+    \end{align*}
+    So we also conclude that $\Phi$ has scaling co-Lipschitz continuous differences.
+
+    We finally argue that $\Phi$ has dense intersections. Fix $r \in \omega$, $(a, b) \in \mathbb{D}_r^2$, and $x \in \mathbb{R}$. We appeal to the the machine construction and geometric observations used in proving Lemma 6(i) of \cite{LS16}. Their argument can be seen as constructing a Turing machine which receives a description for $(\restrict{x}{r}, \restrict{(ax + b)}{r})$, along with descriptions for $r$ and $\restrict{(a, b)}{1}$, to produce parameters $(u_0, v_0) \in B_{2^{-r}}(a, b)$ satisfying:
+    \begin{align*}
+        \abs{u_0 \cdot (\restrict{x}{r}) + v_0 - \restrict{(ax + b)}{r}} < 2^{-r} \cdot (\abs{u_0} + \abs{\restrict{x}{r}} + 3).
+    \end{align*}
+    By their Observation A.4(ii), there exists $(u, v) \in B_{2^{\gamma - r}}(u_0, v_0) \cap \mathbb{D}_r^2$ such that $u \neq a$, where $\gamma = \log(2 \abs{a} + \abs{x} + 5)$. These parameters $(u, v)$ will necessarily agree in output with $(a, b)$ at input $x$ up to precision $2^{-r} \cdot O(\abs{a} + \abs{x} +1)$.
+\end{example}
+
+% \begin{example}[Planar Reflections]
+%     \label{example:planar_reflections}
+%     Take $\Phi$ to be the computable map on $\mathbb{R} \times (\mathbb{R}^2 \setminus \seq{0}) \to \mathbb{R}^2$ given by
+%     \begin{align*}
+%         \Phi(\theta, x) = R_\theta \begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix} R_{-\theta} x, \quad \text{where} \quad R_\theta := \begin{pmatrix} \cos \theta & -\sin \theta \\ \sin \theta & \cos \theta \end{pmatrix}.
+%     \end{align*}
+%     The real-function family $\mathcal{F}_\Phi(\mathbb{R} \times (\mathbb{R}^2 \setminus \seq{0}))$ associated to this map consists of all the planar reflections in a 1-dimensional subspace making an angle $\theta$ with the positive $x$-axis and applied to the nonzero input $x \in \mathbb{R}^2 \setminus \seq{0}$. Let us fix two directions $\theta, \phi \in \mathbb{R}$ and two inputs $x_1, x_2 \in \mathbb{R}^2 \setminus \seq{0}$. We show that $\Phi$ is a CALF on this domain. 
+
+%     With some trigonometry, it is straightforward to show that $\Phi$ is scaling Lipschitz continuous:
+%     \begin{align*}
+%         \abs{\Phi^{\theta}(x_1) - \Phi^{\phi}(x_2)} &\leq \norm{\Phi^{\theta}(x_1) - \Phi^{\phi}(x_1)} + \norm{\Phi^{\phi}(x_1) - \Phi^{\phi}(x_2)}\\
+%         &\leq 4\norm{x_1} \abs{\theta - \phi} + \norm{x_1 - x_2}.
+%     \end{align*}
+
+%     Moreover, $\Phi^{e} - \Phi^{f}$ is constant if and only if $f = \pm e$. By radial symmetry, both components of the parameter $e$ are co-Lipschitz in $x$. It is also easy to show that:
+%     \begin{align*}
+%         \abs{(\Phi^{e}(x_1) - \Phi^{f}(x_1)) - (\Phi^{e}(x_2) - \Phi^{f}(x_2))} &= 2 \abs{\cos \frac{\theta}{2}} \norm{e - f} \norm{x_1 - x_2},
+%     \end{align*}
+%     where $\theta$ is the angular difference between $e$ and $f$, which satisfies $\cos \theta = e \cdot f$. So we may conclude that $\Phi$ has scaling co-Lipschitz continuous differences as well. 
+
+%     Finally, 
+    
+% \end{example}
+
+\section{Finitary Theorem}
+
+\label{section:Finitary_Theorem}
+
+The following geometric observation is known as the \textit{Intersecting Tubes Lemma} in the case of planar lines: that the closer to perpendicular two intersecting lines are to one another, the more precisely one may describe their point of intersection. For us, that generalizes to a statement of the form: the more similar the co-Lipschitz parameters of two $\Phi$-curves are, the more precisely one may describe an input on which they approximately intersect.
+
+% We prove a similar result in the case of CALFs. 
+
+\begin{observation}[C.f. Observation A.5 in \cite{LS16}]
+    \label{observation:approximate_x_location_of_intersection}
+    
+    Take $\Phi : \mathbb{R}^m \times \mathbb{R}^\ell \to \mathbb{R}^n$ to be a CALF on domain $\Omega \times \Xi$. Fix $r \in \omega$, $x \in \Xi_r$, and $\boldsymbol{\alpha}, \boldsymbol{\beta} \in \Omega_r$ with $\Phi^{\boldsymbol{\alpha}} - \Phi^{\boldsymbol{\beta}}$ being scaling co-Lipschitz continuous. If $\norm{\Phi^{\boldsymbol{\alpha}}(x) - \Phi^{\boldsymbol{\beta}}(x)} \leq 2^{-r + O_n(1)}$, $k = S(\boldsymbol{\alpha}, \boldsymbol{\beta})$, and $r \geq k + O_{\norm{x}, n}(1)$, then there is an algorithm approximating $x$ to precision $2^{-r + k + O_{x, n}(1)}$ uniformly in $\boldsymbol{\alpha}$, $\boldsymbol{\beta}$, and $r$.
+\end{observation}
+\begin{proof}
+    Whenever another $x' \in \Xi$ satisfies $\norm{\Phi^{\boldsymbol{\alpha}}(x') - \Phi^{\boldsymbol{\beta}}(x')} < 2^{-r + O_n(1)}$, then since $\Phi$ has co-Lipschitz continuous differences, 
+    \begin{align}
+        \norm{(\boldsymbol{\alpha} - \boldsymbol{\beta})_{\operatorname{cL}}} \cdot \norm{x - x'} &\leq O_{\norm{x}, \norm{x'}}(1) \cdot \norm{(\Phi^{\boldsymbol{\alpha}} - \Phi^{\boldsymbol{\beta}})(x) - (\Phi^{\boldsymbol{\alpha}} - \Phi^{\boldsymbol{\beta}})(x')} \nonumber \\
+        &\leq 2 \cdot O_{\norm{x}, \norm{x'}}(1) \cdot 2^{-r + O_n(1)}. \label{equation:close_outputs_close_x}
+    \end{align}
+    So, $\norm{x - x'} \leq 2^{-r + k + O_{\norm{x}, \norm{x'}, n}(1)}$. This informs our search: splitting $\mathbb{R}^\ell$ into cubes with side-length $2^{-r}$, we iterate through all dyadic rational $q \in \mathbb{D}^\ell_r$ and ask whether $\norm{\Phi^{\boldsymbol{\alpha}}(q) - \Phi^{\boldsymbol{\beta}}(q)} < 2^{-r + O_{\norm{q}, n}(1)}$. In light of~\eqref{equation:close_outputs_close_x}, the search must terminate on a test point $q \in B_{2^{-r + k + O_{\norm{x}, n}(1)}}(x)$.
+\end{proof}
+
+As a corollary to Observation~\ref{observation:approximate_x_location_of_intersection}, we have the following fact for any two curves with parameters $\boldsymbol{\alpha}$ and $\boldsymbol{\beta}$ which approximately agree on some input $x$. Essentially, $\boldsymbol{\beta}$ can simultaneously describe the portion of the co-Lipschitz components of $\boldsymbol{\alpha}$ shared with $\boldsymbol{\beta}$ along with a complementary portion of the bits of $x$.
+
+\begin{corollary}[C.f. Lemma 7 in \cite{LS16}]
+    \label{corollary:lower_bound_simple_line_parameters}
+    Take $\Phi : \mathbb{R}^m \times \mathbb{R}^\ell \to \mathbb{R}^n$ to be a CALF on domain $\Omega \times \Xi$. Fix $r \in \omega$, $x \in \Xi_r$, and $\boldsymbol{\alpha}, \boldsymbol{\beta} \in \Omega_r$ with $\Phi^{\boldsymbol{\alpha}} - \Phi^{\boldsymbol{\beta}}$ being scaling co-Lipschitz continuous. If $\norm{\Phi^{\boldsymbol{\alpha}}(x) - \Phi^{\boldsymbol{\beta}}(x)} \leq 2^{-r + O_n(1)}$ and $k = S(\boldsymbol{\alpha}, \boldsymbol{\beta})$, then for each $r \geq k + O_{\norm{x}, n}(1)$,
+    \begin{align*}
+        K(\boldsymbol{\beta}) \geq K(\restrict{\boldsymbol{\alpha}}{k}) + K(\restrict{x}{(r - k)} \mid \boldsymbol{\alpha}) - O_{\norm{\boldsymbol{\alpha}}, \norm{x}, n}(\log r).
+    \end{align*}
+\end{corollary}
+\begin{proof}
+    % First, if $r < k + O_{x, n}(1)$ as in Observation~\ref{observation:approximate_x_location_of_intersection}, then $r - k = O_{x, n}(1)$, so $K(\restrict{x}{(r - k)} \mid \boldsymbol{\alpha}) = O_{x, n}(1)$. The conclusion is clear in this case since $K(\restrict{\boldsymbol{\alpha}}{k}) \leq K(\boldsymbol{\beta}) \pm O(\log k)$.
+    
+    Suppose $r \geq k + O_{\norm{x}, n}(1)$ from Observation~\ref{observation:approximate_x_location_of_intersection}. We perform symmetry of information~\ref{theorem:chain_rule_for_K} several times to confirm:
+    \begin{align*}
+        K(\boldsymbol{\beta}) &\geq K(\boldsymbol{\beta} \mid \boldsymbol{\alpha}) + \brk{K(\boldsymbol{\alpha}) - K(\boldsymbol{\alpha} \mid \boldsymbol{\beta})} - O(\log r)\\
+        &\geq K(\restrict{x}{(r - k)} \mid \boldsymbol{\alpha}) + \brk{K(\boldsymbol{\alpha}) - K(\boldsymbol{\alpha} \mid \restrict{\boldsymbol{\beta}}{k})} - O(\log r) & [\text{Observation~\ref{observation:approximate_x_location_of_intersection}}]\\
+        &\geq K(\restrict{x}{(r - k)} \mid \boldsymbol{\alpha}) + \brk{K(\boldsymbol{\alpha}) - K(\boldsymbol{\alpha} \mid \restrict{\boldsymbol{\alpha}}{k})} - O(\log r)\\
+        &= K(\restrict{x}{(r - k)} \mid \boldsymbol{\alpha}) + K(\restrict{\boldsymbol{\alpha}}{k}) - O(\log r).
+    \end{align*}
+\end{proof}
+
+\begin{theorem}[Finitary Lower Bound] \label{theorem:finitary} 
+    Take $\Phi : \mathbb{R}^m \times \mathbb{R}^\ell \to \mathbb{R}^n$ to be a CALF on domain $\Omega \times \Xi$. Let $d < \delta \in [0, \ell]$, $r \in \omega$. Suppose $\boldsymbol{\alpha} \in \Omega_r$ and $x \in \Xi_r$ satisfy for each $k \leq r$,
+    \begin{enumerate}[label = (\roman*)]
+        \item $K(\restrict{\boldsymbol{\alpha}}{k}) \geq d k - o(k)$,
+        \item $K(\restrict{x}{k} \mid \boldsymbol{\alpha}) \geq \delta k - o(k)$.
+    \end{enumerate}
+    Then,
+    \begin{align*}
+        K(x, \Phi^{\boldsymbol{\alpha}}(x)) \geq K(\boldsymbol{\alpha}, x) - m \cdot \frac{K(\boldsymbol{\alpha}) - dr}{\delta - d} - o(r).
+    \end{align*}
+\end{theorem}
+\begin{proof}
+Let $m$, $n$, $\ell$, $d$, $\delta$, $r$, $\boldsymbol{\alpha}$, and $x$ be as in the statement. Further denote by $y := \restrict{\Phi^{\boldsymbol{\alpha}}(x)}{r} \in \mathbb{D}^n_r$ the level-$r$ approximation to the output of $\Phi^{\boldsymbol{\alpha}}$ at $x$. Since $\Phi$ has density of intersections, we may fix $\boldsymbol{\beta} \in \Omega_r$ such that $\Phi^{\boldsymbol{\alpha}} - \Phi^{\boldsymbol{\beta}}$ is scaling co-Lipschitz continuous, $\norm{\boldsymbol{\alpha} - \boldsymbol{\beta}} \leq 2^{-r + O_{\norm{\boldsymbol{\alpha}}, \norm{x}, m, n}(1)}$, and $S(\boldsymbol{\alpha}, \boldsymbol{\beta}) \leq r - O_{\norm{\boldsymbol{\alpha}}, \norm{x}, m, n}(1)$. And since $\Phi$ is scaling Lipschitz continuous, this implies that the outputs $\Phi^{\boldsymbol{\alpha}}(x)$ and $\Phi^{\boldsymbol{\beta}}(x)$ agree to a similar precision:
+\begin{align*}
+    \norm{\Phi^{\boldsymbol{\alpha}}(x) - \Phi^{\boldsymbol{\beta}}(x)} \leq O(\norm{\boldsymbol{\alpha}} + \abs{x} + 1) \cdot \norm{\boldsymbol{\alpha} - \boldsymbol{\beta}} \leq 2^{-r + \gamma},
+\end{align*}
+where $\gamma = 2^{O_{\norm{\boldsymbol{\alpha}}, \norm{x}, m, n}(1)}$.
+
+Furthermore, by the density of intersections assumption, we see:
+\begin{align}
+    \label{equation:u_v_x_computed}
+    K(\restrict{(\boldsymbol{\beta}, x)}{(r - \gamma)}) \leq K(x, y) + K_1(\boldsymbol{\alpha}) + K(r) + K(m, n, \ell) + O(1).
+\end{align}
+
+Let $k = S(\boldsymbol{\alpha}, \boldsymbol{\beta})$ and recall $r \geq k + O_{\norm{\boldsymbol{\alpha}}, \norm{x}, m, n}(1)$. Since $\boldsymbol{\alpha}$ can approximately compute $\boldsymbol{\beta}$, we deduce the following numerical condition:
+\begin{align*}
+    K(\boldsymbol{\alpha}) &\geq K(\restrict{\boldsymbol{\beta}}{(r - \gamma)}) - o(r) & [\boldsymbol{\beta} \in B_{2^{\gamma - r}}(\boldsymbol{\alpha})]\\
+        &\geq K(\boldsymbol{\beta}) - o(r) & [\text{$\gamma = O_{\norm{\boldsymbol{\alpha}}, \norm{x}, m, n}(1)$}]\\
+        &\geq K(\restrict{\boldsymbol{\alpha}}{k}) + K(\restrict{x}{(r - k)} \mid \boldsymbol{\alpha}) - o(r) & [\text{Corollary~\ref{corollary:lower_bound_simple_line_parameters}}]\\
+        &\geq dk + \delta (r - k) - o(r) & [\text{Assumptions (i) \& (ii)}]\\
+        &= dr + (\delta - d) (r - k) - o(r),
+\end{align*} 
+We rearrange to see:
+\begin{align}
+    \label{equation:inequality_r_minus_k}
+    r - k \leq \frac{K(\boldsymbol{\alpha}) - dr}{\delta - d} + o(r),
+\end{align}
+which is well-defined as $\delta > d$. Notice by assumption that $B_{2^{-r}}(\boldsymbol{\beta}) \subseteq B_{2^{-k + o(r)}}(\boldsymbol{\alpha})$. We use this fact and the Chain Rule~\ref{theorem:chain_rule_for_K} to conclude:
+\begin{align*}
+    K(x, y) &\geq K(\boldsymbol{\beta}, x) - o(r) & [\text{\eqref{equation:u_v_x_computed}}]\\
+    &\geq K(\restrict{\boldsymbol{\alpha}}{k}, x) - o(r)\\
+    &= K(\restrict{\boldsymbol{\alpha}}{k} \mid x) + K(x) - o(r)\\
+    &\geq K(\boldsymbol{\alpha} \mid x) - m \cdot (r - k) + K(x) - o(r)\\
+    &\geq K(\boldsymbol{\alpha}, x) - m \cdot \frac{K(\boldsymbol{\alpha}) - dr}{\delta - d} - o(r). & [\eqref{equation:inequality_r_minus_k}]
+\end{align*}
+
+\end{proof}
+
+\section{Infinitary Theorem}
+
+\label{section:Infinitary_Theorem}
+
+We leverage the finitary theorem~\ref{theorem:finitary} to prove the corresponding result about the effective dimension of points on the graph of a map in the family given by a CALF. The last component we require to do this is the oracle construction developed by N.~Lutz and D.~Stull in \cite{LS16}. 
+
+\begin{lemma}[Lemma 8 of \cite{LS16}]
+    \label{lemma:oracle_construction}
+    Fix $m, r \in \omega$, $\mathbf{x} \in \mathbb{R}^m$, and rational $0 \leq \eta \leq \dim(\mathbf{x})$. Then there exists an oracle $X = X(\mathbf{x}, m, r, \eta)$ satisfying:
+    \begin{enumerate}[label = (\roman*)]
+        \item For each $k \leq r$,
+        \begin{align*}
+            K^X_k(\mathbf{x}) = \min \seq{\eta r, K_k(\mathbf{x})} \pm O(\log r).
+        \end{align*}
+        \item For any $n, s \in \omega$ and $\mathbf{y} \in \mathbb{R}^n$,
+        \begin{align*}
+            K^X_{s \mid r}(\mathbf{y} \mid \mathbf{x}) &= K_{s \mid r}(\mathbf{y} \mid \mathbf{x}) \pm O(\log r),\\
+            K^{\mathbf{x}, X}_s(\mathbf{y}) &= K^{\mathbf{x}}_s(\mathbf{y}) \pm O(\log r).
+        \end{align*}
+    \end{enumerate}
+\end{lemma}
+Part (i) of the construction claims $X$ can simplify the first $r$ many dyadic truncations of $\mathbf{x}$ to not exceed the limiting information density of $\mathbf{x}$, whereas part (ii) ensures that $X$ cannot meaningfully aid $\mathbf{x}$ in making computations.
+
+\begin{theorem}[Infinitary Lower Bound]
+    \label{theorem:infinitary}
+    Let $\Phi : \mathbb{R}^m \times \mathbb{R}^\ell \to \mathbb{R}^n$ be a CALF on domain $\Omega \times \Xi$. Then for every $\boldsymbol{\alpha} \in \Omega$, $x \in \Xi$, and $B \in 2^{\leq \omega}$,
+    \begin{align*}
+        \dim^B(x, \Phi^{\boldsymbol{\alpha}}(x)) \geq \dim^B(x | \boldsymbol{\alpha}) + \min \seq{\dim^B(\boldsymbol{\alpha}), \dim^{B, \boldsymbol{\alpha}}(x)}.
+    \end{align*}
+\end{theorem}
+\begin{proof}
+    The following argument may be relativized to an arbitrary oracle $B \in 2^{\leq \omega}$. Fix $\boldsymbol{\alpha} \in \Omega$ and $x \in \Xi$. The claim of the theorem is trivial when $\dim(x \mid \boldsymbol{\alpha}) = 0$ (in which case, by Lemma~\ref{oracle_access_to_conditional}, $\dim^{\boldsymbol{\alpha}}(x) = 0$ as well). So consider the case of $\delta := \dim^{\boldsymbol{\alpha}}(x) > 0$, and let
+    \begin{align*}
+        d \in \mathbb{Q} \cap [0, \dim(\boldsymbol{\alpha})] \cap [0, \dim^{\boldsymbol{\alpha}}(x)).
+    \end{align*}
+    Clearly, $\delta > d$. Fix $r \gg 1$ sufficiently large so that $\restrict{\boldsymbol{\alpha}}{r} \in \Omega$ and $\restrict{x}{r} \in \Xi$. Let $X_r := X(\boldsymbol{\alpha}, m, r, d)$ be an oracle for $\boldsymbol{\alpha}$ at information density $d$ as guaranteed by Lemma~\ref{lemma:oracle_construction}. We now check that we may apply Theorem~\ref{theorem:finitary} to $\restrict{\boldsymbol{\alpha}}{r}$ and $\restrict{x}{r}$ at precision-level $r$. Let $0 \leq k \leq r$. We skip writing $\restrict{(\restrict{\boldsymbol{\alpha}}{r})}{k} = \restrict{\boldsymbol{\alpha}}{k}$ and similar for $x$.
+    
+    Then, the assumption (i) of Theorem~\ref{theorem:finitary} follows from Lemma~\ref{maxmin_truncation_for_r}:
+    \begin{align*}
+        K(\restrict{\boldsymbol{\alpha}}{k}) = K_k(\boldsymbol{\alpha}) \pm o(k) \geq \dim(\boldsymbol{\alpha}) k - o(k) \geq dk - o(k).
+    \end{align*}
+    And the assumption (ii) similarly follows from Lemma~\ref{maxmin_truncation_for_r} relativized to $\boldsymbol{\alpha}$:
+    \begin{align*}
+        K^{\boldsymbol{\alpha}}(\restrict{x}{k}) = K^{\boldsymbol{\alpha}}_k(x) \pm o(k) \geq \dim^{\boldsymbol{\alpha}}(x) k - o(k) = \delta k - o(k).
+    \end{align*}
+    Therefore, we may apply Theorem~\ref{theorem:finitary} to $\restrict{\boldsymbol{\alpha}}{r}$ and $\restrict{x}{r}$. Note that if $\boldsymbol{\alpha}_r = \restrict{\boldsymbol{\alpha}}{r}$ and $x_r = \restrict{x}{r}$, then $K(\restrict{\Phi^{\boldsymbol{\alpha}}(x)}{r}) = K(\restrict{\Phi^{\boldsymbol{\alpha}_r}(x_r)}{r}) \pm o(r)$. This follows from $\Phi$ being scaling Lipschitz continuous. So,
+    \begin{align*}
+        \dim(x, \Phi^{\boldsymbol{\alpha}}(x)) &\geq \dim^{X_r}(x, \Phi^{\boldsymbol{\alpha}}(x))\\
+            &= \liminf_{r \to \infty} \frac{1}{r} K^{X_r}_r(x, \Phi^{\boldsymbol{\alpha}}(x))\\
+            &= \liminf_{r \to \infty} \frac{1}{r} K^{X_r}(\restrict{(x, \Phi^{\boldsymbol{\alpha}}(x))}{r}) & [\text{Lemma~\ref{maxmin_truncation_for_r} rel. to $X_r$}]\\
+            &= \liminf_{r \to \infty} \frac{1}{r} K^{X_r}(x_r, \restrict{\Phi^{\boldsymbol{\alpha}_r}(x_r)}{r}) & [\text{$\Phi$ is scaling Lipschitz}]\\
+            &\geq \liminf_{r \to \infty} \frac{1}{r} \brk{K^{X_r}(\boldsymbol{\alpha}_r, x_r) - m \cdot \frac{K^{X_r}(\boldsymbol{\alpha}_r) - dr}{\delta - d}} & \text{[Theorem~\ref{theorem:finitary} rel to $X_r$]}\\
+            &= \liminf_{r \to \infty} \frac{1}{r} \brk{K^{X_r}_r(\boldsymbol{\alpha}, x) - m \cdot \frac{K^{X_r}_r(\boldsymbol{\alpha}) - dr}{\delta - d}} & \text{[Lemma~\ref{maxmin_truncation_for_r} rel to $X_r$]}\\
+            &\geq \liminf_{r \to \infty} \frac{1}{r} K^{X_r}_r(\boldsymbol{\alpha}, x) & [\text{Lemma~\ref{lemma:oracle_construction}(i)}]\\
+            &\geq \liminf_{r \to \infty} \frac{1}{r} \brk{K^{X_r}_{r \mid r}(x \mid \boldsymbol{\alpha}) + K^{X_r}_r(\boldsymbol{\alpha})} & [\text{Theorem~\ref{theorem:approximate_SOI_conditional}}]\\
+            &= \liminf_{r \to \infty} \frac{1}{r} \brk{K_{r \mid r}(x \mid \boldsymbol{\alpha}) + dr} & [\text{Lemma~\ref{lemma:oracle_construction}(i),(ii)}]\\
+            &= \dim(x | \boldsymbol{\alpha}) + d.
+    \end{align*}
+    As $d$ was an arbitrary rational number in $[0, \dim(\boldsymbol{\alpha})] \cap [0, \dim^{\boldsymbol{\alpha}}(x))$, we conclude:
+    \begin{align*}
+        \dim(x, \Phi^{\boldsymbol{\alpha}}(x)) \geq \dim(x \mid \boldsymbol{\alpha}) + \min \seq{\dim(\boldsymbol{\alpha}), \dim^{\boldsymbol{\alpha}}(x)}.
+    \end{align*}
+\end{proof}
+
+Theorem~\ref{theorem:original_infinitary} follows as a consequence of Theorem~\ref{theorem:infinitary} as applied to the CALF $\Phi$ from Example~\ref{example:lines}.
+
+\section{Dimension Spectrum of CALF Maps}
+
+According to Theorem~\ref{theorem:original_infinitary}, if $\Phi^{\boldsymbol{\alpha}}$ is a map from a CALF, then points $(x, \Phi^{\boldsymbol{\alpha}}(x))$ on its graph are at least somewhat complex. Our goal in this section is to understand the effective dimension of these points as a distribution: e.g., can the lower bound in Theorem~\ref{theorem:original_infinitary} be exact for most points along $\Phi^{\boldsymbol{\alpha}}$? The following results are direct generalizations of those from Section 4 of \cite{Stu18}. For the remainder of the section, we fix a CALF $\Phi: \mathbb{R}^m \times \mathbb{R}^\ell \to \mathbb{R}^n$ on a domain $\Omega \times \Xi$.
+
+The first result is an observation that directly follows from the approximate chain rule~\ref{theorem:approximate_SOI_conditional} and the density of intersections of $\Phi$. 
+\begin{observation}
+    \label{observation:computing_alpha_x_x'}
+    For each $\boldsymbol{\alpha} \in \Omega$ and $x_1, x_2 \in \Xi$,
+    \begin{align*}
+        K_r(\boldsymbol{\alpha}) &+ K_r(x_1 \mid \boldsymbol{\alpha}) + K_r(x_2 \mid \boldsymbol{\alpha}, x_1) - O(\log r) \\&\leq K_r(\boldsymbol{\alpha}, x_1, x_2) \\
+        &\leq K_r(x_1, \Phi^{\boldsymbol{\alpha}}(x_1)) + K_r(x_2, \Phi^{\boldsymbol{\alpha}}(x_2)) + O_{\norm{x_1}, \norm{x_2}}(1) + 2 \log \norm{x_1 - x_2}.
+    \end{align*}
+\end{observation}
+
+The final upper bound in Observation~\ref{observation:computing_alpha_x_x'} involves two separate complexity terms which are not guaranteed to achieve their limiting lower densities at the same precision-levels, preventing us from immediately concluding a result relating the effective dimension of these objects. Yet, we may characterize the size of the set of instances when $K_r(x_1, \Phi^{\boldsymbol{\alpha}}(x_1))$ and $K_r(x_2, \Phi^{\boldsymbol{\alpha}}(x_2))$ are simultaneously minimal. 
+
+\begin{lemma}
+    \label{lemma:simultaneously_minimal_complexities}
+    Let $\delta \in (0, \ell)$, $\boldsymbol{\alpha} \in \Omega$, $x_1 \in \Xi$, and $n, r \in \omega$ be such that $\frac{2}{\sqrt{r}} < \frac{1}{n}$. Assume that 
+    \begin{align*}
+        \delta \cdot r \leq K_r^{\boldsymbol{\alpha}}(x_1, \Phi^{\boldsymbol{\alpha}}(x_1)), \quad \text{and} \quad K_r(x_1, \Phi^{\boldsymbol{\alpha}}(x_1)) &\leq \delta \cdot r + \frac{K_r(\boldsymbol{\alpha})}{2} - \frac{r}{n}.
+    \end{align*}
+    Then, for any other $x_2 \in \Xi$ satisfying $K_r(x_2, \Phi^{\boldsymbol{\alpha}}(x_2)) < \delta \cdot r + \frac{K_r(\boldsymbol{\alpha})}{2}$, it holds that either
+    \begin{align*}
+        - \log \norm{x_1 - x_2} \leq \sqrt{r} + O_{\norm{x_1}, \norm{x_2}}(1) + O(\log r), \quad \text{or} \quad K_r(x_2 \mid \boldsymbol{\alpha}, x_1) < \delta \cdot r.
+    \end{align*}
+\end{lemma}
+
+In words, the following holds for all sufficiently large precision-levels. We suppose $x_1$ is sufficiently complex with respect to $\alpha$, while the pair $(x_1, \Phi^{\boldsymbol{\alpha}}(x_1))$ is not much more complex. Then, for any other input $x_2$ with a simple $(x_2, \Phi^{\boldsymbol{\alpha}}(x_2))$, either $x_2$ is sufficiently far from $x_1$, or $x_2$ is simple to describe from $\boldsymbol{\alpha}$ and $x_1$. 
+
+\begin{proof}
+    Suppose the hypothesis holds but that neither condition is satisfied for some $x_2 \in \Xi$. Then by Observation~\ref{observation:computing_alpha_x_x'},
+    \begin{align*}
+        K_r(\boldsymbol{\alpha}) &+ 2 \delta r - O(\log r)
+        \\&\leq
+        K_r(\boldsymbol{\alpha}) + K_r(x_1 \mid \boldsymbol{\alpha}) + K_r(x_2 \mid \boldsymbol{\alpha}, x_1) - O(\log r)\\
+        &\leq K_r(x_1, \Phi^{\boldsymbol{\alpha}}(x_1)) + K_r(x_2, \Phi^{\boldsymbol{\alpha}}(x_2)) + O_{\norm{x_1}, \norm{x_2}}(1) + 2 \log \norm{x_1 - x_2}\\
+        &< \brk{\delta r + \frac{K_r(\boldsymbol{\alpha})}{2} - \frac{r}{n}} + \brk{\delta r + \frac{K_r(\boldsymbol{\alpha})}{2}} + O_{\norm{x_1}, \norm{x_2}}(1) + 2 \log \norm{x_1 - x_2}.
+    \end{align*}
+    Since the first condition on $x_2$ fails, we deduce $\frac{1}{n} < \frac{2}{\sqrt{r}}$, a contradiction. 
+\end{proof}
+
+Given $\delta \in (0, \ell)$, denote by
+\begin{align*}
+    D^{\boldsymbol{\alpha}}(\delta) := \set{x \in \Xi}{\dim(x, \Phi^{\boldsymbol{\alpha}}(x)) < \delta + \frac{\dim(\boldsymbol{\alpha})}{2}}
+\end{align*}
+the set of inputs which map to the point $(x, \Phi^{\boldsymbol{\alpha}}(x))$ having effective dimension less than $\delta + \dim(\boldsymbol{\alpha}) / 2$. Now, we may state the main result for the dimension spectrum of $\Phi^{\boldsymbol{\alpha}}$. 
+
+\begin{theorem}
+    \label{theorem:dimension_spectrum_of_a_CALF}
+    For every $\boldsymbol{\alpha} \in \Omega$ and $\delta \in (0, \ell)$, we have $\dim_{\operatorname{H}}(D^{\boldsymbol{\alpha}}(\delta)) \leq \delta$.
+\end{theorem}
+
+That is, very few points along the graph of $\Phi^{\boldsymbol{\alpha}}$ may be of small effective dimension, and almost every input $x$ produces a point $(x, \Phi^{\boldsymbol{\alpha}}(x))$ of effective dimension at least $\ell$.
+
+\begin{proof}
+    Fix $\boldsymbol{\alpha} \in \Omega$ and $\delta \in (0, \ell)$. Really, we work with the sets:
+    \begin{align*}
+        D^{\boldsymbol{\alpha}}_n(\delta) := \set{x \in \Xi}{(\exists^\infty r \in \omega) \brk{K_r(x, \Phi^{\boldsymbol{\alpha}}(x)) < \delta \cdot r + \frac{K_r(\boldsymbol{\alpha})}{2} - \frac{r}{n}}},
+    \end{align*}
+    which cover $D^{\boldsymbol{\alpha}}(\delta)$, since if $x \in D^{\boldsymbol{\alpha}}(\delta)$ and $\varepsilon > 0$, there will exist infinitely many $r \in \omega$ for which
+    \begin{align*}
+        K_r(x, \Phi^{\boldsymbol{\alpha}}(x)) < \delta \cdot r + \frac{\dim(\boldsymbol{\alpha})}{2}  \cdot r - \varepsilon \cdot r < \delta \cdot r + \frac{K_r(\boldsymbol{\alpha}) + o(r)}{2} - \varepsilon \cdot r,
+    \end{align*}
+    meaning for sufficiently large values of $n \in \omega$, we have $x \in D^{\boldsymbol{\alpha}}_n(\delta)$. Therefore, by the countable stability of Hausdorff dimension, it suffices to show that $\dim_{\operatorname{H}}(D^{\boldsymbol{\alpha}}_n(\delta)) \leq \delta$ for all $n \in \omega$.
+
+    To begin, for each $r \in \omega$, fix a point $x_r \in \Xi$, if it exists, satisfying the hypotheses of Lemma~\ref{lemma:simultaneously_minimal_complexities}, i.e., 
+    \begin{align*}
+        \delta \cdot r \leq K_r^{\boldsymbol{\alpha}}(x_r, \Phi^{\boldsymbol{\alpha}}(x_r)), \quad \text{and} \quad K_r(x_r, \Phi^{\boldsymbol{\alpha}}(x_r)) &\leq \delta \cdot r + \frac{K_r(\boldsymbol{\alpha})}{2} - \frac{r}{n}.
+    \end{align*}
+    And let $B \in 2^{\leq\omega}$ be an oracle encoding all the $(x_r)_{r \in \omega}$ which exist. We now consider three cases for a fixed $x \in D^{\boldsymbol{\alpha}}_n(\delta)$. 
+
+    Suppose first that $K^{\boldsymbol{\alpha}}_r(x) \leq \delta \cdot r$ for infinitely many $r \in \omega$. Then, clearly, $\dim^{\boldsymbol{\alpha}}(x) \leq \delta$. 
+    
+    Otherwise, if $\norm{x - x_r} < 2^{-\sqrt{r} + O(\log r) + O(1)}$ for infinitely many $r \in \omega$, then for each such $r$,
+    \begin{align*}
+        K^B_{\sqrt{r}}(x') \leq O(\log r) + O(1) = O(\log \sqrt{r}),
+    \end{align*}
+    implying $\dim^B(x) = 0$. 
+    
+    Finally, if neither condition holds, take any one of the infinitely many $r \in \omega$ for which 
+    \begin{align*}
+        K_r(x, \Phi^{\boldsymbol{\alpha}}(x)) < \delta r + \frac{K_r(\boldsymbol{\alpha})}{2} - \frac{r}{n}.
+    \end{align*}
+    Then, by Lemma~\ref{lemma:simultaneously_minimal_complexities}, it must be that $K_r(x \mid \boldsymbol{\alpha}, x_r) < \delta \cdot r$, meaning $\dim^{B, \boldsymbol{\alpha}}(x) \leq \delta$. In any case, the Point-to-Set Principle~\ref{theorem:PTS_for_H_dimension} implies $\dim_{\operatorname{H}}(D^{\boldsymbol{\alpha}}_n(\delta)) \leq \delta$, as desired.
+\end{proof}
