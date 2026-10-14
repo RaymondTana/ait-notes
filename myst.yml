@@ -1,6 +1,8 @@
 # MyST project config. Build: `npx myst start` (live preview) or
 # `npx myst build --html` (static site in _build/html).
 version: 1
+site:
+  analytics_google: "G-ZG5QV893BR"
 project:
   title: Algorithmic Information Theory
   description: Notes on algorithmic information theory and effective dimension, ported from Raymond Tana's PhD dissertation.
