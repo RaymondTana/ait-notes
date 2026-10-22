@@ -29,15 +29,8 @@ Next we describe some of the principles that guide how we approach {term}`reason
 - **Minimum Description Length (MDL) Principle**: the principle of {term}`selection` which prefers the {term}`hypothesis` which simultaneously has the (1) simplest description and (2) simplest explanation of the {term}`observations`.
 - **Bayes’ Rule**: a mathematical rule for {term}`induction` which quantifies how a {term}`hypothesis’s <Hypothesis>` {term}`likelihood` should be updated given additional {term}`observations`: via conditional probabilities.
 
-(reasoning:up_to_computability)=
-## Reasoning up to computability
-
-- **Perfect induction**: {term}`induction` by {term}`Bayes’ Rule` using the *true* prior distribution on {term}`hypotheses <Hypothesis>`, i.e., the distribution actually governing the source of the {term}`observations`. Its predictions are necessarily optimal.
-- **Solomonoff Induction**: a method for performing “{term}`perfect <Perfect induction>`” induction over any {term}`computable <Effective algorithm>` prior probability distribution, using the {term}`optimal` {term}`lower semi-computable <Lower-semicomputable>` {term}`continuous semimeasure` $\mathbf{M}$ and by applying {term}`Bayes’ Rule`.
-- **Universal prior distribution**: a {term}`lower semi-computable <Lower-semicomputable>`, {term}`continuous semi-measure <Continuous semimeasure>` (so, assigning non-negative {term}`likelihoods <Likelihood>` to all {term}`hypotheses <Hypothesis>` so that they sum to at most 100%) which can essentially play the role of *any* prior distribution on hypotheses in {term}`Solomonoff induction`, without significant sacrifice in {term}`reasoning` capabilities.
-
 (reasoning:computability)=
-## Computability
+## Recap on Computability
 
 - An **algorithm** is any procedure implementable by an {term}`oracle Turing machine <Oracle machine>` equipped with an appropriate {term}`oracle`.
 - An **effective algorithm** is any procedure implementable by a regular {term}`Turing machine`, or an {term}`algorithm` realizable by any Turing-complete programming language. I.e., "computable" or "decidable".
@@ -55,3 +48,11 @@ Next we describe some of the principles that guide how we approach {term}`reason
     - If the tool = all {term}`algorithms <Algorithm>` ⇒ Shannon entropy.
     - If the tool = all {term}`effective algorithms <Effective algorithm>` ⇒ {term}`Kolmogorov complexity <Plain Kolmogorov complexity>`.
     - If the tool = ~poly-time algorithms ⇒ epiplexity (via pseudo-randomness).
+
+
+(reasoning:up_to_computability)=
+## Reasoning up to computability
+
+- **Perfect induction**: {term}`induction` by {term}`Bayes’ Rule` using the *true* prior distribution on {term}`hypotheses <Hypothesis>`, i.e., the distribution actually governing the source of the {term}`observations`. Its predictions are necessarily optimal.
+- **Solomonoff Induction**: a method for performing “{term}`perfect <Perfect induction>`” induction over any {term}`computable <Effective algorithm>` prior probability distribution, using the {term}`optimal` {term}`lower semi-computable <Lower-semicomputable>` {term}`continuous semimeasure` $\mathbf{M}$ and by applying {term}`Bayes’ Rule`.
+- **Universal prior distribution**: a {term}`lower semi-computable <Lower-semicomputable>`, {term}`continuous semi-measure <Continuous semimeasure>` (so, assigning non-negative {term}`likelihoods <Likelihood>` to all {term}`hypotheses <Hypothesis>` so that they sum to at most 100%) which can essentially play the role of *any* prior distribution on hypotheses in {term}`Solomonoff induction`, without significant sacrifice in {term}`reasoning` capabilities.
