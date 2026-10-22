@@ -1,0 +1,67 @@
+conversion report: chapters 1-6 of /Users/raymondtana/ait-notes/legacy_tex -> /Users/raymondtana/ait-notes/converted_md
+
+[\item[...] custom label kept in the item] (20)
+     2  (\textbf{M1})
+     2  (\textbf{M2})
+     2  (\textbf{M3})
+     2  (\textbf{N4}$'$)
+     2  (\textbf{G5})
+     2  (\textbf{G6})
+     1  (\textbf{N4})
+     1  (\textbf{A1})
+     1  (\textbf{A2})
+     1  (\textbf{A3})
+     1  (\textbf{A4})
+     1  (\textbf{B1})
+     1  (\textbf{B2})
+     1  (vii)
+
+[\ref inside math (number filled in by numbering.mjs)] (52)
+     6  K_minimizers_know_least
+     6  lemma:linearity_with_condition
+     5  corollary:K_minimizer_not_complex
+     5  K_minimizer_with_condition
+     5  lemma:conditional_K_minimizers_suffice
+     3  maxmin_truncation_for_r
+     2  K_minimizers_with_condition_know_least_when_conditioned
+     2  lemma:conditional_pairwise_complexity_by_K_minimizers_and_dyadic_truncation
+     2  theorem:bounded_computable_output
+     2  lemma:forward_data_processing_conditional
+     2  lemma:reverse_data_processing_conditional
+     2  lemma:oracle_construction
+     1  minmax_truncation_for_s
+     1  theorem:maxmin_and_minmax_conditional_complexity_equal
+     1  maxmin_truncation_for_r_s
+     1  observation:approximate_x_location_of_intersection
+     1  corollary:lower_bound_simple_line_parameters
+     1  equation:u_v_x_computed
+     1  equation:inequality_r_minus_k
+     1  theorem:finitary
+     1  theorem:approximate_SOI_conditional
+     1  eqn:boundedness_continuous_mesh_semimeasure_condition
+
+[align row number moved to the block] (5)
+     1  equation:K_bound_for_naturals
+     1  upper_limit_to_K
+     1  K_minimizer_with_condition
+     1  K_minimizers_with_condition_know_least_when_conditioned
+     1  equation:close_outputs_close_x
+
+[citation style] (218)
+   133  cite:t
+    85  cite:p
+
+[layout command dropped] (4)
+     3  \noindent
+     1  \small
+
+[lstlisting with mathescape -> pseudocode div] (2)
+     2  lstlisting
+
+[macro call rewritten (optional arg)] (64)
+    25  \Kcalt[...] -> \KcaltAt{...}
+    23  \norm[...] -> \normAt{...}
+    16  \Kc[...] -> \KcAt{...}
+
+[numbered align split into one block per label] (1)
+     1  eqn:continuous_mesh_semimeasure_condition, eqn:boundedness_continuous_mesh_semimeasure_condition

@@ -1,0 +1,46 @@
+# Paste under project.toc in myst.yml (after moving the files into notes/).
+- file: converted_md/ch1/00-introduction.md
+  children:
+    - file: converted_md/ch1/01-introduction.md
+    - file: converted_md/ch1/02-notation.md
+    - file: converted_md/ch1/03-measures-and-hausdorff-dimension.md
+    - file: converted_md/ch1/04-computability-theory.md
+    - file: converted_md/ch1/05-algorithmic-randomness.md
+    - file: converted_md/ch1/06-prefix-complexity.md
+    - file: converted_md/ch1/07-lifting-prefix-complexity-to-reals.md
+    - file: converted_md/ch1/08-semimeasures.md
+    - file: converted_md/ch1/09-effective-hausdorff-dimension.md
+    - file: converted_md/ch1/10-effective-dimension-variants.md
+    - file: converted_md/ch1/11-complexity-characterizations-of-algorithmic-randomness.md
+    - file: converted_md/ch1/12-point-to-set-principles.md
+- file: converted_md/ch2/00-robustness-of-conditional-kolmogorov-complexity.md
+  children:
+    - file: converted_md/ch2/01-robustness-of-the-lift.md
+    - file: converted_md/ch2/02-effective-dimension-under-uniformly-continuous-maps.md
+- file: converted_md/ch3/00-continuous-absolutely-lipschitz-families.md
+  children:
+    - file: converted_md/ch3/01-background.md
+    - file: converted_md/ch3/02-computable-absolutely-lipschitz-families.md
+    - file: converted_md/ch3/03-finitary-theorem.md
+    - file: converted_md/ch3/04-infinitary-theorem.md
+    - file: converted_md/ch3/05-dimension-spectrum-of-calf-maps.md
+- file: converted_md/ch4/00-algorithmic-information-theory-on-net-spaces.md
+  children:
+    - file: converted_md/ch4/01-background.md
+    - file: converted_md/ch4/02-net-measures.md
+    - file: converted_md/ch4/03-net-semimeasures.md
+    - file: converted_md/ch4/04-kolmogorov-complexity-on-net-spaces.md
+    - file: converted_md/ch4/05-effective-dimension-on-net-spaces.md
+    - file: converted_md/ch4/06-point-to-set-principles-on-net-spaces.md
+    - file: converted_md/ch4/07-effective-net-constructions.md
+- file: converted_md/ch5/00-applications-to-geometric-measure-theory.md
+  children:
+    - file: converted_md/ch5/01-two-approaches-to-the-combinatorics-of-geometric-measure-theory.md
+    - file: converted_md/ch5/02-projective-and-pinned-distance-sets.md
+    - file: converted_md/ch5/03-subsets-of-exact-measure.md
+- file: converted_md/ch6/00-conclusion-and-open-questions.md
+  children:
+    - file: converted_md/ch6/01-dependence-on-the-net-or-dense-subset.md
+    - file: converted_md/ch6/02-conditional-mutual-dimension.md
+    - file: converted_md/ch6/03-applications-of-calfs.md
+    - file: converted_md/ch6/04-effectivity-for-the-subsets-of-exact-measure.md

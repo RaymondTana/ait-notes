@@ -1,17 +1,21 @@
 #!/usr/bin/env python3
-"""Port dissertation LaTeX (Chapters 1-2, plus selected background results)
-into MyST Markdown pages.
+"""Port all six dissertation chapters from LaTeX into MyST Markdown pages.
 
 Design goals:
   * Words and math are carried over verbatim. Only *structure* is rewritten:
     environments -> MyST directives, \\ref -> hyperlinks, \\cite -> {cite:p},
     \\textit -> *...*, etc.
-  * Every theorem/equation/section number is computed from the full thesis
-    source (all chapters) so the web numbering matches the PDF exactly. The
-    computed numbers are verified against the named destinations in the PDF.
+  * No numbers are written. Pages follow the conventions of notes/ (see
+    tools/numbering.mjs): references become `[%s](#label)` (or `\\ref{label}`
+    inside math), and numbers are filled in at build time from the toc.
   * Anything the converter does not understand is reported, never dropped.
 
-Usage:  python3 tools/tex2myst.py            (reads tex/, writes notes/)
+Output: one folder per chapter (chN/), with a 00- landing page holding the
+chapter title and any text before its first section, then one page per
+section; toc.yml (entries to paste into myst.yml) and report.txt.
+
+Usage:  python3 tools/tex2myst.py [TEX_DIR [OUT_DIR]]
+        (default: reads legacy_tex/, writes converted_md/)
 """
 import json
 import re
@@ -19,31 +23,19 @@ import sys
 from collections import Counter, defaultdict
 from pathlib import Path
 
-PDF_URL = ("https://raymondtana.github.io/my_assets/documents/"
-           "Raymond%20Tana%20PhD%20Dissertation.pdf")
-
 THEOREM_ENVS = {"theorem", "lemma", "proposition", "corollary", "remark",
                 "definition", "example", "fact", "claim", "observation"}
 MATH_ENVS = {"align", "align*", "equation", "equation*", "gather", "gather*",
              "multline", "multline*"}
 LIST_ENVS = {"itemize", "enumerate"}
+VERBATIM_ENVS = {"lstlisting", "verbatim"}
 # Macros from UserDefinedCommands.tex whose first argument is optional.
 # KaTeX cannot express optional arguments, so `\Kc[r]{x}{y}` is rewritten to
 # `\KcAt{r}{x}{y}` (same rendering; see myst.yml for the definitions).
 OPTIONAL_ARG_MACROS = ["Kcalt", "Kc", "K", "Icalt", "Ic", "I", "Jcalt", "Jc",
                        "J", "mc", "m", "norm"]
 
-# Chapters/pages that are ported. Everything else is "out of scope": refs into
-# it link to the named destination in the PDF instead.
-PORTED_CHAPTERS = {1, 2}
-APPENDIX_LABELS = [
-    "theorem:marstrand_projection_original",
-    "theorem:Orponen_weak_Marstrand",
-    "lemma:Lemma_2.3_of_Orponen",
-    "theorem:Stull_pinned_distance_theorem",
-    "theorem:Bushling_pinned_distance_theorem",
-    "theorem:Polish_space_as_continuous_image_of_Baire",
-]
+CHAPTERS = range(1, 7)
 
 REPORT = defaultdict(Counter)   # category -> Counter(detail)
 
@@ -157,6 +149,12 @@ def parse(s, i=0, stop_env=None):
             if k < len(s) and s[k] == "[":
                 opt, j = read_group(s, k, "[", "]")
             flush()
+            if name in VERBATIM_ENVS:
+                end = "\\end{%s}" % name
+                k = s.index(end, j)
+                nodes.append(["verbatim", name, opt, s[j:k]])
+                i = k + len(end)
+                continue
             children, i = parse(s, j, name)
             nodes.append(["env", name, opt, children])
             continue
@@ -222,7 +220,8 @@ def env_label(env):
 
 # --------------------------------------------------------------------------
 # Numbering (mirrors the PDF: theorem counter reset per section; equation
-# counter reset per chapter but printed as section.n, e.g. (1.8.5))
+# counter reset per chapter). The numbers are not written to the pages; they
+# decide which math rows are numbered and record each label's kind.
 # --------------------------------------------------------------------------
 
 def split_rows(raw):
@@ -330,30 +329,12 @@ class Converter:
         self.labels = labels
 
     # ---- references -----------------------------------------------------
-    def ref_target(self, label):
-        info = self.labels.get(label)
-        if info is None:
-            note("unresolved \\ref", label)
-            return "??", None
-        if info["chapter"] in PORTED_CHAPTERS or label in APPENDIX_LABELS:
-            if info["kind"] == "chapter":
-                # Chapters are sidebar groups, not pages: link to x.1.
-                first = next(l for l, v in self.labels.items()
-                             if v["kind"] == "section"
-                             and v["number"] == info["number"] + ".1")
-                return info["number"], "#" + first
-            return info["number"], "#" + label
-        note("ref outside ported chapters -> PDF link", label)
-        return info["number"], PDF_URL + "#nameddest=" + info["dest"]
-
     def ref_md(self, label, paren=False):
-        num, url = self.ref_target(label)
-        text = "(%s)" % num if paren else num
-        if url is None:
-            return text
-        if paren:
-            return "([%s](%s))" % (num, url)
-        return "[%s](%s)" % (text, url)
+        """`[%s](#label)`: MyST (or tools/numbering.mjs) fills in the number."""
+        if label not in self.labels:
+            note("unresolved \\ref (target not in any chapter)", label)
+        link = "[%%s](#%s)" % label
+        return "(%s)" % link if paren else link
 
     # ---- math -----------------------------------------------------------
     def math(self, m):
@@ -369,9 +350,12 @@ class Converter:
                      "\\%s[...] -> \\%sAt{...}" % (name, name))
 
         def ref(mm):
-            num, _ = self.ref_target(mm.group(2))
-            note("\\ref inside math (plain number, no link)", mm.group(2))
-            return "(%s)" % num if mm.group(1) == "eqref" else num
+            if mm.group(2) not in self.labels:
+                note("unresolved \\ref (target not in any chapter)", mm.group(2))
+            note("\\ref inside math (number filled in by numbering.mjs)",
+                 mm.group(2))
+            r = "\\ref{%s}" % mm.group(2)
+            return "(%s)" % r if mm.group(1) == "eqref" else r
         m = re.sub(r"\\(ref|eqref)\{([^}]*)\}", ref, m)
         m = re.sub(r"\\label\{[^}]*\}", "", m)
         m = re.sub(r"\\(nonumber|notag)\b", "", m)
@@ -429,11 +413,13 @@ class Converter:
         m = re.compile(r"\\([A-Za-z]+|.)").match(s, i)
         cmd, j = m.group(1), m.end()
         if cmd in ("textit", "emph", "textsl"):
+            # The thesis italicizes defined terms; notes/ sets them in bold
+            # (italics are kept for plain emphasis, fixed by hand).
             a, j = self.arg(s, j)
             inner = self.inline(a)
             lead = inner[:len(inner) - len(inner.lstrip())]
             trail = inner[len(inner.rstrip()):]
-            return lead + "*" + inner.strip() + "*" + trail, j
+            return lead + "**" + inner.strip() + "**" + trail, j
         if cmd == "textbf":
             a, j = self.arg(s, j)
             return "**" + self.inline(a).strip() + "**", j
@@ -533,6 +519,8 @@ class Renderer:
                 out.extend(self.math_block(n))
             elif k == "env":
                 out.append(self.env(n))
+            elif k == "verbatim":
+                out.append(self.verbatim(n))
             elif k == "heading":
                 out.append(self.heading(n))
             elif k == "label":
@@ -544,11 +532,10 @@ class Renderer:
         return out
 
     def heading(self, n):
-        cmd, star, title, label, num = n[1], n[2], n[3], n[4], n[5]
+        cmd, title, label = n[1], n[3], n[4]
         hashes = {"section": "#", "subsection": "##",
                   "subsubsection": "###"}[cmd]
-        text = self.conv.inline(title)
-        line = "%s %s%s" % (hashes, (num + " ") if num else "", text)
+        line = "%s %s" % (hashes, self.conv.inline(title))
         return ("(%s)=\n" % label if label else "") + line
 
     # ---- math -----------------------------------------------------------
@@ -567,49 +554,49 @@ class Renderer:
                                                        inner_env)
             return src
 
-        numbered = [r for r in rows if r["number"]]
+        # Only labeled rows keep a number (numbering.mjs numbers labeled
+        # equations); a PDF-numbered row nobody can reference loses it.
+        for r in rows:
+            if r["number"] and not r["labels"]:
+                note("unlabeled numbered equation left unnumbered", r["number"])
+        numbered = [r for r in rows if r["number"] and r["labels"]]
         if not numbered:
             return ["$$\n%s\n$$" % body(rows)]
         # Group rows so each group holds exactly one numbered row.
         groups, cur = [], []
         for r in rows:
             cur.append(r)
-            if r["number"]:
+            if r["number"] and r["labels"]:
                 groups.append(cur)
                 cur = []
         if cur:
             groups[-1].extend(cur)
         if len(rows) > 1:
             if len(groups) > 1:
-                note("numbered align split into one block per number",
-                     ", ".join(g_num(g) for g in groups))
+                note("numbered align split into one block per label",
+                     ", ".join(g_label(g) for g in groups))
             else:
-                note("align row number moved to the block",
-                     g_num(groups[0]))
+                note("align row number moved to the block", g_label(groups[0]))
         out = []
         for g in groups:
-            r = next(r for r in g if r["number"])
-            label = r["labels"][0] if r["labels"] else \
-                "equation-" + r["number"].replace(".", "-")
+            r = next(r for r in g if r["number"] and r["labels"])
             if len(r["labels"]) > 1:
                 note("extra labels on one equation", ", ".join(r["labels"]))
-            out.append("```{math}\n:label: %s\n:enumerator: %s\n%s\n```"
-                       % (label, r["number"], body(g)))
+            out.append("```{math}\n:label: %s\n%s\n```"
+                       % (r["labels"][0], body(g)))
         return out
 
     # ---- environments ---------------------------------------------------
     def env(self, n):
         name, opt, children = n[1], n[2], n[3]
         if name in THEOREM_ENVS:
-            meta = n[4]
+            label = n[4]["label"]
             inner = "\n\n".join(self.blocks(children))
-            label = meta["label"] or "theorem-" + meta["number"].replace(
-                ".", "-")
             head = "{prf:%s}" % name
             if opt:
                 head += " " + " ".join(self.conv.inline(opt).split())
-            return self.fence(head, [":label: " + label,
-                                     ":enumerator: " + meta["number"]], inner)
+            return self.fence(head, [":label: " + label] if label else [],
+                              inner)
         if name == "proof":
             inner = "\n\n".join(self.blocks(children))
             head = "{prf:proof}"
@@ -621,29 +608,51 @@ class Renderer:
         note("unknown environment (rendered as plain div)", name)
         return self.fence("{div}", [], "\n\n".join(self.blocks(children)))
 
+    def verbatim(self, n):
+        name, opt, raw = n[1], n[2], n[3]
+        lines = raw.strip("\n").split("\n")
+        pad = min((len(ln) - len(ln.lstrip()) for ln in lines if ln.strip()),
+                  default=0)
+        lines = [ln[pad:].rstrip() for ln in lines]
+        if not (opt and "mathescape" in opt):
+            note("verbatim block -> code fence", name)
+            return "```\n%s\n```" % "\n".join(lines)
+        # Code with $math$ inside: one line per row, indentation kept with
+        # non-breaking spaces, rows joined by hard line breaks.
+        note("lstlisting with mathescape -> pseudocode div", name)
+        rows = []
+        for ln in lines:
+            lead = len(ln) - len(ln.lstrip())
+            rows.append("\u00a0" * lead + self.conv.inline(ln.lstrip()))
+        return self.fence("{div}", [":class: pseudocode"], "\\\n".join(rows))
+
     def fence(self, head, opts, inner):
         colons = ":" * max(3, fence_depth(inner) + 1)
         parts = [colons + head] + opts + [inner, colons]
         return "\n".join(p for p in parts if p != "")
 
     def list_env(self, name, opt, children):
-        items, cur = [], None
+        items, labels, cur = [], [], None
         for ch in children:
             if ch[0] == "item":
                 if ch[1] is not None:
-                    note("\\item[...] custom label", ch[1])
+                    note("\\item[...] custom label kept in the item", ch[1])
                 cur = []
                 items.append(cur)
+                labels.append(ch[1])
             elif cur is None:
                 if ch[0] != "text" or ch[1].strip():
                     note("content before first \\item", str(ch)[:60])
             else:
                 cur.append(ch)
-        ordered = name == "enumerate"
+        custom = any(lab is not None for lab in labels)
+        ordered = name == "enumerate" and not custom
         marker = "1. " if ordered else "- "
         rendered = []
-        for it in items:
+        for it, lab in zip(items, labels):
             bl = self.blocks(it)
+            if lab is not None:
+                bl = [self.conv.inline(lab).strip() + " " + (bl[0] if bl else "")] + bl[1:]
             if not bl:
                 rendered.append(marker.rstrip())
                 continue
@@ -656,11 +665,15 @@ class Renderer:
         md = "\n".join(rendered) if all("\n\n" not in r for r in rendered) \
             else "\n\n".join(rendered)
         cls = None
-        if opt:
+        if custom:
+            cls = "labeled-list"
+        elif opt:
             if "\\roman*" in opt:
                 cls = "roman-list"
             elif "\\alph*" in opt:
                 cls = "alpha-list"
+            elif "\\arabic*" in opt:
+                cls = "arabic-list"
             else:
                 note("enumerate option not mapped", opt)
         if cls:
@@ -668,8 +681,8 @@ class Renderer:
         return md
 
 
-def g_num(g):
-    return next(r["number"] for r in g if r["number"])
+def g_label(g):
+    return next(r["labels"][0] for r in g if r["number"] and r["labels"])
 
 
 # --------------------------------------------------------------------------
@@ -682,10 +695,18 @@ def slugify(title):
     return re.sub(r"[^a-z0-9]+", "-", s.lower()).strip("-")
 
 
+def page(title, label, blocks):
+    fm = ["---", "title: %s" % json.dumps(title, ensure_ascii=False)]
+    if label:
+        fm.append("label: %s" % label)
+    fm.append("---")
+    return "\n".join(fm) + "\n\n" + "\n\n".join(blocks) + "\n"
+
+
 def main(thesis, outdir):
     thesis, outdir = Path(thesis).expanduser(), Path(outdir)
     trees = []
-    for c in range(1, 7):
+    for c in CHAPTERS:
         src = (thesis / ("Chapter-%d.tex" % c)).read_text()
         nodes, _ = parse(strip_comments(src))
         trees.append(nodes)
@@ -693,91 +714,48 @@ def main(thesis, outdir):
     for t in trees:
         num.walk(t)
 
-    # ---- verify numbering against PDF named destinations ---------------
-    dest_file = Path(__file__).with_name("pdf_dests.json")
-    if dest_file.exists():
-        pdf = set(json.loads(dest_file.read_text()))
-        ours = set(d for d in num.dests if d)
-        kinds = tuple(k + "." for k in THEOREM_ENVS) + (
-            "chapter.", "section.", "subsection.", "equation.")
-        pdf_k = {d for d in pdf if d.startswith(kinds)}
-        print("numbering check: %d of our %d anchors exist in the PDF; "
-              "%d PDF anchors of these kinds not produced by us"
-              % (len(ours & pdf_k), len(ours), len(pdf_k - ours)))
-        for d in sorted(ours - pdf_k)[:20]:
-            print("   ours-only:", d)
-        for d in sorted(pdf_k - ours)[:20]:
-            print("   pdf-only: ", d)
-
     conv = Converter(num.labels)
     rend = Renderer(conv)
-    toc = []
-    for c in sorted(PORTED_CHAPTERS):
-        tree = trees[c - 1]
+    toc = ["# Paste under project.toc in myst.yml (after moving the files"
+           " into notes/)."]
+    for c, tree in zip(CHAPTERS, trees):
         chap = next(n for n in tree if n[0] == "heading" and n[1] == "chapter")
-        sections, cur = [], None
+        intro, sections, cur = [], [], None
         for n in tree:
+            if n is chap:
+                continue
             if n[0] == "heading" and n[1] == "section":
                 cur = [n, []]
                 sections.append(cur)
             elif cur is not None:
                 cur[1].append(n)
-            elif n[0] not in ("heading",) and not (
-                    n[0] == "text" and not n[1].strip()):
-                note("content before first section (skipped)", str(n)[:60])
+            else:
+                intro.append(n)
         chdir = outdir / ("ch%d" % c)
         chdir.mkdir(parents=True, exist_ok=True)
-        files = []
+        title = conv.inline(chap[3])
+        fname = "00-%s.md" % slugify(chap[3])
+        (chdir / fname).write_text(page(title, chap[4], rend.blocks(intro)))
+        toc += ["- file: %s/ch%d/%s" % (outdir.name, c, fname),
+                "  children:"]
         for k, (h, body) in enumerate(sections, 1):
-            title, label, number = h[3], h[4], h[5]
-            fname = "%02d-%s.md" % (k, slugify(title))
-            fm = ["---", "title: %s" % json.dumps(
-                "%s %s" % (number, conv.inline(title)), ensure_ascii=False)]
-            if label:
-                fm.append("label: %s" % label)
-            fm.append("---")
-            md = "\n".join(fm) + "\n\n" + "\n\n".join(rend.blocks(body)) + "\n"
-            (chdir / fname).write_text(md)
-            files.append("ch%d/%s" % (c, fname))
-        toc.append(dict(title="Chapter %s: %s" % (chap[5],
-                                                  conv.inline(chap[3])),
-                        files=files))
+            fname = "%02d-%s.md" % (k, slugify(h[3]))
+            (chdir / fname).write_text(
+                page(conv.inline(h[3]), h[4], rend.blocks(body)))
+            toc.append("    - file: %s/ch%d/%s" % (outdir.name, c, fname))
 
-    # ---- appendix: selected background results from later chapters -----
-    found = {}
-
-    def find(nodes):
-        for n in nodes:
-            if n[0] == "env":
-                if n[1] in THEOREM_ENVS and n[4]["label"] in APPENDIX_LABELS:
-                    found[n[4]["label"]] = n
-                find(n[3])
-    for t in trees:
-        find(t)
-    blocks = []
-    for lab in APPENDIX_LABELS:
-        if lab not in found:
-            note("appendix label not found", lab)
-            continue
-        blocks.append(rend.env(found[lab]))
-    appdir = outdir / "appendix"
-    appdir.mkdir(parents=True, exist_ok=True)
-    (appdir / "background.md").write_text(
-        "---\ntitle: Background Results\n---\n\n"
-        "Statements of results from the literature that are cited in later "
-        "chapters of the dissertation, numbered as in the "
-        "[dissertation PDF](%s).\n\n" % PDF_URL
-        + "\n\n".join(blocks) + "\n")
-
-    (outdir / "toc.json").write_text(json.dumps(toc, indent=2,
-                                                ensure_ascii=False))
-    print("\n==== conversion report ====")
+    (outdir / "toc.yml").write_text("\n".join(toc) + "\n")
+    report = ["conversion report: chapters %d-%d of %s -> %s"
+              % (CHAPTERS[0], CHAPTERS[-1], thesis, outdir)]
     for cat, ctr in sorted(REPORT.items()):
-        print("\n[%s] (%d)" % (cat, sum(ctr.values())))
-        for d, c in ctr.most_common():
-            print("   %3d  %s" % (c, d))
+        report.append("\n[%s] (%d)" % (cat, sum(ctr.values())))
+        for d, n in ctr.most_common():
+            report.append("   %3d  %s" % (n, d))
+    (outdir / "report.txt").write_text("\n".join(report) + "\n")
+    print("Wrote %d chapters to %s/ (see %s/report.txt and %s/toc.yml)"
+          % (len(trees), outdir.name, outdir.name, outdir.name))
 
 
 if __name__ == "__main__":
     root = Path(__file__).resolve().parent.parent
-    main(*(sys.argv[1:3] or [root / "tex", root / "notes"]))
+    main(*(sys.argv[1:3] or [root / "legacy_tex", root / "converted_md"]))

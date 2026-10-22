@@ -1,8 +1,6 @@
 # MyST project config. Build: `npx myst start` (live preview) or
 # `npx myst build --html` (static site in _build/html).
 version: 1
-site:
-  analytics_google: "G-ZG5QV893BR"
 project:
   title: Algorithmic Information Theory
   description: Notes on algorithmic information theory and effective dimension, ported from Raymond Tana's PhD dissertation.
@@ -10,15 +8,23 @@ project:
     - name: Raymond Tana
   github: https://github.com/RaymondTana/ait-notes
   bibliography:
-    - tex/refs.bib
-  # Only equations the PDF numbers carry numbers; the converter sets each one
-  # explicitly (:enumerator:), so turn off MyST's automatic equation numbering.
+    - refs.bib
+  # Numbers come from each page's place in the toc below: MyST numbers page
+  # titles and headings, and tools/numbering.mjs numbers theorem-like blocks
+  # and labeled equations (unlabeled equations stay unnumbered).
+  plugins:
+    - tools/numbering.mjs
   numbering:
+    title: true
+    headings: true
     equation: false
-  # Macros from SupplementaryMaterial/UserDefinedCommands.tex, translated to
+  # Macros from legacy_tex/UserDefinedCommands.tex, translated to
   # KaTeX. KaTeX cannot take optional arguments, so each macro of the form
-  # \Kc[r]{x}{y} gets a twin \KcAt{r}{x}{y}; the converter rewrites calls.
+  # \Kc[r]{x}{y} gets a twin \KcAt{r}{x}{y}.
   math:
+    # \ref{label} in math is replaced by tools/numbering.mjs; this placeholder
+    # only keeps MyST's first render from failing.
+    '\ref': '\text{??}'
     # symbols
     '\A': '\mathcal{A}'
     '\B': '\mathbb{B}'
@@ -38,6 +44,8 @@ project:
     '\Z': '\mathbb{Z}'
     '\OR': '\vee'
     '\AND': '\wedge'
+    '\bigOR': '\bigvee'
+    '\bigAND': '\bigwedge'
     '\NOT': '\lnot'
     '\up': '\uparrow'
     '\down': '\downarrow'
@@ -94,19 +102,35 @@ project:
     '\m': '\mathbf{m}\left({#1}\right)'
     '\mAt': '\mathbf{m}_{#1}\left({#2}\right)'
     '\mc': '\mathbf{m}\left({#1} \mid {#2}\right)'
+  # Each chapter is a landing page with its sections as children; order here
+  # sets all numbering. Keep entries as `- file:` lines (the plugin reads them).
   toc:
     - file: index.md
-    - title: 'Chapter 1: Introduction'
+    - file: notes/introduction/01-introduction.md
+    - file: notes/introduction/02-notation.md
+    - file: notes/algorithmic_complexity/00-algorithmic-complexity.md
       children:
-        - pattern: notes/ch1/*.md
-    - title: 'Chapter 2: Robustness of Conditional Kolmogorov Complexity'
+        - file: notes/algorithmic_complexity/01-measures-and-hausdorff-dimension.md
+        - file: notes/algorithmic_complexity/02-computability-theory.md
+        - file: notes/algorithmic_complexity/03-prefix-complexity.md
+        - file: notes/algorithmic_complexity/04-algorithmic-randomness.md
+        - file: notes/algorithmic_complexity/05-semimeasures.md
+        - file: notes/algorithmic_complexity/06-complexity-characterizations-of-algorithmic-randomness.md
+    - file: notes/complexity_over_reals/00-complexity-over-the-reals.md
       children:
-        - pattern: notes/ch2/*.md
-    - title: Appendix
+        - file: notes/complexity_over_reals/01-lifting-prefix-complexity-to-reals.md
+        - file: notes/complexity_over_reals/02-effective-hausdorff-dimension.md
+        - file: notes/complexity_over_reals/03-effective-dimension-variants.md
+        - file: notes/complexity_over_reals/04-point-to-set-principles.md
+        - file: notes/complexity_over_reals/05-robustness-of-the-lift.md
+        - file: notes/complexity_over_reals/06-effective-dimension-under-uniformly-continuous-maps.md
+    - file: notes/reasoning/00-reasoning.md
       children:
-        - file: notes/appendix/background.md
+        - file: notes/reasoning/01-primitives-of-reasoning.md
+    - file: notes/glossary.md
 site:
   template: book-theme
+  analytics_google: "G-ZG5QV893BR"
   options:
     style: assets/custom.css
     logo_text: Raymond Tana

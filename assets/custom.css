@@ -19,3 +19,35 @@
 }
 .roman-list ol > li::before { content: "(" counter(item, lower-roman) ")"; }
 .alpha-list ol > li::before { content: "(" counter(item, lower-alpha) ")"; }
+
+/* enumerate[label=(\arabic*)] -> "(1)", "(2)", ... */
+.arabic-list ol {
+  list-style: none;
+  counter-reset: item;
+  padding-left: 2.5em;
+}
+.arabic-list ol > li {
+  counter-increment: item;
+  position: relative;
+}
+.arabic-list ol > li::before {
+  content: "(" counter(item) ")";
+  position: absolute;
+  left: -2.5em;
+  width: 2em;
+  text-align: right;
+}
+
+/* \item[(M1)] lists: the label starts each item, so drop the bullet. */
+.labeled-list ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+/* lstlisting pseudocode (with math): keep its line-by-line look. */
+.pseudocode {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.9em;
+  padding: 0.75em 1em;
+  border-left: 3px solid #ccc;
+}
