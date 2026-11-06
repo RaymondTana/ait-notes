@@ -41,13 +41,7 @@ $$
 \end{aligned}
 $$
 
-where the last equality follows from the {term}`Coding Theorem` [%s](#theorem:coding_theorem). So $\mathbf{M}$ and $\mathbf{m}$ produce the same local dimension notion on $2^\omega$. In light of Proposition [%s](#proposition:ball_vs_point_complexity),
-
-$$
-\begin{aligned}
-\dim_{\operatorname{loc}} \mathbf{m}(X) = \sup_{x \in X} \liminf_{r \to \infty} \frac{L^{\mathbf{U}}_r(x)}{r} =: \operatorname{bcdim}(X).
-\end{aligned}
-$$
+where the last equality follows from the {term}`Coding Theorem` [%s](#theorem:coding_theorem). So $\mathbf{M}$ and $\mathbf{m}$ produce the same local dimension notion on $2^\omega$.
 
 Note that by definition, $\dim_{\operatorname{loc}} \mathbf{M}$ is itself the **lower incompressibility ratio with respect to a priori complexity**:
 
@@ -86,7 +80,7 @@ For any $X \subseteq 2^\omega$, we have
 $$
 \begin{aligned}
 \small
-\operatorname{effdim}(X) = \dim_{\operatorname{loc}} \mathbf{M}(X) = \dim_{\operatorname{loc}} \mathbf{m}(X) = \dim_{\operatorname{loc}} \boldsymbol{\kappa}(X) = \operatorname{cdim}(X) = \operatorname{bcdim}(X) = \underline{\kappa}(X).
+\operatorname{effdim}(X) = \dim_{\operatorname{loc}} \mathbf{M}(X) = \dim_{\operatorname{loc}} \mathbf{m}(X) = \dim_{\operatorname{loc}} \boldsymbol{\kappa}(X) = \operatorname{cdim}(X) = \underline{\kappa}(X).
 \end{aligned}
 $$
 :::
