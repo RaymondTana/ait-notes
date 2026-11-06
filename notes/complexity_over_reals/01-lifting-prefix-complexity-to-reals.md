@@ -132,3 +132,64 @@ K^y_r(x) \leq K_{r \mid s}(x \mid y) + K(s) + c.
 \end{aligned}
 $$
 :::
+
+## Lifting Discrete Semimeasures
+
+Continuing the discussion of section [%s](#section:Semimeasures), we might naturally extend a discrete semimeasure $m : \mathbb{Q}^n \to [0, 1]$ defined on the rationals to a set function over $\mathbb{R}^n$ in one of two ways:
+$$
+\begin{aligned}
+\mu_m(X) &:= \sum_{q \in X \cap \mathbb{Q}^n} m(q), \\
+\Pi_m(X) &:= \sup_{q \in X \cap \mathbb{Q}^n} m(q).
+\end{aligned}
+$$
+
+The first, $\mu_m$, is a purely additive atomic measure defined on every subset of $\mathbb{R}^n$. Whereas the second, $\Pi_m$, is an outer measure on $\mathbb{R}^n$ with $\Pi_m(\mathbb{R}^n) \leq 1$, and it is **completely maxitive** in the sense that for every arbitrary index set $I$:
+$$
+\Pi_m \left(\bigcup_{i \in I} X_i\right) = \sup_{i \in I} \Pi_m(X_i).
+$$
+It is also continuous from below along arbitrary increasing sequences; and is continuous from above along decreasing sequences of compact sets. In the language of capacities, $\Pi_m$ is a maxitive Choquet capacity whose point density function is $g_m := m\upharpoonright_{\mathbb{Q}^n}$. After normalization, we might further refer to this outer measure as a possibility measure with possibility distribution $g_m$. 
+
+Always $\Pi_m \leq \mu_m$. 
+
+In his doctoral dissertation, N. Lutz introduced the function $\boldsymbol{\kappa}(X) := 2^{-K(X)}$, where $K(X) := \min \{ K(q) : q \in X \cap \mathbb{Q}^n \}$, and zero if $X$ contains no rational points {cite:p}`Lut17b`. This is exactly $\Pi_m(X)$ for $m(q) := 2^{-K(q)}$, so it is an outer measure. J. Lutz and N. Lutz showed that $\boldsymbol{\kappa}$ possesses many algorithmic optimality properties. In particular, J. Lutz and N. Lutz showed that $\boldsymbol{\kappa}$ is **locally optimal** among all the other strongly finite, {term}`lower-semicomputable` outer measures on $\mathbb{R}^n$ {cite:p}`LL20`. 
+
+Relative to any oracle $A$, the Coding Theorem [%s](#theorem:coding_theorem) gives for any $X \subseteq \mathbb{R}^n$:
+
+$$
+\boldsymbol{\kappa}^A(X) =^* \Pi_{\mathbf{m}^A}(X).
+$$
+
+Compare this to how Case and Lutz extended the *a priori* probability and Kolmogorov complexity notations to sets of strings $S \subseteq 2^{<\omega}$ {cite:p}`CL14`:
+
+$$
+\begin{aligned}
+Q(S) &:= \sum_{\mathbf{U}_{\operatorname{PF}}(\pi) \downarrow \in S} 2^{-\operatorname{len}(\pi)} = \sum_{\sigma \in S} Q(\sigma),\\
+K(S) &:= \min_{\sigma \in S} K(\sigma).
+\end{aligned}
+$$
+
+They define a **layered disjoint system** (LDS) as a set $B \subseteq \omega \times \omega \times 2^{<\omega}$ whose **blocks** $B_{r,t} := \{ \sigma : (r, t, \sigma) \in B \}$ are pairwise disjoint within each **layer** $r$: so $B_{r,s} \cap B_{r,t} = \emptyset$ whenever $s \neq t$.
+
+:::{prf:theorem} LDS Coding Theorem, Theorem 3.1 of {cite:t}`CL14`
+:label: theorem:LDS_coding_theorem
+For every computably enumerable LDS $B$ there is a constant $c_B$ such that, for all $r, t \in \omega$,
+
+$$
+K(B_{r,t}) \leq -\log Q(B_{r,t}) + K(r) + c_B.
+$$
+:::
+
+The reverse inequality $K(B_{r,t}) \geq -\log Q(B_{r,t}) - O(1)$ fails in general, since a block may contain many strings. The theorem says instead that the total mass of a block exceeds the mass of its best element by at most a factor $2^{K(r) + O(1)}$. Levin's Coding Theorem ([%s](#theorem:coding_theorem)) is the special case where every block is a singleton.
+
+Apply the LDS Coding theorem to $\mathbb{R}^n$: the layers $\mathcal{Q}^n_r$ of the half-open dyadic cubes can computable enumerate their blocks $(r, t)$. And the blocks of $\mathcal{Q}^n_r$ partition $\mathbb{R}^n$. This builds an LDS. Using [%s](theorem:LDS_coding_theorem), we may conclude the that $\Pi_{\mathbf{m}^A}$ and $\mu_{\mathbf{m}^A}$ essentially agree on half-open dyadic cubes.
+
+:::{prf:corollary}
+:label: corollary:sum_sup_dyadic
+For every oracle $A$, precision-level $r \in \omega$, and every half-open dyadic cube $D \in \mathcal{Q}^n_r$,
+
+$$
+\Pi_{\mathbf{m}^A}(D) \leq \mu_{\mathbf{m}^A}(D) \leq 2^{K(r) + O(1)} \cdot \Pi_{\mathbf{m}^A}(D).
+$$
+:::
+
+That is, at each dyadic layer, the additive and maxitive extensions of $\mathbf{m}^A$ agree up to a factor of $2^{o(r)}$. This is the fact that J. Lutz and N. Lutz use to prove that $\boldsymbol{\kappa}$ is locally optimal {cite:p}`LL20`.

@@ -7,7 +7,7 @@ This section presents an alternative approach to measuring the information-conte
 
 ## Discrete Semimeasures
 
-A function $m: 2^{<\omega} \to [0, 1]$ is said to be a **discrete semimeasure** on $2^\omega$ if it satisfies $\sum_{\sigma \in 2^{<\omega}} m(i) \leq 1$. There exists a (reference) **optimal** {term}`lower-semicomputable` discrete semimeasure $\mathbf{m}$ on $2^\omega$. That is, if $m$ is any other lower-semicomputable discrete semimeasure, there exists a constant $\beta > 0$ such that for all $\sigma \in 2^{<\omega}$, we have $\mathbf{m}(\sigma) \geq \beta \cdot m(\sigma)$. Refer to Section 4.3 of {cite:t}`LV08` for more details.
+A function $m: 2^{<\omega} \to [0, 1]$ is said to be a **discrete semimeasure** on $2^\omega$ if it satisfies $\sum_{\sigma \in 2^{<\omega}} m(\sigma) \leq 1$. There exists a (reference) **optimal** {term}`lower-semicomputable` discrete semimeasure $\mathbf{m}$ on $2^\omega$. That is, if $m$ is any other lower-semicomputable discrete semimeasure, there exists a constant $\beta > 0$ such that for all $\sigma \in 2^{<\omega}$, we have $\mathbf{m}(\sigma) \geq \beta \cdot m(\sigma)$. Refer to Section 4.3 of {cite:t}`LV08` for more details.
 
 There is a natural connection between {term}`prefix complexity` and lower-semicomputable discrete semimeasures. Levin originally introduced the concept of an **information content measure**, or an upper-semicomputable, partial function $F : \subseteq 2^{<\omega} \to \omega$ satisfying $\sum_{\sigma \in 2^{<\omega}} 2^{-F(\sigma)} \leq 1$, as described in {cite:t}`DH10`. By the {term}`Kraft Inequality` ([%s](#theorem:kraft_inequality)) and the universality of $\mathbf{U}_{\operatorname{PF}}$, $K$ is considered to be minimal among the the information content measures. Similarly, $2^{-K(\cdot)}$ is maximal (i.e., optimal) among the lower-semicomputable discrete semimeasures.
 
@@ -20,7 +20,7 @@ Fix an {term}`oracle` machine $M$ on $2^{<\omega}$, and $\sigma \in 2^{<\omega}$
 - Let $R_M(\sigma) := 2^{-C_M(\sigma)}$ denote the **algorithmic probability** of $\sigma$ under $M$.
 - Let $Q_M(\sigma) := \sum_{M(\pi) \downarrow = \sigma} 2^{- \operatorname{len}(\pi)}$ denote the **a priori probability** of $\sigma$ under $M$.
 
-When $M$ is the reference {term}`universal PF oracle machine <Universal Turing machine>`, simply write $R \equiv R_{\mathbf{U}_{\operatorname{PF}}}$ and $T \equiv T_{\mathbf{U}_{\operatorname{PF}}}$.
+When $M$ is the reference {term}`universal PF oracle machine <Universal Turing machine>`, simply write $R \equiv R_{\mathbf{U}_{\operatorname{PF}}}$ and $Q \equiv Q_{\mathbf{U}_{\operatorname{PF}}}$.
 :::
 
 Levin proved that $\mathbf{m}$, $R$, and $Q$ all capture essentially the same quantity.
