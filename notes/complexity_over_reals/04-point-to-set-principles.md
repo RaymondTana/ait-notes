@@ -43,6 +43,89 @@ $$
 
 Hitchcock further showed that this correspondence broke down immediately beyond this level of the {term}`lightface Borel hierarchy`.
 
+## PTS by Coding on Balls
+
+K. Miyabe observed that the point-to-set principle factors into a purely classical coding theorem, followed by an encoding of countable data into an oracle {cite:p}`Miy26`.
+
+:::{prf:definition} Definitions 3.1, 3.2, and 4.1 of {cite:t}`Miy26`
+:label: definition:prefix_free_ball_code
+A **prefix-free ball code** is a map $\varphi : D \to \mathcal{B}$, where $D \subseteq 2^{<\omega}$ is {term}`prefix-free` and $\mathcal{B}$ is the collection of closed balls of positive radius in $\mathbb{R}^m$. For $x \in \mathbb{R}^m$ and $r \in \omega$, its **code length** is
+
+$$
+\begin{aligned}
+L^\varphi_r(x) := \min \set{\operatorname{len}(\pi)}{\pi \in D,\ x \in \varphi(\pi),\ \operatorname{diam} \varphi(\pi) \leq 2^{-r}},
+\end{aligned}
+$$
+
+or $+\infty$ if no such $\pi$ exists. The code is **rational** if all of its values are rational closed balls.
+:::
+
+Note that Miyabe writes $K_\varphi(x; r)$ where we write $L^\varphi_r(x)$.
+
+:::{prf:theorem} Theorem 1.1 (Theorems 3.3 and 4.2) of {cite:t}`Miy26`
+:label: theorem:ball_code_characterization
+For every nonempty $X \subseteq \mathbb{R}^m$,
+
+$$
+\begin{aligned}
+\dim_{\operatorname{H}} X &= \min_{\varphi} \sup_{x \in X} \liminf_{r \to \infty} \frac{L^\varphi_r(x)}{r} =: \min_\varphi \operatorname{bcdim}_\varphi(X), \\
+\dim_{\operatorname{P}} X &= \min_{\varphi} \sup_{x \in X} \limsup_{r \to \infty} \frac{L^\varphi_r(x)}{r} =: \min_\varphi \operatorname{bcDim}_\varphi(X),
+\end{aligned}
+$$
+
+where $\varphi$ ranges over prefix-free ball codes.
+:::
+
+One might view the Hausdorff dimension result above as a Euclidean, ball-based counterpart to B. Ryabko's coding theorem for combinatorial sources in $A^\omega$ {cite:p}`Rya86`.
+
+Here, we reproduce the proof of Miyabe's Hausdorff dimension formula.
+
+:::{prf:proof}
+:nonumber:
+Fix $\varphi$ and let $\alpha = \sup_{x \in X} L^\varphi_r(x) / r$.
+
+*Lower bound*: To prove $\dim_{\operatorname{H}} X \leq \alpha$, consider any $t > \alpha$. Each $x \in X$ has infinitely many $r$ with a name $\pi$ such that $x \in \varphi(\pi)$, $\operatorname{diam} \varphi(\pi) \leq 2^{-r}$, and $\operatorname{len}(\pi) < tr$, so that $\operatorname{diam}(\varphi(\pi))^t < 2^{-\operatorname{len}(\pi)}$. A fixed name denotes a ball of fixed positive diameter, so it witnesses only finitely many $r$, and the lengths of the witnessing names tend to infinity. So for every $N$, the balls $\varphi(\pi)$ with $\operatorname{len}(\pi) \geq N$ and $\operatorname{diam}(\varphi(\pi))^t < 2^{-\operatorname{len}(\pi)}$ cover $X$, each with diameter less than $2^{-N/t}$, and
+
+$$
+\begin{aligned}
+\mathcal{H}^t_{2^{-N/t}}(X) \leq \sum_{\pi \in D,\ \operatorname{len}(\pi) \geq N} 2^{-\operatorname{len}(\pi)} \longrightarrow 0
+\end{aligned}
+$$
+
+by the {term}`Kraft Inequality`. Hence $\mathcal{H}^t(X) = 0$.
+
+*Attainable*: Let $s := \dim_{\operatorname{H}} X$ and $t_k := s + 1/k$. Since $\mathcal{H}^{t_k}(X) = 0$, cover $X$ by rational closed balls $\overline{B}$ with $\operatorname{diam} \overline{B} \leq 2^{-k}$ and $\sum (\operatorname{diam} \overline{B})^{t_k} \leq 2^{-k}$. Request a name of length $\ceil{t_k \log (1 / \operatorname{diam} \overline{B})}$ for each such ball. The requests have total Kraft weight at most $\sum_k 2^{-k} \leq 1$, so the countable Kraft inequality (Lemma 3.6 of {cite:t}`Miy26`) provides a prefix-free code $\varphi$ with these lengths. Given $x \in X$ and $k$, choose $\overline{B} \ni x$ from the $k$-th cover and let $r := \floor{\log(1 / \operatorname{diam} \overline{B})} \geq k$. Then $L^\varphi_r(x) / r < t_k + (t_k + 1)/k$, so $\liminf_r L^\varphi_r(x) / r \leq s$.
+:::
+
+The effective version follows by rationalizing a minimizing code and storing it in an oracle.
+
+:::{prf:lemma} Lemmas 5.2 and 5.4 of {cite:t}`Miy26`
+:label: lemma:rationalize_and_encode_ball_codes
+1. For every prefix-free ball code $\varphi$, there is a rational prefix-free ball code $\varphi'$ with $L^{\varphi'}_r(x) \leq L^\varphi_{r+1}(x)$ for all $x$ and $r$.
+2. For every rational prefix-free ball code $\varphi$, there is an oracle $A$ with $L^{\mathbf{U}^A}_r(x) \leq L^\varphi_r(x) + O(1)$ for all $x$ and $r$.
+:::
+
+One can prove the first part by enlargening each ball of the original ball code to a rational closed ball of less than twice its diameter. For the second part: it suffices to encode both the domain and graph of the ball code.
+
+:::{prf:theorem} Point-to-Set Principles via Ball Codes; Theorem 5.5 of {cite:t}`Miy26`
+:label: theorem:PTS_coding_form
+For every nonempty $X \subseteq \mathbb{R}^m$,
+
+$$
+\begin{aligned}
+\dim_{\operatorname{H}} X &= \min_{A \in 2^{\leq \omega}} \sup_{x \in X} \liminf_{r \to \infty} \frac{L^{\mathbf{U}^A}_r(x)}{r} =: \min_{A \in 2^{\leq \omega}} \operatorname{bcdim}^{\mathbf{U}^A}(X), \\
+\dim_{\operatorname{P}} X &= \min_{A \in 2^{\leq \omega}} \sup_{x \in X} \limsup_{r \to \infty} \frac{L^{\mathbf{U}^A}_r(x)}{r} =: \min_{A \in 2^{\leq \omega}} \operatorname{bcDim}^{\mathbf{U}^A}(X).
+\end{aligned}
+$$
+:::
+
+:::{prf:proof}
+:nonumber:
+Each $\mathbf{U}^A$ is a prefix-free ball code, so Theorem [%s](#theorem:ball_code_characterization) gives "$\geq$". For the reverse, take a minimizing code, rationalize it, and encode it into an oracle by Lemma [%s](#lemma:rationalize_and_encode_ball_codes).
+:::
+
+By Proposition [%s](#proposition:ball_vs_point_complexity), these are exactly $\dim^A(x)$ and $\operatorname{Dim}^A(x)$. So Theorem [%s](#theorem:PTS_coding_form) recovers Theorem [%s](#theorem:PTS_for_H_dimension) and its packing analogue (Corollary 5.9 of {cite:t}`Miy26`). Conversely, granting the point-to-set principle, the same two lemmas recover the rational-ball case of Theorem [%s](#theorem:ball_code_characterization).
+
 ## PTS for Hausdorff Measures
 
 The original Point-to-Set Principle has recently been refined to the $s$-dimensional Hausdorff outer measures by P. Lutz and J. Miller {cite:p}`LM24`. These results also expand on the complexity characterizations of various partial randomness notions from Theorem [%s](#theorem:complexity_characterizations_of_randomness).
@@ -84,3 +167,36 @@ $$
 Again by Theorem [%s](#theorem:complexity_characterizations_of_randomness), $X$ is not $s$-null if and only if there is an ML-$B$-$s$-random element in $X$ for every oracle $B$.
 
 In effect, these refined point-to-set principles demonstrate the usefulness of *a priori* complexity–defined by {term}`continuous semimeasures <Continuous semimeasure>`–in characterizing not just Hausdorff dimension but also the $s$-dimensional Hausdorff outer measures.
+
+On $\mathbb{R}^m$, Miyabe's ball codes also give a classical characterization of nullity at a fixed exponent.
+
+:::{prf:theorem} Hausdorff Nullity; Theorem 3.8 of {cite:t}`Miy26`
+:label: theorem:ball_code_nullity
+Let $s > 0$ and let $X \subseteq \mathbb{R}^m$ be nonempty. Then $\mathcal{H}^s(X) = 0$ if and only if there is a prefix-free ball code $\varphi$ such that, for every $x \in X$,
+
+$$
+\begin{aligned}
+\liminf_{r \to \infty} \p{L^\varphi_r(x) - sr} = -\infty.
+\end{aligned}
+$$
+:::
+
+Effectivizing as in Theorem [%s](#theorem:PTS_coding_form) gives a Euclidean analogue of the $\operatorname{\Delta P}$ characterization in Corollary [%s](#corollary:PTS_null_or_finite).
+
+:::{prf:corollary}
+:label: corollary:ball_PTS_nullity
+Let $s > 0$ and let $X \subseteq \mathbb{R}^m$ be nonempty. Then
+
+$$
+\begin{aligned}
+\mathcal{H}^s(X) > 0 \iff (\forall B \in 2^{\leq \omega})(\exists x \in X) \brk{\liminf_{r \to \infty} \p{L^{\mathbf{U}^B}_r(x) - sr} > -\infty}.
+\end{aligned}
+$$
+:::
+
+:::{prf:proof}
+:nonumber:
+($\Leftarrow$): Each $\mathbf{U}^A$ is a prefix-free ball code, so appeal to Theorem [%s](#theorem:ball_code_nullity).
+
+($\Rightarrow$): Suppose $\mathcal{H}^s(X) = 0$ and let $\varphi$ be the code guaranteed by Theorem [%s](#theorem:ball_code_nullity). Rationalize it, changing $L^\varphi_r(x) - sr$ by at most $s$. Then, encode it into an oracle $B$ by Lemma [%s](#lemma:rationalize_and_encode_ball_codes). Exchanging this $L^\varphi_r(x)$ for $L^{\mathbf{U}^B}_r(x)$ introduces at most $O(1)$ error. Thus, $\liminf_r (L^{\mathbf{U}^B}_r(x) - sr) = -\infty$ for every $x \in X$.
+:::
