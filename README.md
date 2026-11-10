@@ -1,5 +1,7 @@
 # Algorithmic Information Theory Notes
 
+Find the live notes here: [AIT Information Theory, Notes](https://raymondtana.github.io/ait-notes/).
+
 Much of the content of these notes is based on my [doctoral dissertation](https://raymondtana.github.io/my_assets/documents/Raymond%20Tana%20PhD%20Dissertation.pdf).
 
 ## Developer notes
