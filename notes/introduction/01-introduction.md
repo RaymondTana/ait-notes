@@ -8,11 +8,13 @@ numbering:
 
 These notes concern algorithmic information theory (AIT) and its applications to geometric measure theory (GMT), inductive reasoning, and machine learning (ML).
 
-These notes are partly motivated by the mounting evidence that mathematics under algorithmic restrictions offers insights into–and refinements to–the study of the fractal properties of sets.
+These notes are partly motivated by the mounting evidence that mathematics under algorithmic restrictions offers insights into–-and refinements to–-the study of the fractal properties of sets. Since the early 2000s, mathematicians have used both algorithmic methods and "classical" methods to steadily new results in GMT. Sometimes, the algorithmic methods provide new and finer proofs of existing GMT results first proved classically; in other cases, it is the classical program which has to respond to a result in GMT first proved by algorithmic methods. It is surprising that such a back-and-forth has persisted for so long, especially given the sneaking suspicion that both theories are really saying the same thing when it comes to GMT. Parts of this online book illustrate this tit-for-tat dynamic, as well as help to unify the language and methods employed by both traditions. If I had to guess, there will be a grand unification of that two theories which will conclude the following: any result about GMT is equivalently provable in either the language of algorithmic complexity or in the classical language of fractal measures/dimension; but AIT is *richer* in the sense that its language can express finer properties of points and sets at the granularity of degrees of computability (i.e., it can prove results of effective fractal geometry).
 
-These notes are also motivated in part by the incredible success of modern machine learning techniques for serving intelligent inference models. We wish to flesh out the deep relationship between the ability to *compress* information and the ability to *reason*.
+These notes are also motivated in part by the incredible success of modern machine learning techniques for serving intelligent inference models. I hope to expound on the deep relationship between the ability to *compress* information and the ability to *infer* models from observations.
 
 The rest of this page is taken from the introduction to my [doctoral dissertation](https://raymondtana.github.io/my_assets/documents/Raymond%20Tana%20PhD%20Dissertation.pdf). 
+
+---
 
 The origins of algorithmic information theory began in the 1960s with the formalization of **{term}`Solomonoff induction`**: a rule for selecting an {term}`hypothesis` for the source from which some given data was produced. The rule substitutes a non-computable, {term}`universal prior distribution` into {term}`Bayes' rule`, and rewards algorithmically-simpler explanations {cite:p}`Sol60`. R. Solomonoff's conception of information content is most closely related to the {term}`algorithmic probability` of producing a piece of data with respect to a {term}`universal Turing machine`.
 
