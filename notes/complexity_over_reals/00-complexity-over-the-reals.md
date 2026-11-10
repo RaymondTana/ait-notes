@@ -3,7 +3,7 @@ title: "Algorithmic Complexity over the Reals"
 label: chapter:complexity_over_reals
 ---
 
-This chapter lifts algorithmic complexity from finitary objects to infinitary ones (like points of Euclidean space) through their finitary approximations, and uses the lift to study effective dimension.
+This chapter lifts algorithmic complexity from finitary objects to infinitary ones (like points of Euclidean space) through their finitary approximations, and uses the lift to study effective fractal dimension. We show how this lift satisfies some desirable properties which imply that many distinct approaches to measuring algorithmic information content all produce the same effective dimension notion. We also include how effective fractal dimension connects to classical fractal dimension via the point-to-set principles.
 
 - [Lifting Prefix Complexity to Reals](#section:Lifting_Prefix_Complexity_to_Reals): the standard lift of prefix complexity to $\mathbb{R}^m$.
 - [Effective Hausdorff Dimension](#section:Effective_Hausdorff_Dimension): constructive dimension and its characterizations by complexity, supergales, and tests.

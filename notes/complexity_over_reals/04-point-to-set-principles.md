@@ -3,7 +3,7 @@ title: "Point-to-Set Principles"
 label: section:PTS
 ---
 
-In this context, a point-to-set (PTS) principle will characterize the fractal dimension or measure content of a subset by some {term}`local dimension` or measure assigned to its elements. We summarize the few PTS principles known for {term}`Hausdorff dimension` and the $s$-dimensional {term}`Hausdorff outer measures <Hausdorff outer measure>` via algorithmically-restricted quantities.
+AIT defines effective dimension under an algorithmic restriction; but in the limit of stronger computational powers, it is intuitive that AIT might recover the classically-defined fractal dimensions. The point-to-set principles formalize this. In this context, a point-to-set (PTS) principle will characterize the fractal dimension or measure content of a subset by some {term}`local dimension` or measure assigned to its elements. We summarize the few PTS principles known for {term}`Hausdorff dimension` and the $s$-dimensional {term}`Hausdorff outer measures <Hausdorff outer measure>` via algorithmically-restricted quantities.
 
 ## PTS for Hausdorff Dimension
 

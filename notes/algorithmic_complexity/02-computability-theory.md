@@ -3,9 +3,11 @@ title: "Computability Theory"
 label: section:Computability_Theory
 ---
 
+The primary difference between classical GMT and the newer AIT is that AIT attempts to deduce facts about fractal geometry when constrained by computational power. For our purposes, this computational power is not to do with time or space bounds on algorithms, but on the ability to answer problems via algorithms *at all*. This notion is called *computability*, and its main objects are algorithms, one of whose formalisms are the *Turing machines*. Below we present some of the fundamentals of the theory of computability, so that we might have the primitives and language with which to express arguments and results of AIT.
+
 ## Computability by Machines
 
-We briefly review the necessary components of computability theory for discussing algorithmic randomness. In this dissertation, we accept Turing's model of computation as the “right” way to characterize *algorithmic* or *effective* procedures. According to the Church-Turing thesis, the subsets of the natural numbers or functions from natural numbers to natural numbers which are “intuitively algorithmic” are exactly those which may be computed by Turing machines. See {cite:t}`DH10` for more on the formalism of Turing machines.
+We briefly review the necessary components of computability theory for discussing algorithmic randomness. Here, we accept Turing's model of computation as the “right” way to characterize *algorithmic* or *effective* procedures. According to the Church-Turing thesis, the subsets of the natural numbers or functions from natural numbers to natural numbers which are “intuitively algorithmic” are exactly those which may be computed by Turing machines. See {cite:t}`DH10` for more on the formalism of Turing machines.
 
 To begin, we will consider partial functions of the form $\Phi : \subseteq \omega \to \omega$. If $\operatorname{dom}(\Phi) = \omega$, call $\Phi$ **total**. Each Turing machine $M$ **computes** a partial function $\Phi_M : \subseteq \omega \to \omega$ satisfying $n \in \operatorname{dom}(\Phi_M) \iff M(n) \downarrow$, and $n \in \operatorname{dom}(\Phi_M)$ implies $M(n) \downarrow= \Phi_M(n)$. All such $\Phi_M$ are called **partial computable (p.c.)** functions. Moreover, whenever $A = \operatorname{dom}\Phi_M$ is the domain of a Turing machine $M$, then $M$ is said to **computably enumerate** $A$, making $A$ **computably enumerable (c.e.)**. If both $A$ and its complement $\omega \setminus A$ are c.e., then $A$ is called **computable**.
 

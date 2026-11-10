@@ -3,7 +3,7 @@ title: "Lifting Prefix Complexity to Reals"
 label: section:Lifting_Prefix_Complexity_to_Reals
 ---
 
-{term}`Prefix complexity` may be lifted to {term}`infinitary objects <Infinitary object>` via {term}`finitary <Finitary object>` approximations. We state the following results how they were originally presented: over Euclidean space. Analogous statements also hold over Cantor space.
+This page discusses how our measures of incompressibility (via Kolmogorov complexity) can be lifted to quantity the (limiting) incompressibility of points in Euclidean space. In general, {term}`prefix complexity` may be lifted to {term}`infinitary objects <Infinitary object>` via {term}`finitary <Finitary object>` approximations. We state the following results how they were originally presented: over Euclidean space. Analogous statements also hold over Cantor space.
 
 ## Lifting Conditional Complexity
 

@@ -3,7 +3,7 @@ title: "Effective Dimension Variants"
 label: section:Conditional_and_Mutual_Dimensions
 ---
 
-We review two variants of effective dimension.
+We review two variants of effective dimension. These notions are inspired by analogous quantities in classical (Shannon) information theory. 
 
 ## Mutual Dimension
 

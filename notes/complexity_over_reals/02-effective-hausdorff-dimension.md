@@ -7,6 +7,10 @@ J. Lutz was the first to introduce a refinement to {term}`Hausdorff dimension` 
 
 For simplicity, we define the effective dimension notions in this section over $2^\omega$. With slight adjustments, some may be extended to any $\mathbb{R}^m$.
 
+## Defining Effective Hausdorff Dimension
+
+### Local Dimension Notions
+
 Inspired by the definition of the local dimension of an outer measure in K. Falconer's book {cite:p}`Fal90`, define local dimension for outer measures and semimeasures as follows.
 
 :::{prf:definition}
@@ -51,6 +55,8 @@ $$
 \end{aligned}
 $$
 
+### Effectivizing Hausdorff Dimension itself
+
 One might also attempt to effectivize the definition of classical Hausdorff dimension directly. Suppose $\mathcal{U}$ is a Martin-Löf-$s$-test covering $X \subseteq 2^\omega$. Then, $\mathcal{U}$ acts as an effective witness to $X$ being $s$-null. In analogy with the definition of Hausdorff dimension in ([%s](#equation:definition_of_Hausdorff_dimension)), define the **effective Hausdorff dimension** of $X \in 2^\omega$ to be:
 
 $$
@@ -69,7 +75,11 @@ $$
 
 Martin-Löf-$s$-randomness relates to success by constructive $s$-supergales. That is, if there exists a constructive $s$-supergale {term}`succeeding <Succeed>` on $X$, then $X$ will be ML-$t$-null for all left-c.e. $t > s$. Conversely, if $s$ is left-c.e. and $X$ is ML-$s$-null, then there exists a constructive $s$-supergale succeeding on $X$. Therefore, $\operatorname{cdim}(X) = \operatorname{effdim}(X)$ on all sets $X \subseteq 2^\omega$.
 
+### Optimal Outer Measures
+
 Recall that in his doctoral dissertation, N. Lutz introduced the map $\boldsymbol{\kappa}(X) := 2^{-K(X)}$ originally on $\mathbb{R}^m$ (although, we can equivalently consider it an outer measure on $2^\omega$) which possesses many algorithmic optimality properties as explored in both {cite:p}`Lut17b; LL20`. In particular, J. Lutz and N. Lutz showed that $\boldsymbol{\kappa}$ is **locally optimal** among all the other strongly finite, {term}`lower-semicomputable` outer measures on $2^\omega$, and that any locally optimal outer measure $\boldsymbol{\mu}$ has local dimension $\dim_{\operatorname{loc}}\boldsymbol{\mu}$ matching the lower incompressibility ratio of {term}`prefix complexity` {cite:p}`LL20`.
+
+### Asymptotic Agreements for Effective Hausdorff Dimension
 
 We now summarize these standard asymptotic coincidences in the following theorem.
 
@@ -87,6 +97,8 @@ $$
 
 We will use $\dim(\cdot)$ as a generic placeholder for any one of those listed in Theorem [%s](#theorem:asymptotic_coincidences_Cantor) over either Cantor space or Euclidean space. And $\dim(x)$ will stand for $\dim(\seq{x})$ for any $x \in 2^\omega$.
 
+## Effective Packing Dimension
+
 We further note that **effectivized packing dimension** (or **strong dimension**) coincides with the *upper* incompressibility ratio of prefix complexity, as first shown in {cite:t}`AHLE07`. So, we fix the notation:
 
 $$
@@ -94,3 +106,5 @@ $$
 \operatorname{Dim}(X) := \overline{\kappa}(X) = \sup_{x \in X} \limsup_{r \to \infty} \frac{K(\restrict{x}{r})}{r}.
 \end{aligned}
 $$
+
+While the results for packing dimension are often analogous to those of Hausdorff dimension (and follow this upper- versus lower-limit relationship), the proofs for packing dimension are often a bit more involved, which has to do with the slightly more complex definition of classical packing dimension. 

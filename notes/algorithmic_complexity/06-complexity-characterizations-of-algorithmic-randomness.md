@@ -3,6 +3,8 @@ title: "Complexity Characterizations of Algorithmic Randomness"
 label: section:Complexity_Characterizations_of_Algorithmic_Randomness
 ---
 
+Many of the algorithmic randomness notions have equivalent characterizations that have to do with being sufficiently incompressible. Let's formalize that here.
+
 ## Algorithmic Discrepancies
 
 We fix some notation for the quantitative discrepancy between a {term}`finitary object`'s algorithmic entropy and its mass according to some {term}`premeasure`.

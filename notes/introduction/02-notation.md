@@ -6,7 +6,9 @@ numbering:
   headings: false
 ---
 
-## Section 1
+Refer to this page for any notation that might be unfamiliar. Note that the GitHub repository linked to this book includes the raw Markdown and TeX sources for these notes, which an agent can parse and interpret very easily. These notations are mostly standard to descriptive set theory and mathematics in general.
+
+---
 
 Let $\mathbb{R}$ denote the set of real numbers, $\mathbb{Q}$ the set of rational numbers, and $\omega$ the set of natural numbers (including $0$). Let $\mathbb{D} \subset \mathbb{Q}$ denote the set of all dyadic rational numbers (i.e., numbers of the form $k / 2^l$ for integers $k, l \geq 0$), and $\mathbb{D}_r$ the set of all $r$-dyadic rational numbers (i.e., all simplified dyadic rationals where the power of $2$ in the denominator is no more than $r$). Let $2^n$ denote the set of length-$n$ binary strings, $2^{\leq n}$ the set of all binary strings length no greater than $n$, $2^{< \omega}$ the set of finite binary strings of any length, and analogous definitions for each of $2^{\geq n}$, $2^{> n}$, $2^\omega$, and $2^{\leq \omega}$. Similarly, $\omega^{<\omega}$ will denote the set of finite sequences of natural numbers, and $\omega^\omega$ the set of infinite sequences of natural numbers. Generally, for any space $X$, interpret $X^m$ as the set of length-$m$ tuples over $X$. In particular, elements of $(2^{\leq n})^m$ are $m$-tuples of binary strings of a common length less than or equal to $n$.
 

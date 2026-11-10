@@ -3,6 +3,8 @@ title: "Robustness of the Lift"
 label: section:Robustness_of_the_Lift
 ---
 
+It's important to introspect on the *arbitrary* choices involved in lifting Kolmogorov complexity to Euclidean space. Here, we establish that our lift of conditional prefix complexity is robust under exchanging the optimizations in its definition, and establish that it satisfies a desirable symmetry of information.
+
 ## An Alternate Lift
 
 Recall that in Section [%s](#section:Lifting_Prefix_Complexity_to_Reals), we specified the standard lift of conditional {term}`prefix complexity` to Euclidean space. We claim that the order of maximum and minimum in its definition makes no difference asymptotically. That is, suppose we were to alternatively define for $B \subseteq \mathbb{R}^m$ and $C \subseteq \mathbb{R}^n$:

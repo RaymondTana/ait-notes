@@ -3,6 +3,8 @@ title: "Prefix Complexity"
 label: section:Prefix_Comlexity
 ---
 
+According to AIT, a set will have higher fractal dimension when (the data in) its points are hard to compress by algorithms. This page formalizes how we will measure compressibility. That is, equipped with the language of [computability](#section:Computability_Theory), we can now express the central quantity of AIT: Kolmogorov complexity. In particular, we focus on *prefix(-free) complexity*, a particular Kolmogorov complexity function with a number of useful properties. 
+
 ## Incompressibility
 
 Recall the universal {term}`oracle` machine $\mathbf{U}$ from Section [%s](#section:Computability_Theory). The universality of $\mathbf{U}$ implies some invariance and minimality properties in the following senses. Let $\sigma$ and $\tau$ be finite binary strings and $M$ to be an oracle Turing machine on finite binary strings. By universality, it holds that there exists a string $\nu_M$ which may be prepended to the input $\sigma$ to allow $\mathbf{U}$ to simulate $M$ on $\sigma$ given any oracle $B$, i.e., $\mathbf{U}^B(\nu_M\ ^\smallfrown \sigma) = M^B(\sigma)$. Define the **conditional plain Kolmogorov complexity of $\sigma$ given $\tau$ in $M$** to be

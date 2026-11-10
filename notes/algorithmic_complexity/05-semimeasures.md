@@ -3,7 +3,7 @@ title: "Semimeasures"
 label: section:Semimeasures
 ---
 
-This section presents an alternative approach to measuring the information-content or algorithmic-complexity of {term}`finitary objects <Finitary object>` through mass distribution.
+According to AIT, a set will have higher fractal dimension when it contains points which are difficult to make a profit on when employing algorithmic betting strategies to guess the digits of their expansions. This page formalizes a few notions of algorithmic betting strategies, which can be equivalently viewed as effective methods for distributing mass across the set's points.
 
 ## Discrete Semimeasures
 
