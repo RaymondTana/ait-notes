@@ -18,6 +18,9 @@ A priori discrepancy
 A priori probability
 : The total weight $Q_M(a) := \sum_{M(\pi) \downarrow = a} 2^{-\operatorname{len}(\pi)}$ of all descriptions of a finitary object $a$ under a machine $M$. See Definition [%s](#definition:algorithmic_and_a_priori_probability).
 
+Absolutely continuous
+: An outer measure $\nu$ is absolutely continuous with respect to $\mu$, written $\nu \ll \mu$, if every $\mu$-null set is $\nu$-null. See Section [%s](#section:Measures_and_Hausdorff_Dimension).
+
 Algorithm
 : A procedure implementable by an oracle Turing machine equipped with an appropriate oracle. See Section [%s](#reasoning:computability).
 
@@ -84,6 +87,9 @@ Constructive supergale
 Continuous semimeasure
 : A map on a sequence space whose value on each string is at least the combined value on its immediate extensions, so mass can only leak away as strings grow. See Section [%s](#section:Semimeasures).
 
+Conull set
+: A set whose complement is null. In particular, $Y \subseteq X$ is $\mu$-conull in $X$ if $\mu(X \setminus Y) = 0$. See Section [%s](#section:Measures_and_Hausdorff_Dimension).
+
 Convex premeasure
 : A premeasure on Cantor space whose value on each string is at most the combined value on its two one-bit extensions. See Section [%s](#section:Measures_and_Hausdorff_Dimension).
 
@@ -97,7 +103,7 @@ Cylinder set
 : The set $[\sigma]$ of all infinite binary strings extending a finite string $\sigma$. See the [Notation](#section:Notation) page.
 
 Dimension function
-: A non-negative, non-decreasing, right-continuous function $h$ on $[0, \infty)$ with $h(t) = 0$ exactly when $t = 0$. See Section [%s](#section:Measures_and_Hausdorff_Dimension).
+: A non-negative, non-decreasing, right-continuous function $h$ on $[0, \infty)$ with $h(t) = 0$ exactly when $t = 0$. Also called a gauge. See Section [%s](#section:Measures_and_Hausdorff_Dimension).
 
 Direct weight
 : The total premeasure $\operatorname{DW}_\rho(\mathcal{V})$ of the cylinders of a collection of strings. See Definition [%s](#definition:weights).
@@ -129,6 +135,9 @@ Entropy notion
 Epicurus’ Principle of Multiple Explanations
 : A principle of induction: every hypothesis consistent with all observations ought to keep some nonzero likelihood. See Section [%s](#reasoning:principles).
 
+Exact gauge
+: A dimension function $h$ with $0 < \mathcal{H}^h(X) < \infty$ for a given set $X$. See Section [%s](#section:Measures_and_Hausdorff_Dimension).
+
 Expansive map
 : A map $f$ on Cantor space is $\alpha$-expansive if, for all but finitely many $r$, the first $r$ bits of an input determine at least $\alpha \cdot r$ bits of its output. See Section [%s](#section:Effective_Dimension_under_Uniformly_Continuous_Maps).
 
@@ -137,6 +146,9 @@ Extension
 
 Finitary object
 : An element of a standard countable collection such as $\omega$, $2^{<\omega}$, $\mathbb{D}$, or $\mathbb{Q}$, all identified by computable bijections; also called hereditarily finite. See the [Notation](#section:Notation) page.
+
+Gauge
+: Another name for a dimension function. See Section [%s](#section:Measures_and_Hausdorff_Dimension).
 
 Hausdorff dimension
 : The infimum of $s \geq 0$ for which a set is null with repect to the $s$-dimensional outer Hausdorff measure. See Section [%s](#section:Measures_and_Hausdorff_Dimension).
@@ -260,6 +272,12 @@ Oracle
 
 Oracle machine
 : A Turing machine that may also query, finitely often, the bits of an oracle during its computation; also called an oracle Turing machine or Turing functional. See Section [%s](#section:Computability_Theory).
+
+Packing dimension
+: The least value, over countable covers of a set by bounded sets, of the supremum of their upper box-counting dimensions. See Definition [%s](#definition:packing_dimension).
+
+Packing oracle
+: An oracle that attains the minimum in the Point-to-Set Principle for packing dimension. See Section [%s](#section:PTS).
 
 Partial bi-computable
 : Both partial computable and partial co-computable. Abbreviated p.b.c. See Section [%s](#section:Prefix_Comlexity).

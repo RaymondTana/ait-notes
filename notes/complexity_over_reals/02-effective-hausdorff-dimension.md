@@ -107,4 +107,4 @@ $$
 \end{aligned}
 $$
 
-While the results for packing dimension are often analogous to those of Hausdorff dimension (and follow this upper- versus lower-limit relationship), the proofs for packing dimension are often a bit more involved, which has to do with the slightly more complex definition of classical packing dimension. 
+While the results for {term}`strong dimension` are often analogous to those of Hausdorff dimension (and follow this upper- versus lower-limit relationship), the proofs for packing dimension are often a bit more involved, which has to do with the slightly more complex definition of classical packing dimension. 

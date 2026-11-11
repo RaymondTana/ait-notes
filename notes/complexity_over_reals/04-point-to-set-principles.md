@@ -20,7 +20,22 @@ $$
 $$
 :::
 
-Notably, this implies that for each subset $X$, there exists an {term}`oracle` $B \in 2^{\leq \omega}$ which is powerful enough to simulate Hausdorff dimension by ML-$B$-$s$-tests. Any such oracle is called a **Hausdorff oracle** for $X$. An analogous formula holds for classical packing dimension (see Theorem 2 of {cite:t}`LL18`), swapping weak effective dimension $\dim$ for {term}`strong dimension`: $\operatorname{Dim}$.
+Notably, this implies that for each subset $X$, there exists an {term}`oracle` $B \in 2^{\leq \omega}$ which is powerful enough to simulate Hausdorff dimension by ML-$B$-$s$-tests. Any such oracle is called a **Hausdorff oracle** for $X$. 
+
+An analogous formula holds for classical {term}`packing dimension`, wapping weak effective dimension $\dim$ for {term}`strong dimension` $\operatorname{Dim}$:
+
+:::{prf:theorem} Strong Point-to-Set Principle; Theorem 2 of {cite:t}`LL18`
+:label: theorem:PTS_for_Packing_dimension
+For any $X \subseteq 2^\omega$ or $X \subseteq \mathbb{R}^m$, we have
+
+$$
+\begin{aligned}
+\dim_{\operatorname{P}} X = \min_{B \in 2^{\leq \omega}} \sup_{x \in X} \operatorname{Dim}^B(x).
+\end{aligned}
+$$
+:::
+
+Likewise, any oracle attaining this minimum is called a **packing oracle** for $X$.
 
 The main insight used to prove the Point-to-Set Principle involves the ability to build for a fixed set $X \subseteq \mathbb{R}^m$ an oracle $B$ with knowledge of how $X$ intersects with any given dyadic cube from $\mathcal{Q}^m$. Arbitrary covers of $X$ exhibiting $\dim_{\operatorname{H}} X$ may be approximated using covers comprising dyadic cubes, and so the Hausdorff dimension of $X$ is the supremum of the size of the intersection with $X$ along nested sequences of dyadic cubes. Suppose that the intersection of a nested sequence intersecting with $X$ is the singleton set containing $x \in X$. Then $\dim^B(x)$ exactly captures how much dimension $X$ takes on at $x$.
 

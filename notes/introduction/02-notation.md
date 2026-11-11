@@ -22,7 +22,7 @@ $$
 \end{aligned}
 $$
 
-where $z \in \mathbb{Z}^m$, $a \in \omega^m$, and $r \in \omega$. Collect into $\mathcal{Q}^m_r$ all the $m$-dimensional dyadic cubes $Q(z, a, r)$ with side-length $2^{-r}$.
+where $z \in \mathbb{Z}^m$, $a \in \omega^m$, and $r \in \omega$. Collect into $\mathcal{Q}^m_r$ all the $m$-dimensional dyadic cubes $Q(z, a, r)$ with side-length $2^{-r}$. Each such layer partitions $\mathbb{R}^m$, so for a given $r \in \omega$ and $x \in \mathbb{R}^m$, we let $Q_r(x)$ denote the unique dyadic cube from $\mathcal{Q}^m_r$ containing $x$.
 
 It will often happen that certain equalities hold only up to an additive or multiplicative constant. For this reason we use the following notation: a statement of the form $f(x) \leq^+ g(x)$ for all $x \in X$ means that there exists a constant $c \in \mathbb{R}$ such that $f(x) \leq g(x) + c$ for all $x \in X$. Similarly $f(x) =^+ g(x)$ for all $x \in X$ means that $f(x) \leq^+ g(x) \leq^+ f(x)$ for all $x \in X$. Similarly, $f(x) \leq^* g(x)$ for all $x \in X$ will mean there exists a constant $c \in \mathbb{R}$ such that $f(x) \leq c \cdot g(x)$ for all $x \in X$, and similar for $f(x) =^* g(x)$. Similarly, the notation $f = O_{\boldsymbol{v}}(g)$ is to be interpreted as $f \leq^* g$ everywhere, where the implicit multiplicative constant may depend on the components in $\boldsymbol{v}$. And the notation $o(r)$ is used to represent a **sub-linear term**, or a term which satisfies $\lim_{r \to \infty} \frac{o(r)}{r} = 0$.
 

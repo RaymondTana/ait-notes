@@ -32,7 +32,7 @@ $$
 
 ::::{prf:lemma} Lemma 2.3 in {cite:t}`Orp21`
 :label: lemma:Lemma_2.3_of_Orponen
-Let $0 \leq s \leq m$, $\delta > 0$, $C \geq 1$, and $X \subset \mathbb{R}^m$ be a bounded subset with $N(X, \delta) \leq C \cdot \delta^{-s}$. Then, for any $L \geq 1$, there exists a disjoint decomposition $X = X_{\operatorname{good}} \sqcup X_{\operatorname{bad}}$ such that
+Let $0 \leq s \leq m$, $\delta > 0$, $C \geq 1$, and $X \subset \mathbb{R}^m$ be a bounded subset with $N(X, \delta) \leq C \cdot \delta^{-s}$ (Definition [%s](#definition:delta_ball_covering_number). Then, for any $L \geq 1$, there exists a disjoint decomposition $X = X_{\operatorname{good}} \sqcup X_{\operatorname{bad}}$ such that
 
 :::{div}
 :class: roman-list

@@ -89,18 +89,7 @@ A countable collection $(X_i)_{i \in \omega}$ of sets **strongly covers** anothe
 
 Note that in Definition [%s](#definition:test_coverings), we consider $X$ to be covered by a Solovay-type test if that test strongly covers $X$ in the sense of Definition [%s](#definition:strongly_covers).
 
-:::{prf:definition}
-:label: definition:delta_ball_covering_number
-For any (bounded) set $X \subseteq \mathbb{R}^m$ and $\delta > 0$, define,
-
-$$
-\begin{aligned}
-N(X, \delta) := \min \set{\abs{Y}}{\text{$Y$ is a set of $\delta$-balls covering $X$}}.
-\end{aligned}
-$$
-:::
-
-The quantity $N(X, \delta)$ is exactly what appears in the definitions of the box-counting dimensions, as it captures the least number of $\delta$-balls required to cover $X$ (see {cite:p}`Fal90`). This fractal dimension always bounds the {term}`Hausdorff dimension` from above.
+We will also use the covering number $N(X, \delta)$ from Definition [%s](#definition:delta_ball_covering_number): the least number of $\delta$-balls covering a bounded set $X \subseteq \mathbb{R}^m$.
 
 :::{prf:definition}
 :label: definition:C_delta_s_set
