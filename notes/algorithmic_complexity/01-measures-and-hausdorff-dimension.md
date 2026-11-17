@@ -100,7 +100,7 @@ Suppose $\mathcal{H}^s(X) < \infty$ for some $s \geq 0$. This implies that $X$ i
 
 or $+\infty$ if the infimum is taken over the empty set.
 
-Consider now how some sets fall between the cracks of the power functions $h_s$: a set of Hausdorff dimension $s$ could have $\mathcal{H}^s(X) \in \seq{0, +\infty}$ (i.e., be $s$-null or have infinite $\mathcal{H}^s$-measure). In either case, no power function $h_{s'}$ assigns $X$ a positive, finite measure. Still, it is possible that some dimension function does: call a dimension function $h$ an **exact gauge** for $X$ if $0 < \mathcal{H}^h(X) < +\infty$. 
+Consider now how some sets fall between the cracks of the power functions $h_s$: a set of Hausdorff dimension $s$ could have $\mathcal{H}^s(X) \in \seq{0, +\infty}$ (i.e., be $s$-null or have infinite $\mathcal{H}^s$-measure). In either case, no power function $h_{s'}$ assigns $X$ a positive, finite measure. Still, it is possible that some dimension function does: call a dimension function $h$ an **exact gauge** for $X$ if $0 < \mathcal{H}^h(X) < +\infty$. In particular, if the gauge $h_s$ is exact for a set $X$, then it is common to call $X$ and **$s$-set**.
 
 And exact gauges still relate back to Hausdorff dimension through their relationship with power laws:
 
@@ -186,24 +186,28 @@ For an outer measure $\mu$ on $\Omega$ and a set $X \subseteq \Omega$, let the *
 
 $$
 \begin{aligned}
-\overline{\dim}_{\operatorname{H}}(\mu \llcorner X) = \inf \set{\dim_{\operatorname{H}}(Y)}{\text{$Y \subseteq X$ is $\mu$-conull in $X$}} \leq \dim_{\operatorname{H}}(X).
+\overline{\dim}_{\operatorname{H}}(\mu \llcorner X) &= \inf \set{\dim_{\operatorname{H}}(Y)}{\text{$Y \subseteq X$ is $\mu$-conull in $X$}}\\
+&= \inf \set{\dim_{\operatorname{H}}(X \setminus N)}{\text{$N \subseteq X$ is $\mu$-null in $X$}}\\
+&\leq \dim_{\operatorname{H}}(X).
 \end{aligned}
 $$
 
-Equality here holds exactly when deleting a $\mu$-null set from $X$ never lower its Hausdorff dimension. I.e., when the mass of $\mu$ on $X$ is spread across all of the dimension of $X$. The following proposition gives two sufficient conditions for this:
+Equality here holds exactly when deleting a $\mu$-null set $N$ from $X$ never lowers its Hausdorff dimension. The following proposition gives two sufficient conditions for this:
 
 :::{prf:proposition} Implicit in the proof of Theorem 13 of {cite:t}`Stu21`
 :label: proposition:full_upper_dimension
-Let $X \subseteq \Omega$ with $s := \dim_{\operatorname{H}}(X)$, and let $\mu$ be an outer measure on $\Omega$ with $\mu(X) > 0$. Then $\overline{\dim}_{\operatorname{H}}(\mu \llcorner X) = s$ whenever either:
-1. $\mu \ll \mathcal{H}^{s - \delta}$ for every $0 < \delta \leq s$, (in which case, $\underline{\dim}_{\operatorname{H}}(\mu \llcorner X) = s$, too); or
-2. $\mathcal{H}^s \ll \mu$ and $\mathcal{H}^s(X) > 0$.
+Let $X \subseteq \Omega$ with $s := \dim_{\operatorname{H}}(X)$. Suppose $\mu$ is an outer measure on $\Omega$ with $\mu(X) > 0$. Then, if either
+1. $\mu \ll \mathcal{H}^{s - \delta}$ for every $0 < \delta \leq s$; or
+2. $\mathcal{H}^s \ll \mu$ and $\mathcal{H}^s(X) > 0$,
+
+we may conclude $\overline{\dim}_{\operatorname{H}}(\mu \llcorner X) = s$.
 :::
 
 :::{prf:proof}
 We already have that $\overline{\dim}_{\operatorname{H}}(\mu \llcorner X) \leq s$. Now we prove the other direction for each condition. 
 
 1. If $\mu(E \cap X) > 0$ for some $E \subseteq \Omega$, then $E \cap X$ is not $(s - \delta)$-null, so $\dim_{\operatorname{H}}(E) \geq s - \delta$ for every $0 < \delta \leq s$. Hence $s \leq \underline{\dim}_{\operatorname{H}}(\mu \llcorner X) \leq \overline{\dim}_{\operatorname{H}}(\mu \llcorner X)$. 
-2. If $E$ is (\mu \llcorner X)-conull, i.e., $\mu(X \setminus E) = 0$, then $\mathcal{H}^s(X \setminus E) = 0$, so $0 < \mathcal{H}^s(X) \leq \mathcal{H}^s(X \cap E)$ and $\dim_{\operatorname{H}}(E) \geq s$. So $$\overline{\dim}_{\operatorname{H}}(\mu \llcorner X) \geq s$, too.
+2. If $E$ is $(\mu \llcorner X)$-conull, i.e., $\mu(X \setminus E) = 0$, then $\mathcal{H}^s(X \setminus E) = 0$, so $0 < \mathcal{H}^s(X) \leq \mathcal{H}^s(X \cap E)$ and $\dim_{\operatorname{H}}(E) \geq s$. So $\overline{\dim}_{\operatorname{H}}(\mu \llcorner X) \geq s$, too.
 :::
 
 {cite:t}`Stu21` assumes these two conditions in his sufficient condition for the existence of optimal Hausdorff oracles.
