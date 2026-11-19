@@ -32,6 +32,8 @@ Then, $\mathcal{H}^\rho$ is an outer measure on $\Omega$.
 
 We call $\mathcal{H}^\rho$ the **Method II outer measure associated to the premeasure $\rho$**. And for each $\delta > 0$, we also call $\mathcal{H}^\rho_\delta$ the **$\rho$-dimensional $\delta$-content** measure.
 
+An outer measure $\mu$ on a metric space is **metric** if $\mu(E \cup F) = \mu(E) + \mu(F)$ whenever $E$ and $F$ are a positive distance apart. Every Method II outer measure is metric: if $E$ and $F$ are a distance $d > 0$ apart, then no set of diameter less than $d$ meets both, so $\mathcal{H}^\rho_\delta(E \cup F) = \mathcal{H}^\rho_\delta(E) + \mathcal{H}^\rho_\delta(F)$ for every $\delta < d$. By Carathéodory's criterion, an outer measure is metric if and only if every Borel set $B$ is **$\mu$-measurable**, meaning $\mu(E) = \mu(E \cap B) + \mu(E \setminus B)$ for every $E$. Every Method II outer measure is metric {cite:p}`Rog70`.
+
 In {cite:t}`Rog70`, C. Rogers also defines an alternative “Method I” which differs from Method II in that it does not enforce any upper bound on the diameter of the cover elements used in the infimum:
 
 $$
@@ -102,7 +104,7 @@ or $+\infty$ if the infimum is taken over the empty set.
 
 Consider now how some sets fall between the cracks of the power functions $h_s$: a set of Hausdorff dimension $s$ could have $\mathcal{H}^s(X) \in \seq{0, +\infty}$ (i.e., be $s$-null or have infinite $\mathcal{H}^s$-measure). In either case, no power function $h_{s'}$ assigns $X$ a positive, finite measure. Still, it is possible that some dimension function does: call a dimension function $h$ an **exact gauge** for $X$ if $0 < \mathcal{H}^h(X) < +\infty$. In particular, if the gauge $h_s$ is exact for a set $X$, then it is common to call $X$ and **$s$-set**.
 
-And exact gauges still relate back to Hausdorff dimension through their relationship with power laws:
+And exact gauges still relate back to Hausdorff dimension through their relationship with power laws.
 
 :::{prf:proposition}
 :label: proposition:exact_gauge_orders
@@ -122,6 +124,8 @@ First, if $0 < u$ is less than the limit inferior, then $h(t) \leq t^u$ for all 
 
 Now, if $v$ exceeds the limit superior, then $h(t) \geq t^v$ for all sufficiently small $t > 0$, so $\mathcal{H}^v(X) \leq \mathcal{H}^h(X) < \infty$. Hence $s \leq v$.
 :::
+
+If $X$ is a set for which there exists an exact gauge $h$ for $X$ with $\liminf_{t \to 0^+} \frac{\log h(t)}{\log t} = \dim_{\operatorname{H}}(X)$, let us consider $X$ to be **Hausdorff gauge-regular**. In particular, every $s$-set is Hausdorff gauge-regular, as witnessed by $h_s$.
 
 ## Packing Dimension
 
@@ -187,29 +191,56 @@ For an outer measure $\mu$ on $\Omega$ and a set $X \subseteq \Omega$, let the *
 $$
 \begin{aligned}
 \overline{\dim}_{\operatorname{H}}(\mu \llcorner X) &= \inf \set{\dim_{\operatorname{H}}(Y)}{\text{$Y \subseteq X$ is $\mu$-conull in $X$}}\\
-&= \inf \set{\dim_{\operatorname{H}}(X \setminus N)}{\text{$N \subseteq X$ is $\mu$-null in $X$}}\\
+&= \inf \set{\dim_{\operatorname{H}}(X \setminus N)}{\text{$N \subseteq X$ is $\mu$-null}}\\
 &\leq \dim_{\operatorname{H}}(X).
 \end{aligned}
 $$
 
-Equality here holds exactly when deleting a $\mu$-null set $N$ from $X$ never lowers its Hausdorff dimension. The following proposition gives two sufficient conditions for this:
+Equality here holds exactly when deleting a $\mu$-null set $N$ from $X$ never lowers its Hausdorff dimension. Let's call a set $X$ **Hausdorff measure-regular** if there exists a metric outer measure $\mu$ on $\Omega$ with $0 < \mu(X) < \infty$ and $\overline{\dim}_{\operatorname{H}}(\mu \llcorner X) = \dim_{\operatorname{H}}(X)$.
+
+The following proposition gives two sufficient conditions for this:
 
 :::{prf:proposition} Implicit in the proof of Theorem 13 of {cite:t}`Stu21`
 :label: proposition:full_upper_dimension
-Let $X \subseteq \Omega$ with $s := \dim_{\operatorname{H}}(X)$. Suppose $\mu$ is an outer measure on $\Omega$ with $\mu(X) > 0$. Then, if either
-1. $\mu \ll \mathcal{H}^{s - \delta}$ for every $0 < \delta \leq s$; or
+Let $X \subseteq \Omega$ with $s := \dim_{\operatorname{H}}(X)$, and let $\mu$ be an outer measure on $\Omega$ with $\mu(X) > 0$. Then, if either
+1. $\mu \ll \mathcal{H}^{s - \varepsilon}$ for every $0 < \varepsilon \leq s$; or
 2. $\mathcal{H}^s \ll \mu$ and $\mathcal{H}^s(X) > 0$,
 
-we may conclude $\overline{\dim}_{\operatorname{H}}(\mu \llcorner X) = s$.
+we may conclude that $\overline{\dim}_{\operatorname{H}}(\mu \llcorner X) = \dim_{\operatorname{H}}(X)$. In particular, if $\mu$ is metric and $\mu(X) < \infty$, then $X$ is Hausdorff measure-regular.
 :::
 
 :::{prf:proof}
 We already have that $\overline{\dim}_{\operatorname{H}}(\mu \llcorner X) \leq s$. Now we prove the other direction for each condition. 
 
-1. If $\mu(E \cap X) > 0$ for some $E \subseteq \Omega$, then $E \cap X$ is not $(s - \delta)$-null, so $\dim_{\operatorname{H}}(E) \geq s - \delta$ for every $0 < \delta \leq s$. Hence $s \leq \underline{\dim}_{\operatorname{H}}(\mu \llcorner X) \leq \overline{\dim}_{\operatorname{H}}(\mu \llcorner X)$. 
+1. If $\mu(E \cap X) > 0$ for some $E \subseteq \Omega$, then $E \cap X$ is not $(s - \varepsilon)$-null, so $\dim_{\operatorname{H}}(E) \geq s - \varepsilon$ for every $0 < \varepsilon \leq s$. Hence $s \leq \underline{\dim}_{\operatorname{H}}(\mu \llcorner X) \leq \overline{\dim}_{\operatorname{H}}(\mu \llcorner X)$. 
 2. If $E$ is $(\mu \llcorner X)$-conull, i.e., $\mu(X \setminus E) = 0$, then $\mathcal{H}^s(X \setminus E) = 0$, so $0 < \mathcal{H}^s(X) \leq \mathcal{H}^s(X \cap E)$ and $\dim_{\operatorname{H}}(E) \geq s$. So $\overline{\dim}_{\operatorname{H}}(\mu \llcorner X) \geq s$, too.
 :::
 
-{cite:t}`Stu21` assumes these two conditions in his sufficient condition for the existence of optimal Hausdorff oracles.
+{cite:t}`Stu21` assumes these two conditions, for a metric outer measure $\mu$ with $0 < \mu(X) < \infty$, in his sufficient condition for the existence of optimal Hausdorff oracles.
 
 Note that while the first condition actually proves equality for lower Hausdorff dimension as well, the second condition does not control the lower dimension. To be concrete, suppose $s > 0$, that $\mathcal{H}^s(X) > 0$, and $x \in X$. Then $\mu := \mathcal{H}^s + \delta_x$ (where $\delta_x$ is the point mass at $x$) satisfies the second condition while $\underline{\dim}_{\operatorname{H}}(\mu \llcorner X) = 0$.
+
+Moreover, Hausdorff gauge-regularity implies Hausdorff measure-regularity.
+
+:::{prf:proposition}
+:label: proposition:gauge_regular_implies_regular
+Suppose $X \subseteq \Omega$ is Hausdorff gauge-regular, witnessed by the exact gauge $h$. Then $0 < \mathcal{H}^h(X) < \infty$ and $\overline{\dim}_{\operatorname{H}}(\mathcal{H}^h \llcorner X) = \dim_{\operatorname{H}}(X)$. In particular, $X$ is Hausdorff measure-regular.
+:::
+
+:::{prf:proof}
+We naturally have $0 < \mathcal{H}^h(X) < \infty$ since $h$ is exact for $X$. 
+
+Now, let $s := \dim_{\operatorname{H}}(X)$. We claim that the Method II metric outer measure $\mu = \mathcal{H}^h$ associated with $h$ witnesses $X$ being Hausdorff measure-regular. 
+
+Fix $0 < \varepsilon \leq s$. Since $\liminf_{t \to 0^+} \log h(t) / \log t = s > s - \varepsilon$, there is some $t_\varepsilon \in (0, 1)$ such that $\log h(t) / \log t > s - \varepsilon$ for all $0 < t < t_\varepsilon$. Thus,
+
+$$
+\begin{aligned}
+h(t) < t^{s - \varepsilon} \qquad (0 < t < t_\varepsilon).
+\end{aligned}
+$$
+
+With this and the fact that $h(0) = 0$, it must be that any set $E$ of bounded diameter $\diam(E) < t_\varepsilon$ has $\rho_h(E) \leq \rho_{s - \varepsilon}(E)$. Hence every cover admissible for the $\delta$-contents with $\delta < t_\varepsilon$ costs no more under $\rho_h$ than under $\rho_{s - \varepsilon}$, which gives $\mathcal{H}^h_\delta(E) \leq \mathcal{H}^{s - \varepsilon}_\delta(E)$ for every $E \subseteq \Omega$. As $\delta > 0$ was arbitrary, we get $\mathcal{H}^h(E) \leq \mathcal{H}^{s - \varepsilon}(E)$. In particular, every $(s - \varepsilon)$-null set is $\mathcal{H}^h$-null. I.e., $\mathcal{H}^h \ll \mathcal{H}^{s - \varepsilon}$.
+
+We've satisfied the first condition in Proposition [%s](#proposition:full_upper_dimension), so $\overline{\dim}_{\operatorname{H}}(\mathcal{H}^h \llcorner X) = \dim_{\operatorname{H}}(X)$. This implies that $X$ is Hausdorff measure-regular.
+:::

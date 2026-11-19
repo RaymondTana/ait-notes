@@ -159,8 +159,14 @@ Hausdorff dimension
 Hausdorff distance
 : The infimum of $\varepsilon > 0$ for which two sets are $\varepsilon$-close: every point of each lies within $\varepsilon$ of the other. See Section [%s](#section:Computability_Theory).
 
+Hausdorff gauge-regular
+: A set with an exact gauge $h$ such that $\liminf_{t \to 0^+} \log h(t) / \log t$ matches the Hausdorff dimension of the set. In particular, every $s$-set is Hausdorff gauge-regular. See Section [%s](#section:Measures_and_Hausdorff_Dimension).
+
+Hausdorff measure-regular
+: A set $X$ for which some metric outer measure $\mu$ with $0 < \mu(X) < \infty$ has $\overline{\dim}_{\operatorname{H}}(\mu \llcorner X) = \dim_{\operatorname{H}}(X)$; that is, deleting a $\mu$-null set from $X$ never lowers its Hausdorff dimension. See Section [%s](#section:Measures_and_Hausdorff_Dimension).
+
 Hausdorff oracle
-: An oracle that attains the minimum in the Point-to-Set Principle for a set. See Section [%s](#section:PTS).
+: An oracle that attains the minimum in the Point-to-Set Principle for a set's Hausdorff dimension. See Section [%s](#section:PTS).
 
 Hausdorff outer measure
 : A Method II outer measure induced by a Hausdorff premeasure. See Section [%s](#section:Measures_and_Hausdorff_Dimension).
@@ -350,6 +356,9 @@ Reasoning
 
 Relativization
 : Generalizing notions or results from Turing machines to oracle machines with an arbitrary oracle. See Section [%s](#section:Computability_Theory).
+
+s-set
+: A set for which the dimension function $h_s : t \mapsto t^s$ is an exact gauge; that is, a set $X$ with $0 < \mathcal{H}^s(X) < \infty$. See Section [%s](#section:Measures_and_Hausdorff_Dimension).
 
 Selection
 : Any procedure for selecting or preferring a hypothesis. See Section [%s](#reasoning:primitives).
