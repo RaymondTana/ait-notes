@@ -130,6 +130,7 @@ project:
     - file: notes/reasoning/00-reasoning.md
       children:
         - file: notes/reasoning/01-primitives-of-reasoning.md
+    - file: notes/appendix/background.md
     - file: notes/glossary.md
 site:
   template: book-theme

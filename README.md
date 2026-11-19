@@ -24,7 +24,7 @@ Refer to a theorem, equation, or page by label: `Lemma [%s](#lemma:foo)` renders
 
 Defined terms have a short entry in the glossary (`notes/glossary.md`) linking to their full definition. Link a term to its entry with `` {term}`Name` `` or `` {term}`written form <Name>` `` (keep math out of the link text), typically at its first use on a page.
 
-A page with `numbering: {title: false}` in its frontmatter is unnumbered; while `numbering: {title: {enumerator: A}}` numbers it "A".
+A page with `numbering: {title: false}` in its frontmatter is unnumbered; while `numbering: {title: {enumerator: A}}` numbers it "A". An unnumbered page whose `label` starts with `appendix:` keeps an unnumbered title but numbers its theorems A.1, A.2, …
 
 ### Update the book
 

@@ -1,9 +1,8 @@
 ---
-title: Miscellaneous Results
-label: appendix:miscellaneous
+title: Appendix
+label: appendix:background
 numbering:
-  title:
-    enumerator: A
+  title: false
 ---
 
 Statements of results from the literature that are cited in these notes or in later chapters of my [dissertation](https://raymondtana.github.io/my_assets/documents/Raymond%20Tana%20PhD%20Dissertation.pdf).
@@ -61,9 +60,4 @@ $$
 \dim_{\operatorname{H}}\p{\Delta^*_z X} \geq \dim_{\operatorname{H}}X - (m - 1).
 \end{aligned}
 $$
-:::
-
-:::{prf:theorem} Theorem 7.9 of {cite:t}`Kec95`
-:label: theorem:Polish_space_as_continuous_image_of_Baire
-If $\Omega$ is a Polish space, then there exists a closed class $F \subseteq \omega^\omega$ and a continuous bijection $g: F \to \Omega$. Furthermore, if $\Omega \neq \emptyset$, then there is a continuous surjection $\hat{g}: \omega^\omega \to \Omega$ extending $g$.
 :::

@@ -228,6 +228,9 @@ Lower incompressibility ratio
 Lower-semicomputable
 : A real number, or a real-valued map on a collection of finitary objects (such as a semimeasure), whose lower graph $\set{(n, q)}{q < f(n)}$ is c.e.; equivalently, one approximable from below by a computable left-approximator. Also called left-c.e. See Section [%s](#section:Computability_Theory).
 
+Marstrand-Mattila Projection Theorem
+: A theorem in geometric measure theory stating that, for a broad range of subsets of Euclidean space, the Hausdorff dimension of their orthogonal projections is almost always as large as possible. Originally proved for analytic sets, and later for weakly regular sets and sets with optimal Hausdorff oracles. See Theorem [%s](#theorem:marstrand_projection_original).
+
 Martin-Löf test
 : A uniformly-c.e. sequence $(U_n)_n$ of sets of strings, each of which having direct weight at most $2^{-n}$; strong and vehement versions bound the prefix or vehement weight instead. See Definition [%s](#definition:tests).
 

@@ -130,7 +130,7 @@ Assume the Axiom of Choice (AC) and the Continuum Hypothesis (CH).
 2. For every $0 < s_1 < s_2 \leq 1$, there are sets $X \subseteq \mathbb{R}$ with $\dim_{\operatorname{H}}(X) = s_1$ and $\dim_{\operatorname{P}}(X) = s_2$ realizing each of the following: neither optimal Hausdorff nor optimal packing oracles; optimal Hausdorff oracles but no optimal packing oracles; optimal packing oracles but no optimal Hausdorff oracles.
 :::
 
-The original motivation for optimal oracles is Marstrand's projection theorem. For $\theta \in [0, \pi]$, let $p_\theta : \mathbb{R}^2 \to \mathbb{R}$ be the projection $p_\theta(z) := z_1 \cos \theta + z_2 \sin \theta$.
+The original motivation for optimal oracles is Marstrand's projection theorem (Theorem [%s](#theorem:marstrand_projection_original)), here in the planar case $m = 2$, $n = 1$. For $\theta \in [0, \pi]$, let $p_\theta : \mathbb{R}^2 \to \mathbb{R}$ be the projection $p_\theta(z) := z_1 \cos \theta + z_2 \sin \theta$.
 
 :::{prf:theorem} Theorem 22 of {cite:t}`Stu21`
 :label: theorem:Marstrand_optimal_oracles
