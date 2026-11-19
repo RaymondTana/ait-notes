@@ -7,8 +7,10 @@
 // numbering.headings.) On page 1.2, theorems, lemmas, definitions, etc. share
 // one counter (Theorem 1.2.1, Lemma 1.2.2, ...) and labeled equations get
 // (1.2.1), (1.2.2), ... A page whose frontmatter sets
-// `numbering: {title: {enumerator: A}}` is numbered A instead (appendices);
-// one that sets `numbering: {title: false}` is skipped (front matter).
+// `numbering: {title: {enumerator: A}}` is numbered A instead; one that sets
+// `numbering: {title: false}` is skipped (front matter), unless its label starts
+// with `appendix:`: then its title stays unnumbered but its theorems and
+// equations are numbered A.1, A.2, ... (B.1, ... for a second appendix).
 //
 // It also fills in two things MyST cannot:
 //   [%s](#page-label)        -> that page's number ("Section [%s](#x)" -> "Section 1.2")
@@ -60,17 +62,23 @@ function scanBook() {
   const pages = {}; // absolute path -> page number
   const labels = {}; // label -> number
   const counts = [];
+  let appendices = 0;
   tocEntries(config).forEach(({ file, depth }, i) => {
     if (i === 0 || !fs.existsSync(file)) return;
     const src = fs.readFileSync(file, 'utf8');
     const front = src.match(/^---\n([\s\S]*?)\n---/)?.[1] ?? '';
-    if (/^\s+title:\s*false/m.test(front)) return;
-    counts.length = depth + 1;
-    counts[depth] = (counts[depth] ?? 0) + 1;
-    const template = front.match(/title:\s*\n\s+enumerator:\s*['"]?([^'"\s]+)/)?.[1];
-    const num = template ? template.replace(/%s/g, counts.join('.')) : counts.join('.');
-    pages[file] = num;
     const pageLabel = front.match(/^label:\s*(\S+)/m)?.[1];
+    let num;
+    if (/^\s+title:\s*false/m.test(front)) {
+      if (!pageLabel?.startsWith('appendix:')) return;
+      num = String.fromCharCode(65 + appendices++); // A, B, ...
+    } else {
+      counts.length = depth + 1;
+      counts[depth] = (counts[depth] ?? 0) + 1;
+      const template = front.match(/title:\s*\n\s+enumerator:\s*['"]?([^'"\s]+)/)?.[1];
+      num = template ? template.replace(/%s/g, counts.join('.')) : counts.join('.');
+    }
+    pages[file] = num;
     if (pageLabel) labels[pageLabel] = num;
     let thm = 0;
     let eq = 0;
