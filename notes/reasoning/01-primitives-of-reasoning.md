@@ -27,7 +27,7 @@ Next we describe some of the principles that guide how we approach {term}`reason
 - **Occam’s Razor Principle**: a principle of {term}`selection` which prefers the simplest {term}`hypothesis` which is consistent with all {term}`observations`.
     - Or, more generally, the principle of {term}`reasoning` which asserts that simpler {term}`hypotheses <Hypothesis>` ought to be assigned with greater {term}`likelihoods <Likelihood>`.
 - **Minimum Description Length (MDL) Principle**: the principle of {term}`selection` which prefers the {term}`hypothesis` which simultaneously has the (1) simplest description and (2) simplest explanation of the {term}`observations`.
-- **Bayes’ Rule**: a mathematical rule for {term}`induction` which quantifies how a {term}`hypothesis’s <Hypothesis>` {term}`likelihood` should be updated given additional {term}`observations`: via conditional probabilities.
+- **Bayes’ Rule**: a mathematical rule for {term}`induction` which quantifies how an {term}`hypothesis’s <Hypothesis>` {term}`likelihood` should be updated given additional {term}`observations`: via conditional probabilities.
 
 (reasoning:computability)=
 ## Recap on Computability
