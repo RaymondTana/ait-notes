@@ -1,6 +1,7 @@
 ---
 title: "Optimal Oracles via Kolmogorov Complexity"
 label: section:Optimal_Oracles_via_Kolmogorov_Complexity
+description: "Stull's optimal Hausdorff oracles via Kolmogorov complexity, equivalent full-dimensional forms, which sets have them, and the connection to Marstrand's projection theorem."
 ---
 
 By the {term}`Point-to-Set Principle` (Theorem [%s](#theorem:PTS_for_H_dimension)), every set $X \subseteq \mathbb{R}^m$ has a {term}`Hausdorff oracle`: that is, an oracle $A$ with $\sup_{x \in X} \dim^A(x) = \dim_{\operatorname{H}}(X)$. Inuitively, this means that a Hausdorff oracle is one which can compute approximations to *all* points of $X$ powerfully enough to recuperate the classical dimension of $X$.

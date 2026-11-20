@@ -1,6 +1,7 @@
 ---
 title: "Computability Theory"
 label: section:Computability_Theory
+description: "Turing machines, partial computable and computably enumerable sets, oracle machines and Turing reducibility, semicomputable reals, and the lightface hierarchies."
 ---
 
 The primary difference between classical GMT and the newer AIT is that AIT attempts to deduce facts about fractal geometry when constrained by computational power. For our purposes, this computational power is not to do with time or space bounds on algorithms, but on the ability to answer problems via algorithms *at all*. This notion is called *computability*, and its main objects are algorithms, one of whose formalisms are the *Turing machines*. Below we present some of the fundamentals of the theory of computability, so that we might have the primitives and language with which to express arguments and results of AIT.

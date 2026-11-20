@@ -1,6 +1,7 @@
 ---
 title: "Semimeasures"
 label: section:Semimeasures
+description: "Discrete and continuous semimeasures as algorithmic betting strategies; Levin's Coding Theorem, algorithmic and a priori probability, and supergales."
 ---
 
 According to AIT, a set will have higher fractal dimension when it contains points which are difficult to make a profit on when employing algorithmic betting strategies to guess the digits of their expansions. This page formalizes a few notions of algorithmic betting strategies, which can be equivalently viewed as effective methods for distributing mass across the set's points.

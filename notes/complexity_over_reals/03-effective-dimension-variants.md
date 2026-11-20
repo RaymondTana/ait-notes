@@ -1,6 +1,7 @@
 ---
 title: "Effective Dimension Variants"
 label: section:Conditional_and_Mutual_Dimensions
+description: "Mutual dimension and conditional dimension: effective-dimension variants inspired by mutual information and conditional entropy in Shannon information theory."
 ---
 
 We review two variants of effective dimension. These notions are inspired by analogous quantities in classical (Shannon) information theory. 

@@ -1,6 +1,7 @@
 ---
 title: "Optimal Oracles"
 label: chapter:optimal_oracles
+description: "Chapter overview: Stull's optimal oracles — a notion with no classical characterization — as a case study in how algorithmic and classical methods interoperate."
 ---
 
 This chapter introduces a powerful geometric measure theoretic notion which has only ever been expressed in the language of AIT, with no corresponding characterization in classical terms. We use this notion as a case study in how algorithmic and classical methods interoperate.

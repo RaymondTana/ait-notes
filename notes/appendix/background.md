@@ -1,6 +1,7 @@
 ---
 title: Appendix
 label: appendix:background
+description: "Appendix: statements of cited results from the literature, including the Marstrand–Mattila projection theorem and other classical theorems used in the notes."
 numbering:
   title: false
 ---

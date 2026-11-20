@@ -1,6 +1,7 @@
 ---
 title: "Algorithmic Complexity"
 label: chapter:algorithmic_complexity
+description: "Chapter overview: premeasures and Hausdorff dimension, computability theory, prefix Kolmogorov complexity, algorithmic randomness, and semimeasures on finite strings."
 ---
 
 This chapter reviews the basic definitions and results of algorithmic information theory over finitary objects, like the natural numbers or finite binary strings. We also introduce the fundamental quantities of geometric measure theory. In particular, this chapter lays the groundwork for understanding the zoo of approaches to evaluating effective fractal dimension which all happen agree.

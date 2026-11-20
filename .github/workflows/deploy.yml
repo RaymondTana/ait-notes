@@ -29,6 +29,17 @@ jobs:
           node-version: 22
       - run: npm ci
       - run: npx myst build --html
+      # `myst build --html` prerenders sitemap.xml/robots.txt against a
+      # placeholder host (http://pre.render) and drops BASE_URL from the URLs.
+      # Rewrite that host to the real origin+path so search engines get valid
+      # absolute URLs.
+      - name: Fix sitemap/robots URLs
+        run: |
+          SITE_URL="https://raymondtana.github.io${BASE_URL}"
+          sed -i -E "s|http://(pre\.render\|localhost:[0-9]+)|${SITE_URL}|g" \
+            _build/html/sitemap.xml _build/html/robots.txt
+          grep -m2 "<loc>" _build/html/sitemap.xml
+          grep "Sitemap:" _build/html/robots.txt
       - uses: actions/upload-pages-artifact@v3
         with:
           path: ./_build/html

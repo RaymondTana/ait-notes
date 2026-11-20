@@ -1,6 +1,7 @@
 ---
 title: "Effective Dimension under Uniformly Continuous Maps"
 label: section:Effective_Dimension_under_Uniformly_Continuous_Maps
+description: "Processing inequalities for conditional prefix complexity under computable uniformly continuous maps; dimension is invariant under bi-computable bi-Lipschitz maps."
 ---
 
 The [robustness of conditional prefix complexity](#section:Robustness_of_the_Lift) has implications for effective conditional dimension. In particular, we can show that conditional dimension doesn't change when we apply sufficiently smooth and computable transformations to a sets being measured. This supports the characterization of effective fractal geometry as the study of fractal properties up to these sorts of transformations. 

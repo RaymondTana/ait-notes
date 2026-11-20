@@ -1,6 +1,7 @@
 ---
 title: "Prefix Complexity"
 label: section:Prefix_Comlexity
+description: "Plain and prefix-free Kolmogorov complexity: incompressibility of finite strings, conditional complexity, the Kraft inequality, and the chain rule."
 ---
 
 According to AIT, a set will have higher fractal dimension when (the data in) its points are hard to compress by algorithms. This page formalizes how we will measure compressibility. That is, equipped with the language of [computability](#section:Computability_Theory), we can now express the central quantity of AIT: Kolmogorov complexity. In particular, we focus on *prefix(-free) complexity*, a particular Kolmogorov complexity function with a number of useful properties. 

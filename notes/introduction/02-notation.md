@@ -1,6 +1,7 @@
 ---
 title: "Notation"
 label: section:Notation
+description: "Notation for these notes: binary strings and Cantor space, dyadic rationals and cubes, and asymptotic symbols up to additive and multiplicative constants."
 numbering:
   title: false
   headings: false
