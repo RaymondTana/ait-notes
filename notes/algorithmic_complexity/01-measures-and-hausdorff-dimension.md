@@ -1,6 +1,7 @@
 ---
 title: "Measures and Hausdorff Dimension"
 label: section:Measures_and_Hausdorff_Dimension
+description: "Premeasures and the outer measures they induce (Method II), Hausdorff measure and dimension, packing dimension, and the Hausdorff dimensions of a measure."
 ---
 
 Geometric measure theory studies fractal measures and dimensions. We outline here a standard method for building outer meaures from premeasures, which guides the standard construction of Hausdorff measures and dimension. These notes are biased to put a spotlight on Hausdorff dimension as a principal quantity of fractal geometry. This is despite the established importance of other fractal measures/dimensions and their established connections with AIT.

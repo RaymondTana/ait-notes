@@ -1,6 +1,7 @@
 ---
 title: "Introduction"
 label: section:Introduction
+description: "Introduction to algorithmic information theory: Solomonoff induction, Kolmogorov complexity, and algorithmic methods in geometric measure theory."
 numbering:
   title: false
   headings: false

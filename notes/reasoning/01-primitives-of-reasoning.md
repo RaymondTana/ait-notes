@@ -1,6 +1,7 @@
 ---
 title: "The Primitives of Reasoning"
 label: section:Primitives_of_Reasoning
+description: "The primitives of reasoning: observations, hypotheses, likelihood, complexity notions, and the link between compressing data and inferring models from it."
 ---
 
 This page summarizes many of the key terms, in sufficient generality for future discussions. Much of this content is inspired by {cite:t}`LV08`.

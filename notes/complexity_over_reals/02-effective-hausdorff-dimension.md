@@ -1,6 +1,7 @@
 ---
 title: "Effective Hausdorff Dimension"
 label: section:Effective_Hausdorff_Dimension
+description: "Constructive (effective Hausdorff) dimension à la Lutz and its characterizations by Kolmogorov complexity (Mayordomo), supergales, and effective tests."
 ---
 
 J. Lutz was the first to introduce a refinement to {term}`Hausdorff dimension` in the form of **constructive dimension** {cite:p}`Lut00`, which could distinguish between subsets of zero Hausdorff dimension by their algorithmically-exploitable patterns. Shortly after, E. Mayordomo demonstrated this quantity matched an algorithmic information density involving Kolmogorov complexity first studied by L. Staiger {cite:p}`May02; Sta89`. In this section, we review a few of the characterizations for effective dimension, but not necessarily in their historical order.

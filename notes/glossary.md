@@ -1,6 +1,7 @@
 ---
 title: "Glossary"
 label: section:Glossary
+description: "Short definitions of terms used in the notes — cylinder sets, premeasures, prefix complexity, semimeasures, effective dimension — each linked to its full definition."
 numbering:
   title: false
   headings: false

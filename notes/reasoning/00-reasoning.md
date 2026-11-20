@@ -1,6 +1,7 @@
 ---
 title: "Reasoning"
 label: chapter:reasoning
+description: "Chapter overview (work in progress): the relationship between information theory, compression, and machine learning, in the Shannon and computability-theoretic senses."
 ---
 
 This chapter explores the relationship between information theory and machine learning. We examine it at a few different levels, including in the classical (Shannon) sense, as well as with respect to computability, and even under computional resource constraints. This chapter is a work in progress!

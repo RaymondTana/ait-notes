@@ -1,6 +1,7 @@
 ---
 title: "Robustness of the Lift"
 label: section:Robustness_of_the_Lift
+description: "The lift of conditional prefix complexity is robust: exchanging its max/min optimizations changes nothing up to sub-linear terms, and a conditional symmetry of information holds."
 ---
 
 It's important to introspect on the *arbitrary* choices involved in lifting Kolmogorov complexity to Euclidean space. Here, we establish that our lift of conditional prefix complexity is robust under exchanging the optimizations in its definition, and establish that it satisfies a desirable symmetry of information.

@@ -1,6 +1,7 @@
 ---
 title: "Algorithmic Randomness"
 label: section:Algorithmic_Randomness
+description: "The test-based approach to algorithmic randomness: direct, prefix, and vehement weights, effective statistical tests, and partial randomness relative to a premeasure."
 ---
 
 According to AIT, a set will have higher fractal dimension when its points are hard cover by effective statistical tests. This page formalizes how these statistical tests work. That is, we review the tests-based approach to algorithmic information and randomness, all with respect to a given {term}`premeasure`.
