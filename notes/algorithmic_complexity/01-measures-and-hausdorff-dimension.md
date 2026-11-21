@@ -103,9 +103,14 @@ Suppose $\mathcal{H}^s(X) < \infty$ for some $s \geq 0$. This implies that $X$ i
 
 or $+\infty$ if the infimum is taken over the empty set.
 
-Consider now how some sets fall between the cracks of the power functions $h_s$: a set of Hausdorff dimension $s$ could have $\mathcal{H}^s(X) \in \seq{0, +\infty}$ (i.e., be $s$-null or have infinite $\mathcal{H}^s$-measure). In either case, no power function $h_{s'}$ assigns $X$ a positive, finite measure. Still, it is possible that some dimension function does: call a dimension function $h$ an **exact gauge** for $X$ if $0 < \mathcal{H}^h(X) < +\infty$. In particular, if the gauge $h_s$ is exact for a set $X$, then it is common to call $X$ and **$s$-set**.
+Consider now how some sets fall between the cracks of the power functions $h_s$: a set of Hausdorff dimension $s$ could have $\mathcal{H}^s(X) \in \seq{0, +\infty}$ (i.e., be $s$-null or have infinite $\mathcal{H}^s$-measure). In either case, no power function $h_{s'}$ assigns $X$ a positive, finite measure. Still, it is possible that some dimension function does: call a dimension function $h$ an **exact gauge** for $X$ if $0 < \mathcal{H}^h(X) < +\infty$. In particular, if the gauge $h_s$ is exact for a set $X$, then it is common to call $X$ and **$s$-set**. Let's highlight one way of finding $s$-sets:
 
-And exact gauges still relate back to Hausdorff dimension through their relationship with power laws.
+:::{prf:theorem} C.f. Theorem 1 of {cite:t}`Stu22`
+:label: theorem:compact_non_null_compact_s_set_subset
+Every non-$s$-null, compact subset of Euclidean space has a compact subset which is an $s$-set.
+:::
+
+Exact gauges still relate back to Hausdorff dimension through their relationship with power laws.
 
 :::{prf:proposition}
 :label: proposition:exact_gauge_orders
@@ -119,11 +124,17 @@ $$
 :::
 
 :::{prf:proof}
-Let $s := \dim_{\operatorname{H}}(X)$. 
+If $0 < \eta < \liminf_{t \to 0^+} \log h(t) / \log t$, then $h(t) \leq t^\eta$ for all sufficiently small $t > 0$. Thus, for sufficiently small $\delta > 0$,
+$$
+\begin{aligned}
+\mathcal{H}^h_\delta(X) \leq \mathcal{H}^\eta_\delta(X) &\implies 0 < \mathcal{H}^h(X) \leq \mathcal{H}^\eta(X) \implies \eta \leq \dim_{\operatorname{H}}(X).
+\end{aligned}
+$$
 
-First, if $0 < u$ is less than the limit inferior, then $h(t) \leq t^u$ for all sufficiently small $t > 0$. So $\mathcal{H}^h_\delta(X) \leq \mathcal{H}^u_\delta(X)$ for all sufficiently small $\delta > 0$, and $0 < \mathcal{H}^h(X) \leq \mathcal{H}^u(X)$. Hence $u \leq s$. 
-
-Now, if $v$ exceeds the limit superior, then $h(t) \geq t^v$ for all sufficiently small $t > 0$, so $\mathcal{H}^v(X) \leq \mathcal{H}^h(X) < \infty$. Hence $s \leq v$.
+Similarly, if $\eta > \limsup_{t \to 0^+} \log h(t) / \log t$, then $h(t) \geq t^\eta$ for all sufficiently small $t > 0$. This implies 
+$$
+\mathcal{H}^\eta(X) \leq \mathcal{H}^h(X) < \infty \implies \dim_{\operatorname{H}}(X) \leq \eta.
+$$
 :::
 
 If $X$ is a set for which there exists an exact gauge $h$ for $X$ with $\liminf_{t \to 0^+} \frac{\log h(t)}{\log t} = \dim_{\operatorname{H}}(X)$, let us consider $X$ to be **Hausdorff gauge-regular**. In particular, every $s$-set is Hausdorff gauge-regular, as witnessed by $h_s$.
@@ -225,7 +236,7 @@ Moreover, Hausdorff gauge-regularity implies Hausdorff measure-regularity.
 
 :::{prf:proposition}
 :label: proposition:gauge_regular_implies_regular
-Suppose $X \subseteq \Omega$ is Hausdorff gauge-regular, witnessed by the exact gauge $h$. Then $0 < \mathcal{H}^h(X) < \infty$ and $\overline{\dim}_{\operatorname{H}}(\mathcal{H}^h \llcorner X) = \dim_{\operatorname{H}}(X)$. In particular, $X$ is Hausdorff measure-regular.
+Suppose $X \subseteq \Omega$ is Hausdorff gauge-regular, witnessed by the exact gauge $h$. Then, $\overline{\dim}_{\operatorname{H}}(\mathcal{H}^h \llcorner X) = \dim_{\operatorname{H}}(X)$. In particular, $X$ is Hausdorff measure-regular.
 :::
 
 :::{prf:proof}

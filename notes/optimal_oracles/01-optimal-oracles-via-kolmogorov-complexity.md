@@ -13,7 +13,7 @@ But recall that {term}`effective Hausdorff dimension` is the limit inferior of p
 D. Stull asked for an oracle which rules this possibility out at almost every precision level, for at least one point of nearly full effective Hausdorff dimension against any join on that oracle {cite:p}`Stu21`. Such an oracle would be even moreso "optimal" for $X$. Stull's motivation was the {term}`Marstrand-Mattila Projection Theorem` (Theorem [%s](#theorem:marstrand_projection_original)): its classical proof needs $X$ to be analytic, while sets with optimal Hausdorff oracles satisfy its conclusion in the plane without any such assumption (Theorem [%s](#theorem:Marstrand_optimal_oracles)).
 <!-- Conveniently, Stull's crtieria are well-suited for the types of requirements used for proving projection theorems. For instance, the projection estimate of J. Lutz and D. Stull (Theorem 21 of {cite:t}`Stu21`, from {cite:t}`LS17`) bounds $K^{C, \theta}_r(p_\theta z)$ from below only at those precisions $r$ where the oracle $(C, \theta)$ gives essentially no information about $z$, i.e., where $K^{C, \theta}_r(z) \geq K_r(z) - \varepsilon r$. -->
 
-For the remainder of this page, let $X \subseteq \mathbb{R}^m$ and $s := \dim_{\operatorname{H}}(X) \geq 0$. 
+In this chapter, we work over Euclidean space $\mathbb{R}^m$.
 
 ## Optimal Oracles
 
@@ -72,7 +72,7 @@ So $N_X(A, B, \varepsilon)$ is non-empty. Any of its elements serve the second c
 
 The second condition of Definition [%s](#definition:optimal_oracles), applied to the additional oracle $B \oplus C$ and tolerance $\delta$, guarantees $\exists x \in X$ with $\dim^{A, B, C}(x) \geq s - \delta$ with
 
-$$(\forall^\infty r) K^{A, B, C}_r(x) \geq K^A_r(x) - \delta r.$$
+$$K^{A, B, C}_r(x) \geq K^A_r(x) - \delta r \quad (\forall^\infty r).$$
 
 Does $x \stackrel{?}{\in} N_X(A, B, \varepsilon)$? If so, then by the Point-to-Set Principle (Theorem [%s](#theorem:PTS_for_H_dimension)),
 $$
@@ -91,9 +91,9 @@ a contradiction to $\delta < \varepsilon$.
 The proof for optimal packing oracles follows the same form.
 :::
 
-We can't ask much more than this: for no single point can serve every additional oracle in general. For instance, any $x \in N_X(A, x, \varepsilon)$, would have $K^A_r(x) \leq K^{A, x}_r(x) + \varepsilon r \leq K(r) + \varepsilon r + O(1)$ for all but finitely many $r$, so $\operatorname{Dim}^A(x) \leq \varepsilon$. By Point-to-Set Principle for packing dimension (Theorem [%s](#theorem:PTS_for_Packing_dimension)), $\dim_{\operatorname{H}}(X) \leq \dim_{\operatorname{P}}(X) \leq \varepsilon$, too. 
+We can't ask much more than this: for no single point can serve every additional oracle in general. For instance, any $x \in N_X(A, x, \varepsilon)$, would have $K^A_r(x) \leq K^{A, x}_r(x) + \varepsilon r \leq^+ K(r) + \varepsilon r$ for all but finitely many $r$, so $\operatorname{Dim}^A(x) \leq \varepsilon$. By the Point-to-Set Principle for packing dimension (Theorem [%s](#theorem:PTS_for_Packing_dimension)), $\dim_{\operatorname{H}}(X) \leq \dim_{\operatorname{P}}(X) \leq \varepsilon$, too. 
 
-The proposition excludes dimension zero. That case is trivial.
+Proposition [%s](#proposition:full_dimensional_preservation) ignores dimension zero sets. That case is trivial.
 
 :::{prf:observation}
 :label: observation:dimension_zero_optimal_oracles
@@ -127,14 +127,73 @@ Analogous statements hold for optimal packing oracles under $\dim_{\operatorname
 
 Several (classical) classes of sets are known to have optimal oracles.
 
-:::{prf:theorem} Theorem 13, Lemmas 15, 17, 32, and 34 of {cite:t}`Stu21`
+:::{prf:theorem} Theorem 13, Lemmas 15, 17, 32, and Corollary 14 of {cite:t}`Stu21`
 :label: theorem:optimal_oracles_sufficient
-1. Every [analytic set](https://en.wikipedia.org/wiki/Analytic_set) has both optimal Hausdorff oracles and optimal packing oracles.
-2. Every {term}`weakly regular` set has both optimal Hausdorff oracles and optimal packing oracles. Moreover, the join of a Hausdorff oracle and a packing oracle for a weakly regular set is an optimal Hausdorff oracle for it.
-3. Every {term}`Hausdorff measure-regular` set has optimal Hausdorff oracles.
-4. Every {term}`Hausdorff gauge-regular` set has optimal Hausdorff oracles. 
-5. Every {term}`s-set` has optimal Hausdorff oracles.
+Over Euclidean space:
+1. Every {term}`weakly regular` set has both optimal Hausdorff oracles and optimal packing oracles.
+2. Every {term}`Hausdorff measure-regular` set has optimal Hausdorff oracles.
+3. Every {term}`Hausdorff gauge-regular` set has optimal Hausdorff oracles. 
+4. Every {term}`s-set` has optimal Hausdorff oracles.
+5. Every compact set has optimal Hausdorff oracles.
+6. Every $\boldsymbol{\Sigma}^0_2$ set has optimal Hausdorff oracles.
+7. Every [analytic set](https://en.wikipedia.org/wiki/Analytic_set) has both optimal Hausdorff oracles and optimal packing oracles.
 :::
+Let's recreate their proofs.
+:::{prf:proof}
+Many of these are simple consequences of the others. Let $X \subseteq \mathbb{R}^m$ be the set in question. By Observation [%s](#observation:dimension_zero_optimal_oracles), we may assume $\dim_{\operatorname{H}}(X) > 0$.
+1. **Weakly regular sets**
+
+We claim that the join $A_{\operatorname{H}} \oplus A_{\operatorname{P}}$ of any Hausdorff oracle $A_{\operatorname{H}}$ and any packing oracle $A_{\operatorname{P}}$ for $X$ is itself an optimal Hausdorff oracle for $X$. It's obvious that $A_{\operatorname{H}} \oplus A_{\operatorname{P}}$ is a Hausdorff oracle for $X$ by the Point-to-Set Principle (Theorem [%s](#theorem:PTS_for_H_dimension)). 
+
+As for the second condition in Definition [%s](#definition:optimal_oracles), take aribtrary $B$ and $\varepsilon > 1$. Then, we use the Strong Point-to-Set Principle (Theorem [%s](#theorem:PTS_for_Packing_dimension)) to derive for $r \gg 1$:
+
+$$
+K_r^{A_{\operatorname{H}}, A_{\operatorname{P}}}(x) &\leq K_r^{A_{\operatorname{P}}}(x) \leq \dim_{\operatorname{P}}(X) \cdot r + \frac{1}{4} \varepsilon r\\
+&= \dim_{\operatorname{H}}(X) \cdot r + \frac{1}{2} \varepsilon r\\
+&\leq \dim^{A_{\operatorname{H}}, A_{\operatorname{P}}, B}(x) \cdot r + \frac{1}{2} \varepsilon r\\
+&\leq K^{A_{\operatorname{H}}, A_{\operatorname{P}}, B}(x) + \varepsilon r.
+$$
+
+2. **Hausdorff measure-regular sets**
+
+Let $\mu$ witness the Hausdorff measure-regularity of $X$, and $s := \dim_{\operatorname{H}}(X)$. For now, fix a Hausdorff oracle $A$, which exists by the Point-to-Set Principle (Theorem [%s](#theorem:PTS_for_H_dimension)). For the sake of contradiction, assume there exist $B$ and $\varepsilon > 0$ which make $A$ fail to be optimal for $X$. By definition, that means:
+
+$$
+X = \set{x \in X}{\dim^{A, B}(x) < s - \varepsilon} \cup \left(X \setminus N_X(A, B, \varepsilon) \right).
+$$
+
+<!-- Can explain Lemma 12 more explicitly. -->
+By Lemma 12 of {cite:t}`Stu21`, we may as well have chosen $A$ to be strong enough to guarantee that, no matter the choice of $B$ and $\varepsilon$, we'd have $N_X(A, B, \varepsilon)$ is $\mu$-conull in $X$. Therefore:
+
+$$
+s - \varepsilon > \dim_{\operatorname{H}}\left(\set{x \in X}{\dim^{A, B}(x) < s - \varepsilon}\right) = \dim_{\operatorname{H}}(X) = s,
+$$
+
+a contradiction. Thus, $X$ has optimal Hausdorff oracles.
+
+3. **Hausdorff gauge-regular sets**
+
+Every Hausdorff gauge-regular set is Hausdorff measure-regular. If $h$ is the exact gauge witnessing gauge-regularity, then its associated Method II metric outer measure $\mathcal{H}^h$ witnesses measure-regularity.
+
+4. **$s$-sets**
+
+Every $s$-set is Hausdorff gauge-regular, as witnessed by the gauge $h_s$.
+
+5. **Compact sets**
+
+For each $n \in \omega$, define $s_n := \dim_{\operatorname{H}}(X) - \frac{1}{n}$. By definition of Hausdorff dimension, $X$ is not $s_n$-null. Applying Theorem [%s](#theorem:compact_non_null_compact_s_set_subset) to each $s = s_n$ yields a sequence of $s_n$-sets $X_n \subset X$ such that $X = \bigcup_n X_n$. In particular, each $X_n$ has optimal Hausdorff oracles. So, by the third part of Theorem [%s](#theorem:optimal_oracles_closure), so does $X$.
+
+6. **$\boldsymbol{\Sigma}^0_2$ sets**
+
+In $\mathbb{R}^m$, one may write any $\boldsymbol{\Sigma}^0_2$ set (i.e., $F_\sigma$ set) as the countable union of compact subsets. Since we have just shown that compact subsets have optimal Hausdorff oracles, we need only apply the third part of Theorem [%s](#theorem:optimal_oracles_closure) to finish.
+
+7. **Analytic sets**
+
+By Theorem [%s](#theorem:Sigma_0_2_subsets_dimension), $X$ has a $\boldsymbol{\Sigma}^0_2$ subset of the same Hausdorff dimension. By above, this subset has optimal Hausdorff oracles. So, by the second part of Theorem [%s](#theorem:optimal_oracles_closure), $X$ does too.
+:::
+
+<!-- Corollary: Proposition [%s](#proposition:full_upper_dimension) -->
+
 
 But whether *every* set has optimal oracles actually depends on the axioms of set theory.
 
@@ -208,3 +267,4 @@ $$
 (\exists A)(\forall B)(\forall \varepsilon > 0) \brk{\dim_{\operatorname{H}}(N_X(A, B, \varepsilon)) = \dim_{\operatorname{H}}(X)}.
 \end{aligned}
 $$
+

@@ -82,4 +82,17 @@ $$
 \end{aligned}
 $$
 
-again by alternating quantifiers with an appropriate choice for the innermost one $Q$. The complement of a $\Sigma^0_n$-class is a **$\Pi^0_n$-class**. But we may equivalently conceive of the $\Sigma^0_{n + 1}$-classes as uniformly-computable unions of $\Pi^0_n$-classes. This may be formalized using effective Borel codes. And a set which is both a $\Sigma^0_n$-class and a $\Pi^0_n$-class is also called a **$\Delta^0_n$-class**. These notions may be relativized to any oracle $B \in 2^{\leq \omega}$, notated with $B$ in the superscript: $\Sigma^{0, B}_n$, etc. The Fundamental Theorem of effective descriptive set theory states that for any $n \in \omega$, it holds that $\boldsymbol{\Sigma}^0_n = \bigcup_{B \in 2^{\leq \omega}} \Sigma^{0, B}_n$, where $\boldsymbol{\Sigma}^0_n$ denotes the corresponding level of the (boldface) Borel hierarchy from classical descriptive set theory. This motivates naming the hierarchy of $\Sigma^0_n$ and $\Pi^0_n$-classes as the **lightface Borel hierarchy**.
+again by alternating quantifiers with an appropriate choice for the innermost one $Q$. The complement of a $\Sigma^0_n$-class is a **$\Pi^0_n$-class**. But we may equivalently conceive of the $\Sigma^0_{n + 1}$-classes as uniformly-computable unions of $\Pi^0_n$-classes. This may be formalized using effective Borel codes. And a set which is both a $\Sigma^0_n$-class and a $\Pi^0_n$-class is also called a **$\Delta^0_n$-class**. These notions may be relativized to any oracle $B \in 2^{\leq \omega}$, notated with $B$ in the superscript: $\Sigma^{0, B}_n$, etc. The union of all levels $\bigcup_{\alpha < \omega} \Sigma^0_\alpha$ comprises the **arithmetical sets**, and $\bigcup_{\alpha< \omega_1^{\text{CK}}} \Sigma^0_\alpha$ the **hyperarithmetical sets**. 
+
+The Fundamental Theorem of effective descriptive set theory states that for any $n \in \omega$, it holds that $\boldsymbol{\Sigma}^0_n = \bigcup_{B \in 2^{\leq \omega}} \Sigma^{0, B}_n$, where $\boldsymbol{\Sigma}^0_n$ denotes the corresponding level of the (boldface) Borel hierarchy from classical descriptive set theory. This motivates naming the hierarchy of $\Sigma^0_n$ and $\Pi^0_n$-classes as the **lightface Borel hierarchy**. Note that the union $\bigcup_{\alpha < \omega_1} \boldsymbol{\Sigma}^0_\alpha$ comprises exactly the **Borel sets**. 
+
+Further note that these pointclass hierarchies have equivalents under second-order arithmetic: the **analytical sets** $\bigcup_{\alpha < \omega} \Sigma^1_\alpha$ and the **projective sets** $\bigcup_{\alpha < \omega} \boldsymbol{\Sigma}^1_\alpha$. Note that the [**analytic set**](https://en.wikipedia.org/wiki/Analytic_set) sit at the level $\boldsymbol{\Sigma}^1_1$.
+
+The definability hierarchies of descriptive set theory are useful for studying GMT. In particular, in light of their definitions, fractal dimensions often admit results at the second level of the (lightface) Borel hierarchy. For instance, besides Hitchcock's Correspondence Principle [%s](#theorem:correspondence_principle_for_H_dimension), we might cite a standard GMT result:
+
+:::{prf:theorem} C.f. Theorem 1 of {cite:t}`Stu21`
+:label: theorem:Sigma_0_2_subsets_dimension
+Every analytic set has a $\boldsymbol{\Sigma}^0_2$-definable subset with the same Hausdorff dimension.
+:::
+
+Similar holds for packing dimension.
