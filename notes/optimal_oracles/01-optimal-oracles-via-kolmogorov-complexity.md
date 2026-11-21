@@ -145,7 +145,7 @@ Many of these are simple consequences of the others. Let $X \subseteq \mathbb{R}
 
 We claim that the join $A_{\operatorname{H}} \oplus A_{\operatorname{P}}$ of any Hausdorff oracle $A_{\operatorname{H}}$ and any packing oracle $A_{\operatorname{P}}$ for $X$ is itself an optimal Hausdorff oracle for $X$. It's obvious that $A_{\operatorname{H}} \oplus A_{\operatorname{P}}$ is a Hausdorff oracle for $X$ by the Point-to-Set Principle (Theorem [%s](#theorem:PTS_for_H_dimension)). 
 
-As for the second condition in Definition [%s](#definition:optimal_oracles), take aribtrary $B$ and $\varepsilon > 1$. Then, we use the Strong Point-to-Set Principle (Theorem [%s](#theorem:PTS_for_Packing_dimension)) to derive for $r \gg 1$:
+As for the second condition in Definition [%s](#definition:optimal_oracles), take aribtrary $B$ and $\varepsilon > 0$. Then, we use the Strong Point-to-Set Principle (Theorem [%s](#theorem:PTS_for_Packing_dimension)) to derive for $r \gg 1$:
 
 $$
 K_r^{A_{\operatorname{H}}, A_{\operatorname{P}}}(x) &\leq K_r^{A_{\operatorname{P}}}(x) \leq \dim_{\operatorname{P}}(X) \cdot r + \frac{1}{4} \varepsilon r\\
