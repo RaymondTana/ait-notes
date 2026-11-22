@@ -86,13 +86,13 @@ again by alternating quantifiers with an appropriate choice for the innermost on
 
 The Fundamental Theorem of effective descriptive set theory states that for any $n \in \omega$, it holds that $\boldsymbol{\Sigma}^0_n = \bigcup_{B \in 2^{\leq \omega}} \Sigma^{0, B}_n$, where $\boldsymbol{\Sigma}^0_n$ denotes the corresponding level of the (boldface) Borel hierarchy from classical descriptive set theory. This motivates naming the hierarchy of $\Sigma^0_n$ and $\Pi^0_n$-classes as the **lightface Borel hierarchy**. Note that the union $\bigcup_{\alpha < \omega_1} \boldsymbol{\Sigma}^0_\alpha$ comprises exactly the **Borel sets**. 
 
-Further note that these pointclass hierarchies have equivalents under second-order arithmetic: the **analytical sets** $\bigcup_{\alpha < \omega} \Sigma^1_\alpha$ and the **projective sets** $\bigcup_{\alpha < \omega} \boldsymbol{\Sigma}^1_\alpha$. Note that the [**analytic set**](https://en.wikipedia.org/wiki/Analytic_set) sit at the level $\boldsymbol{\Sigma}^1_1$.
+Further note that these pointclass hierarchies have equivalents under second-order arithmetic: the **analytical sets** $\bigcup_{\alpha < \omega} \Sigma^1_\alpha$ and the **projective sets** $\bigcup_{\alpha < \omega} \boldsymbol{\Sigma}^1_\alpha$. Note that the [**analytic sets**](https://en.wikipedia.org/wiki/Analytic_set) sit at the level $\boldsymbol{\Sigma}^1_1$.
 
 The definability hierarchies of descriptive set theory are useful for studying GMT. In particular, in light of their definitions, fractal dimensions often admit results at the second level of the (lightface) Borel hierarchy. For instance, besides Hitchcock's Correspondence Principle [%s](#theorem:correspondence_principle_for_H_dimension), we might cite a standard GMT result:
 
 :::{prf:theorem} C.f. Theorem 1 of {cite:t}`Stu21`
 :label: theorem:Sigma_0_2_subsets_dimension
-Every analytic set has a $\boldsymbol{\Sigma}^0_2$-definable subset with the same Hausdorff dimension.
+Every analytic set has a $\boldsymbol{\Sigma}^0_2$-definable (i.e., $F_\sigma$) subset with the same Hausdorff dimension.
 :::
 
 Similar holds for packing dimension.
