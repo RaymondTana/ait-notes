@@ -249,7 +249,9 @@ An analogous statement holds for packing orcles under $\dim{\operatorname{P}}$.
 :::
 
 :::{prf:proof}
-For the first part, $A \oplus A_0$ is a Hausdorff oracle because $A_0$ is. Given $B$ and $\varepsilon > 0$, apply the fitness of $A$ to the oracle $A_0 \oplus B$ with tolerance $\varepsilon / 2$. This gives $x \in X$ with $\dim^{A, A_0, B}(x) \geq \dim_{\operatorname{H}}(X) - \varepsilon / 2$ and, for all but finitely many $r$, so
+It is easy to see that additional oracle power on the Hausdorff oracle $A_0$ makes $A \oplus A_0$ a Hausdorff oracle for $X$, too.
+
+Given $B$ and $\varepsilon > 0$, apply the fitness of $A$ to the oracle $A_0 \oplus B$ with tolerance $\varepsilon / 2$. This gives $x \in X$ with $\dim^{A, A_0, B}(x) \geq \dim_{\operatorname{H}}(X) - \varepsilon / 2$ and, for all but finitely many $r$:
 
 $$
 \begin{aligned}
