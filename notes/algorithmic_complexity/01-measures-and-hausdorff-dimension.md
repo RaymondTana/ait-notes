@@ -4,7 +4,7 @@ label: section:Measures_and_Hausdorff_Dimension
 description: "Premeasures and the outer measures they induce (Method II), Hausdorff measure and dimension, packing dimension, and the Hausdorff dimensions of a measure."
 ---
 
-Geometric measure theory studies fractal measures and dimensions. We outline here a standard method for building outer meaures from premeasures, which guides the standard construction of Hausdorff measures and dimension. These notes are biased to put a spotlight on Hausdorff dimension as a principal quantity of fractal geometry. This is despite the established importance of other fractal measures/dimensions and their established connections with AIT.
+Geometric measure theory studies fractal measures and dimensions. We outline here a standard method for building outer measures from premeasures, which guides the standard construction of Hausdorff measures and dimension. These notes are biased to put a spotlight on Hausdorff dimension as a principal quantity of fractal geometry. This is despite the established importance of other fractal measures/dimensions and their established connections with AIT.
 
 ## Measures
 
@@ -33,7 +33,7 @@ Then, $\mathcal{H}^\rho$ is an outer measure on $\Omega$.
 
 We call $\mathcal{H}^\rho$ the **Method II outer measure associated to the premeasure $\rho$**. And for each $\delta > 0$, we also call $\mathcal{H}^\rho_\delta$ the **$\rho$-dimensional $\delta$-content** measure.
 
-An outer measure $\mu$ on a metric space is **metric** if $\mu(E \cup F) = \mu(E) + \mu(F)$ whenever $E$ and $F$ are a positive distance apart. Every Method II outer measure is metric: if $E$ and $F$ are a distance $d > 0$ apart, then no set of diameter less than $d$ meets both, so $\mathcal{H}^\rho_\delta(E \cup F) = \mathcal{H}^\rho_\delta(E) + \mathcal{H}^\rho_\delta(F)$ for every $\delta < d$. By Carathéodory's criterion, an outer measure is metric if and only if every Borel set $B$ is **$\mu$-measurable**, meaning $\mu(E) = \mu(E \cap B) + \mu(E \setminus B)$ for every $E$. Every Method II outer measure is metric {cite:p}`Rog70`.
+An outer measure $\mu$ on a metric space is **metric** if $\mu(E \cup F) = \mu(E) + \mu(F)$ whenever $E$ and $F$ are a positive distance apart. Every Method II outer measure is metric: if $E$ and $F$ are a distance $d > 0$ apart, then no set of diameter less than $d$ meets both, so $\mathcal{H}^\rho_\delta(E \cup F) = \mathcal{H}^\rho_\delta(E) + \mathcal{H}^\rho_\delta(F)$ for every $\delta < d$. By Carathéodory's criterion, an outer measure is metric if and only if every Borel set $B$ is **$\mu$-measurable**, meaning $\mu(E) = \mu(E \cap B) + \mu(E \setminus B)$ for every $E$.
 
 In {cite:t}`Rog70`, C. Rogers also defines an alternative “Method I” which differs from Method II in that it does not enforce any upper bound on the diameter of the cover elements used in the infimum:
 
@@ -103,9 +103,9 @@ Suppose $\mathcal{H}^s(X) < \infty$ for some $s \geq 0$. This implies that $X$ i
 
 or $+\infty$ if the infimum is taken over the empty set.
 
-Consider now how some sets fall between the cracks of the power functions $h_s$: a set of Hausdorff dimension $s$ could have $\mathcal{H}^s(X) \in \seq{0, +\infty}$ (i.e., be $s$-null or have infinite $\mathcal{H}^s$-measure). In either case, no power function $h_{s'}$ assigns $X$ a positive, finite measure. Still, it is possible that some dimension function does: call a dimension function $h$ an **exact gauge** for $X$ if $0 < \mathcal{H}^h(X) < +\infty$. In particular, if the gauge $h_s$ is exact for a set $X$, then it is common to call $X$ and **$s$-set**. Let's highlight one way of finding $s$-sets:
+Consider now how some sets fall between the cracks of the power functions $h_s$: a set of Hausdorff dimension $s$ could have $\mathcal{H}^s(X) \in \seq{0, +\infty}$ (i.e., be $s$-null or have infinite $\mathcal{H}^s$-measure). In either case, no power function $h_{s'}$ assigns $X$ a positive, finite measure. Still, it is possible that some dimension function does: call a dimension function $h$ an **exact gauge** for $X$ if $0 < \mathcal{H}^h(X) < +\infty$. In particular, if the gauge $h_s$ is exact for a set $X$, then it is common to call $X$ an **$s$-set**. Let's highlight one way of finding $s$-sets:
 
-:::{prf:theorem} C.f. Theorem 1 of {cite:t}`Stu22`
+:::{prf:theorem} C.f. Theorem 1 of {cite:t}`Bes52`
 :label: theorem:compact_non_null_compact_s_set_subset
 Every non-$s$-null, compact subset of Euclidean space has a compact subset which is an $s$-set.
 :::
