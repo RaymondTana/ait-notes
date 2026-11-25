@@ -215,7 +215,7 @@ This shows $A_{\operatorname{H}} \oplus A_{\operatorname{P}}$ is an optimal Haus
 
 Let $\mu$ witness the Hausdorff measure-regularity of $X$. Let $A_\mu$ be an oracle guaranteed by Lemma [%s](#lemma:preservation_set_conull) for $\mu$ and $X$, let $A_{\operatorname{H}}$ be a Hausdorff oracle for $X$ (which exists by the Point-to-Set Principle [%s](#theorem:PTS_for_H_dimension)), and let $A := A_{\operatorname{H}} \oplus A_\mu$. This more powerful oracle $A$ is still a Hausdorff oracle for $X$.
 
-Now fix an oracle $B$ and $\varepsilon > 0$. By Lemma [%s](#lemma:preservation_set_conull), the set $X \setminus N_X(A, B, \varepsilon)$ is $\mu$-null. Since $X$ is Hausdorff measure-regular, deleting a $\mu$-null set from $X$ does not lower its Hausdorff dimension, so
+Now fix an oracle $B$ and $\varepsilon > 0$. By Lemma [%s](#lemma:preservation_set_conull) and its proof, the set $X \setminus N_X(A, B, \varepsilon)$ is $\mu$-null. Since $X$ is Hausdorff measure-regular, deleting a $\mu$-null set from $X$ does not lower its Hausdorff dimension, so
 
 $$
 \dim_{\operatorname{H}}(N_X(A, B, \varepsilon)) = \dim_{\operatorname{H}}(X).
