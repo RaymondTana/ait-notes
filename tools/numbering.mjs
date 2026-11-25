@@ -115,7 +115,11 @@ const numberingTransform = {
     let thm = 0;
     let eq = 0;
     walk(tree, (node) => {
-      if (num && node.type === 'proof' && node.kind !== 'proof' && node.enumerated !== false) {
+      if (node.type === 'proof' && node.kind === 'proof') {
+        // Proofs are never numbered.
+        node.enumerated = false;
+        delete node.enumerator;
+      } else if (num && node.type === 'proof' && node.enumerated !== false) {
         node.enumerator = `${num}.${++thm}`;
       } else if (num && node.type === 'math' && node.label) {
         node.enumerator = `${num}.${++eq}`;

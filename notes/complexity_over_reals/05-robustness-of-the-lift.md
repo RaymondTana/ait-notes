@@ -65,7 +65,6 @@ $$
 :::
 
 :::{prf:proof}
-:nonumber:
 The first inequality follows by definition. Unpacking the notation, it suffices to show that for any fixed $q \in B_{2^{-s}}(y) \cap \mathbb{Q}^n$,
 
 $$
@@ -113,7 +112,6 @@ $$
 :::
 
 :::{prf:proof}
-:nonumber:
 The first inequality follows by definition. Unpacking the notation, it suffices to show for any fixed $p \in B_{2^{-r}}(x) \cap \mathbb{Q}^m$ that
 
 $$
@@ -147,7 +145,6 @@ $$
 :::
 
 :::{prf:proof}
-:nonumber:
 In one direction, we have that $\restrict{y}{s}$ is a rational in a ball about $y$ of radius $2^{-s} \sqrt{n}$. So, $\restrict{y}{s}$ is considered in the evaluation of $\mathcal{K}_{s + \log \sqrt{n}}(p \mid y)$. We appeal to linear sensitivity [%s](#minmax_linear_sensitivity_in_s) in $s$ and use the fact that $\restrict{y}{s} \in B_{2^{-s} \sqrt{n}}(y) \cap \mathbb{Q}^n$ to bound $\mathcal{K}_s(p \mid y)$ from below:
 
 $$
@@ -189,7 +186,6 @@ $$
 We could prove this lemma directly using the linear sensitivity of $\mathcal{K}$ in $r$ in Lemma [%s](#minmax_linear_sensitivity_in_r). But there is a simpler proof using dyadic truncation.
 
 :::{prf:proof}
-:nonumber:
 Dropping the logarithmic terms in the precision-levels and norms, and using the definitions of $K$ and $\mathcal{K}$:
 
 $$
@@ -255,7 +251,6 @@ where equality holds up to the logarithmic factors given by ([%s](#equation:log
 :::
 
 :::{prf:proof}
-:nonumber:
 Let $(p^*, q^*)$ be the $K$-minimizers for $x$ and $y$ at precisions $r$ and $s$, respectively. Additionally, let $(p', q')$ denote a witness pair to $\KcAt{r \mid s}{x}{y}$, and $(p'', q'')$ the same for $\KcaltAt{r \mid s}{x}{y}$. Then, dropping any logarithmic terms,
 
 $$
@@ -287,7 +282,6 @@ Let $m, n, \ell \in \omega$, $x \in \mathbb{R}^m$, $y \in \mathbb{R}^n$, $z \in 
 ::::
 
 :::{prf:proof}
-:nonumber:
 We have two competing notions of $K$-minimizer, now: either unconditional, or conditioned on some extra information $\zeta \in 2^{< \omega}$. Let $p^* \in \mathbb{Q}^m$ be a $K$-minimizer of $B_{2^{-r}}(x)$ and $p^*_\zeta \in \mathbb{Q}^m$ a witness to $K_r(x \mid \zeta)$. We first show that, no matter $\zeta$, the $K$-minimizer $p^*$ also approximately minimizes $K_r(x \mid \zeta)$. By definition,
 
 ```{math}
@@ -379,7 +373,6 @@ $$
 :::
 
 :::{prf:proof}
-:nonumber:
 We simply follow the approximate equalities from the previous result:
 
 $$

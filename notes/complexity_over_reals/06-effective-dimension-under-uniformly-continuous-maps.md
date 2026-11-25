@@ -126,7 +126,6 @@ Let $m, n, k \in \omega$, $x \in \mathbb{R}^m$, $y \in \mathbb{R}^n$, and $r, s 
 ::::
 
 :::{prf:proof}
-:nonumber:
 We start by proving (i). Let $p_{f(x)}^* \in B_{2^{-r}}(f(x))$, $p_x^* \in B_{2^{-\mu(r + 1)}}(x)$ and $q^* \in B_{2^{-s}}(y)$ be $K$-minimizers in their respective open balls. Since $f$ is computable, there is an {term}`oracle` {term}`prefix-free` Turing machine $M$ which approximates $f$ arbitrarily well at $p^*_x$ when given $p^*_x$ as an oracle; say, such that for any $r \in \omega$ we have $\abs{M^{p^*_x}(r) - f(p^*_x)} \leq 2^{-(r + 1)}$. Since $\mu$ is a modulus for $f$, $M$ also approximates $f$ arbitrarily well at $x$ when given $p^*_x$ as an oracle, since for any $r$,
 
 $$
@@ -236,7 +235,6 @@ Let $m, n, k \in \omega$, $x \in \mathbb{R}^m$, $y \in \mathbb{R}^n$, and $r, s 
 ::::
 
 ::::{prf:proof}
-:nonumber:
 Both parts follow by applying the corresponding result in the previous lemma.
 
 :::{div}
@@ -271,7 +269,6 @@ Let $m, n \in \omega$, $x \in \mathbb{R}^m$, and $y \in \mathbb{R}^n$.
 ::::
 
 ::::{prf:proof}
-:nonumber:
 We combine Lemmas [%s](#lemma:forward_data_processing_conditional) and [%s](#lemma:reverse_data_processing_conditional),
 
 :::{div}

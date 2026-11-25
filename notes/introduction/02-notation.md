@@ -17,7 +17,9 @@ The notation $(\exists^\infty n)$ is a shorthand for the quantifying statement "
 
 If $\delta > 0$ and $A$ is a subset of a metric space $(\Omega, d)$, then let us define the **$\delta$-neighborhood of $A$** to be $B_\delta(A) := \set{x \in \Omega}{d(x, A) < \delta}$. Then for any $x \in \Omega$, the set $B_\delta(x) := B_\delta(\seq{x})$ is the open ball of radius $\delta$ about $x$.
 
-The cardinality of a set $A$ is denoted by $\abs{A}$. We also use $\abs{\cdot}$ for the absolute value on $\mathbb{R}$. Use $\lambda$ to denote the Lebesgue measure on both $2^\omega$ and $\mathbb{R}$. For any $p \in [0, \infty]$, $\normAt{p}{\cdot}$ denotes the $L^p$-norm on Euclidean space, and we may simply write $\norm{\cdot}$ for the standard $L^2$-norm unless specified otherwise. While $\log_b$ will denote the base-$b$ logarithm for any $0 < b \neq 1$, we will always take $\log$ to mean the base-$2$ logarithm. Also let $\mathcal{Q}^m$ be the collection of all the $m$-dimensional dyadic cubes in $\mathbb{R}^m$, consisting of the sets $Q(z, a, r)$ of the form:
+The cardinality of a set $A$ is denoted by $\abs{A}$. We also use $\abs{\cdot}$ for the absolute value on $\mathbb{R}$. Use $\lambda$ to denote the Lebesgue measure on both $2^\omega$ and $\mathbb{R}$. For any $p \in [0, \infty]$, $\normAt{p}{\cdot}$ denotes the $L^p$-norm on Euclidean space, and we may simply write $\norm{\cdot}$ for the standard $L^2$-norm unless specified otherwise. While $\log_b$ will denote the base-$b$ logarithm for any $0 < b \neq 1$, we will always take $\log$ to mean the base-$2$ logarithm.
+
+Also let $\mathcal{Q}^m$ be the collection of all the $m$-dimensional dyadic cubes in $\mathbb{R}^m$, consisting of the sets $Q(z, a, r)$ of the form:
 
 $$
 \begin{aligned}
@@ -25,7 +27,7 @@ $$
 \end{aligned}
 $$
 
-where $z \in \mathbb{Z}^m$, $a \in \omega^m$, and $r \in \omega$. Collect into $\mathcal{Q}^m_r$ all the $m$-dimensional dyadic cubes $Q(z, a, r)$ with side-length $2^{-r}$. Each such layer partitions $\mathbb{R}^m$, so for a given $r \in \omega$ and $x \in \mathbb{R}^m$, we let $Q_r(x)$ denote the unique dyadic cube from $\mathcal{Q}^m_r$ containing $x$.
+where $z \in \mathbb{Z}^m$, $a \in \omega^m$, and $r \in \omega$. Collect into $\mathcal{Q}^m_r$ all the $m$-dimensional dyadic cubes $Q(z, a, r)$ with side-length $2^{-r}$. If $Q \in \mathcal{Q}^m_r$, we consider $\operatorname{depth}(Q) = r$ to be its **depth** or **rank** in $\mathcal{Q}^m$. All $\mathcal{Q}_r$ partition $\mathbb{R}^m$, so for a given $r \in \omega$ and $x \in \mathbb{R}^m$, we let $Q_r(x)$ denote the unique dyadic cube from of rank $r$ containing $x$.
 
 It will often happen that certain equalities hold only up to an additive or multiplicative constant. For this reason we use the following notation: a statement of the form $f(x) \leq^+ g(x)$ for all $x \in X$ means that there exists a constant $c \in \mathbb{R}$ such that $f(x) \leq g(x) + c$ for all $x \in X$. Similarly $f(x) =^+ g(x)$ for all $x \in X$ means that $f(x) \leq^+ g(x) \leq^+ f(x)$ for all $x \in X$. Similarly, $f(x) \leq^* g(x)$ for all $x \in X$ will mean there exists a constant $c \in \mathbb{R}$ such that $f(x) \leq c \cdot g(x)$ for all $x \in X$, and similar for $f(x) =^* g(x)$. Similarly, the notation $f = O_{\boldsymbol{v}}(g)$ is to be interpreted as $f \leq^* g$ everywhere, where the implicit multiplicative constant may depend on the components in $\boldsymbol{v}$. And the notation $o(r)$ is used to represent a **sub-linear term**, or a term which satisfies $\lim_{r \to \infty} \frac{o(r)}{r} = 0$.
 

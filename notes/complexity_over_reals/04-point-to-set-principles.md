@@ -97,7 +97,6 @@ One might view the Hausdorff dimension result above as a Euclidean, ball-based c
 Here, we reproduce the proof of Miyabe's Hausdorff dimension formula.
 
 :::{prf:proof}
-:nonumber:
 Fix $\varphi$ and let $\alpha = \sup_{x \in X} L^\varphi_r(x) / r$.
 
 *Lower bound*: To prove $\dim_{\operatorname{H}} X \leq \alpha$, consider any $t > \alpha$. Each $x \in X$ has infinitely many $r$ with a name $\pi$ such that $x \in \varphi(\pi)$, $\operatorname{diam} \varphi(\pi) \leq 2^{-r}$, and $\operatorname{len}(\pi) < tr$, so that $\operatorname{diam}(\varphi(\pi))^t < 2^{-\operatorname{len}(\pi)}$. A fixed name denotes a ball of fixed positive diameter, so it witnesses only finitely many $r$, and the lengths of the witnessing names tend to infinity. So for every $N$, the balls $\varphi(\pi)$ with $\operatorname{len}(\pi) \geq N$ and $\operatorname{diam}(\varphi(\pi))^t < 2^{-\operatorname{len}(\pi)}$ cover $X$, each with diameter less than $2^{-N/t}$, and
@@ -136,7 +135,6 @@ $$
 :::
 
 :::{prf:proof}
-:nonumber:
 Each $\mathbf{U}^A$ is a prefix-free ball code, so Theorem [%s](#theorem:ball_code_characterization) gives "$\geq$". For the reverse, take a minimizing code, rationalize it, and encode it into an oracle by Lemma [%s](#lemma:rationalize_and_encode_ball_codes).
 :::
 
@@ -211,7 +209,6 @@ $$
 :::
 
 :::{prf:proof}
-:nonumber:
 ($\Leftarrow$): Each $\mathbf{U}^A$ is a prefix-free ball code, so appeal to Theorem [%s](#theorem:ball_code_nullity).
 
 ($\Rightarrow$): Suppose $\mathcal{H}^s(X) = 0$ and let $\varphi$ be the code guaranteed by Theorem [%s](#theorem:ball_code_nullity). Rationalize it, changing $L^\varphi_r(x) - sr$ by at most $s$. Then, encode it into an oracle $B$ by Lemma [%s](#lemma:rationalize_and_encode_ball_codes). Exchanging this $L^\varphi_r(x)$ for $L^{\mathbf{U}^B}_r(x)$ introduces at most $O(1)$ error. Thus, $\liminf_r (L^{\mathbf{U}^B}_r(x) - sr) = -\infty$ for every $x \in X$.

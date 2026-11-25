@@ -146,7 +146,36 @@ The following are results of {cite:t}`Stu21` related to having optimal oracles. 
 Analogous statements hold for optimal packing oracles under $\dim_{\operatorname{P}}$.
 :::
 
-Several (classical) classes of sets are known to have optimal Hausdorff oracles.
+Oracles can encode information about measures by, for instance, encoding countably much information on how they assign measure to sets. The following result by D. Stull uses this idea to find a strong enough oracle making $N_X(A, B, \varepsilon)$ take up most of $X$.
+
+:::{prf:lemma} c.f., Lemma 12 of {cite:t}`Stu21`
+:label: lemma:preservation_set_conull
+Let $\mu$ be a metric outer measure on $\mathbb{R}^m$ with $0 < \mu(X) < \infty$. Then there exists an oracle $A$ such that for every oracle $B$ and every $\varepsilon > 0$, the set $N_X(A, B, \varepsilon)$ is $\mu$-conull in $X$.
+:::
+
+:::{prf:proof}
+We claim that any oracle $A$ which can lower-semicompute the map $Q \mapsto \mu(X \cap Q)$ on $\mathcal{Q}^m$ suffices.
+
+Since $\mu$ is metric, every Borel set is $\mu$-measurable, so $\nu(E) := \mu(X \cap E)$ defines a finite Borel measure on $\mathbb{R}^m$. By Lemma [%s](#lemma:coding_bound_from_measure) applied to $\nu$, there is a constant $c$ such that for all $x \in \mathbb{R}^m$ and all $r \gg 1$,
+
+$$
+\begin{aligned}
+K^A_r(x) \leq -\log \mu(X \cap Q_r(x)) + c \log r.
+\end{aligned}
+$$
+
+By Lemma [%s](#lemma:measure_bound_almost_everywhere) applied to $\nu$ relative to $A \oplus B$, after enlarging $c$, for $\nu$-almost every $x$ (call the exceptional set $E$) and all sufficiently large $r$ we have 
+$$
+K^{A, B}_r(x) \geq -\log \mu(X \cap Q_r(x)) - c \log r.
+$$ 
+Thus,
+$$
+K^{A, B}_r(x) \geq K^A_r(x) - 2c \log r \geq K^A_r(x) - \varepsilon r
+$$ 
+for all large $r$, so $x \in N_X(A, B, \varepsilon)$. 
+
+The exceptional set $E$ is $\nu$-null, so $\mu(X \setminus N_X(A, B, \varepsilon)) \leq \mu(X \cap E) = \nu(E) = 0$.
+:::
 
 :::{prf:theorem} Theorem 13, Lemmas 15, 17, 32, and Corollary 14 of {cite:t}`Stu21`
 :label: theorem:optimal_oracles_sufficient
@@ -182,20 +211,15 @@ This shows $A_{\operatorname{H}} \oplus A_{\operatorname{P}}$ is an optimal Haus
 
 2. **Hausdorff measure-regular sets**
 
-Let $\mu$ witness the Hausdorff measure-regularity of $X$, and $s := \dim_{\operatorname{H}}(X)$. For now, fix a Hausdorff oracle $A$, which exists by the Point-to-Set Principle (Theorem [%s](#theorem:PTS_for_H_dimension)). For the sake of contradiction, assume there exist $B$ and $\varepsilon > 0$ which make $A$ fail to be optimal for $X$. By definition, that means:
+Let $\mu$ witness the Hausdorff measure-regularity of $X$. Let $A := A_{\operatorname{H}} \oplus A_\mu$, where $A_{\operatorname{H}}$ is a Hausdorff oracle for $X$ (which exists by the Point-to-Set Principle [%s](#theorem:PTS_for_H_dimension)), and $A_\mu$ is an oracle encoding the values $\mu(X \cap Q)$ for $Q \in \mathcal{Q}^m$. The more powerful oracle $A$ is still a Hausdorff oracle for $X$, and $Q \mapsto \mu(X \cap Q)$ is computable relative to $A$.
+
+Now fix an oracle $B$ and $\varepsilon > 0$. By Lemma [%s](#lemma:preservation_set_conull), the set $X \setminus N_X(A, B, \varepsilon)$ is $\mu$-null. Since $X$ is Hausdorff measure-regular, deleting a $\mu$-null set from $X$ does not lower its Hausdorff dimension, so
 
 $$
-X = \set{x \in X}{\dim^{A, B}(x) < s - \varepsilon} \cup \left(X \setminus N_X(A, B, \varepsilon) \right).
+\dim_{\operatorname{H}}(N_X(A, B, \varepsilon)) = \dim_{\operatorname{H}}(X).
 $$
 
-<!-- Can explain Lemma 12 more explicitly. -->
-By Lemma 12 of {cite:t}`Stu21`, we may as well have chosen $A$ to be strong enough to guarantee that, no matter the choice of $B$ and $\varepsilon$, we'd have $N_X(A, B, \varepsilon)$ is $\mu$-conull in $X$. Therefore:
-
-$$
-s - \varepsilon \geq \dim_{\operatorname{H}}\left(\set{x \in X}{\dim^{A, B}(x) < s - \varepsilon}\right) = \dim_{\operatorname{H}}(X) = s,
-$$
-
-a contradiction. Thus, $X$ has optimal Hausdorff oracles.
+As $B$ and $\varepsilon$ were arbitrary, Proposition [%s](#proposition:full_dimensional_preservation) shows that $A$ is an optimal Hausdorff oracle for $X$.
 
 3. **Hausdorff gauge-regular sets**
 

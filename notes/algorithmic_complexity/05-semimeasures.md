@@ -104,7 +104,6 @@ Fix $X \subseteq 2^\omega$ and computable $s > 0$. Then the following are equiva
 ::::
 
 :::{prf:proof}
-:nonumber:
 It suffices to prove (i) $\iff$ (iii). First, suppose (i). For each $n \in \omega$, the map
 
 $$
