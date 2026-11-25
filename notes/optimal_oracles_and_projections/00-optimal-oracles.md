@@ -1,10 +1,10 @@
 ---
-title: "Optimal Oracles"
-label: chapter:optimal_oracles
-description: "Chapter overview: Stull's optimal oracles — a notion with no classical characterization — as a case study in how algorithmic and classical methods interoperate."
+title: "Optimal Oracles and Projection Results"
+label: chapter:optimal_oracles_and_projections
+description: "Chapter overview: Stull's optimal oracles as a case study in how algorithmic and classical methods interoperate."
 ---
 
-This chapter introduces a powerful geometric measure theoretic notion which has only ever been expressed in the language of AIT, with no corresponding characterization in classical terms. We use this notion as a case study in how algorithmic and classical methods interoperate.
+This chapter explores notions from AIT to proving geometric measure theoretic results of sets under projections. The central centers on a powerful tool for GMT which has only ever been expressed in the language of AIT, with no corresponding characterization in classical terms. We use this notion as a case study in how algorithmic and classical methods interoperate.
 
 In particular, we study *optimal oracles*, a characteristic of a set first introduced by D. Stull {cite:p}`Stu21`. He considers an {term}`oracle <Oracle>` to be *optimal* for a set if it not only witnesses a {term}`point-to-set principle <Point-to-Set Principle>` for that set, but also resists being improved at computing points of that set under any additional oracle power. Stull's notion is defined using Kolmogorov complexity. Yet, this property controls classical statements from GMT such as {term}`Marstrand's projection theorem <Marstrand-Mattila Projection Theorem>`, and whether a set has optimal oracles can depend on set-theoretic axioms. This leaves much to explore. 
 

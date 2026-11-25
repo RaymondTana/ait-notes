@@ -124,9 +124,9 @@ project:
         - file: notes/complexity_over_reals/04-point-to-set-principles.md
         - file: notes/complexity_over_reals/05-robustness-of-the-lift.md
         - file: notes/complexity_over_reals/06-effective-dimension-under-uniformly-continuous-maps.md
-    - file: notes/optimal_oracles/00-optimal-oracles.md
+    - file: notes/optimal_oracles_and_projections/00-optimal-oracles.md
       children:
-        - file: notes/optimal_oracles/01-optimal-oracles-via-kolmogorov-complexity.md
+        - file: notes/optimal_oracles_and_projections/01-optimal-oracles-via-kolmogorov-complexity.md
     - file: notes/reasoning/00-reasoning.md
       children:
         - file: notes/reasoning/01-primitives-of-reasoning.md
