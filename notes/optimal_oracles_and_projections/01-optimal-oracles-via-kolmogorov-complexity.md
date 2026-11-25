@@ -148,7 +148,7 @@ Analogous statements hold for optimal packing oracles under $\dim_{\operatorname
 
 Oracles can encode information about measures by, for instance, encoding countably much information on how they assign measure to sets. The following result by D. Stull uses this idea to find a strong enough oracle making $N_X(A, B, \varepsilon)$ take up most of $X$.
 
-:::{prf:lemma} c.f., Lemma 12 of {cite:t}`Stu21`
+:::{prf:lemma} Cf. Lemma 12 of {cite:t}`Stu21`
 :label: lemma:preservation_set_conull
 Let $\mu$ be a metric outer measure on $\mathbb{R}^m$ with $0 < \mu(X) < \infty$. Then there exists an oracle $A$ such that for every oracle $B$ and every $\varepsilon > 0$, the set $N_X(A, B, \varepsilon)$ is $\mu$-conull in $X$.
 :::
@@ -180,7 +180,7 @@ The exceptional set $E$ is $\nu$-null, so $\mu(X \setminus N_X(A, B, \varepsilon
 :::{prf:theorem} Theorem 13, Lemmas 15, 17, 32, and Corollary 14 of {cite:t}`Stu21`
 :label: theorem:optimal_oracles_sufficient
 Over Euclidean space:
-1. Every {term}`weakly regular` set has both optimal Hausdorff oracles.
+1. Every {term}`weakly regular` set has optimal Hausdorff oracles.
 2. Every {term}`Hausdorff measure-regular` set has optimal Hausdorff oracles.
 3. Every {term}`Hausdorff gauge-regular` set has optimal Hausdorff oracles. 
 4. Every {term}`s-set` has optimal Hausdorff oracles.
@@ -197,21 +197,23 @@ Let $s := \dim_{\operatorname{H}}(X) = \dim_{\operatorname{P}}(X)$. We claim tha
 
 It's obvious by the Point-to-Set Principle (Theorem [%s](#theorem:PTS_for_H_dimension)) that the more powerful oracle $A_{\operatorname{H}} \oplus A_{\operatorname{P}}$ is still a Hausdorff oracle for $X$.
 
-Now fix an oracle $B$ and $\varepsilon > 0$. Apply the Point-to-Set Principle again but to the oracle $A \oplus B$ to pick an $x \in X$ with $\dim^{A, B}(x) > s - \tfrac{\varepsilon}{4}$; and derive for $r \gg 1$:
+Now fix an oracle $B$ and $\varepsilon > 0$. Apply the Point-to-Set Principle again but to the oracle $A_{\operatorname{H}} \oplus A_{\operatorname{P}} \oplus B$ to pick an $x \in X$ with $\dim^{A_{\operatorname{H}}, A_{\operatorname{P}}, B}(x) > s - \tfrac{\varepsilon}{4}$; and derive for $r \gg 1$:
 
 $$
-K_r^{A_{\operatorname{H}}, A_{\operatorname{P}}}(x) &\leq K_r^{A_{\operatorname{P}}}(x)\\
+\begin{aligned}
+K_r^{A_{\operatorname{H}}, A_{\operatorname{P}}}(x) &\leq^+ K_r^{A_{\operatorname{P}}}(x)\\
 &\leq \dim_{\operatorname{P}}(X) \cdot r + \frac{1}{4} \varepsilon r\\
 &= \dim_{\operatorname{H}}(X) \cdot r + \frac{1}{4} \varepsilon r\\
 &< \dim^{A_{\operatorname{H}}, A_{\operatorname{P}}, B}(x) \cdot r + \frac{1}{2} \varepsilon r\\
 &\leq K_r^{A_{\operatorname{H}}, A_{\operatorname{P}}, B}(x) + \varepsilon r.
+\end{aligned}
 $$
 
 This shows $A_{\operatorname{H}} \oplus A_{\operatorname{P}}$ is an optimal Hausdorff oracle.
 
 2. **Hausdorff measure-regular sets**
 
-Let $\mu$ witness the Hausdorff measure-regularity of $X$. Let $A := A_{\operatorname{H}} \oplus A_\mu$, where $A_{\operatorname{H}}$ is a Hausdorff oracle for $X$ (which exists by the Point-to-Set Principle [%s](#theorem:PTS_for_H_dimension)), and $A_\mu$ is an oracle encoding the values $\mu(X \cap Q)$ for $Q \in \mathcal{Q}^m$. The more powerful oracle $A$ is still a Hausdorff oracle for $X$, and $Q \mapsto \mu(X \cap Q)$ is computable relative to $A$.
+Let $\mu$ witness the Hausdorff measure-regularity of $X$. Let $A_\mu$ be an oracle guaranteed by Lemma [%s](#lemma:preservation_set_conull) for $\mu$ and $X$, let $A_{\operatorname{H}}$ be a Hausdorff oracle for $X$ (which exists by the Point-to-Set Principle [%s](#theorem:PTS_for_H_dimension)), and let $A := A_{\operatorname{H}} \oplus A_\mu$. This more powerful oracle $A$ is still a Hausdorff oracle for $X$.
 
 Now fix an oracle $B$ and $\varepsilon > 0$. By Lemma [%s](#lemma:preservation_set_conull), the set $X \setminus N_X(A, B, \varepsilon)$ is $\mu$-null. Since $X$ is Hausdorff measure-regular, deleting a $\mu$-null set from $X$ does not lower its Hausdorff dimension, so
 

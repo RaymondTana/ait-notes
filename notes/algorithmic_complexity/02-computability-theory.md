@@ -90,7 +90,7 @@ Further note that these pointclass hierarchies have equivalents under second-ord
 
 The definability hierarchies of descriptive set theory are useful for studying GMT. In particular, in light of their definitions, fractal dimensions often admit results at the second level of the (lightface) Borel hierarchy. For instance, besides Hitchcock's Correspondence Principle [%s](#theorem:correspondence_principle_for_H_dimension), we might cite a standard GMT result:
 
-:::{prf:theorem} C.f. Theorem 1 of {cite:t}`Stu21`
+:::{prf:theorem} Cf. Theorem 1 of {cite:t}`Stu21`
 :label: theorem:Sigma_0_2_subsets_dimension
 Every analytic set has a $\boldsymbol{\Sigma}^0_2$-definable (i.e., $F_\sigma$) subset with the same Hausdorff dimension.
 :::

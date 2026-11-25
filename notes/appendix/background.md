@@ -8,7 +8,7 @@ numbering:
 
 Statements of results from the literature that are cited in these notes or in later chapters of my [dissertation](https://raymondtana.github.io/my_assets/documents/Raymond%20Tana%20PhD%20Dissertation.pdf).
 
-:::{prf:theorem} Marstrand-Mattila Projection Theorem; c.f. Theorem 5.8 in {cite:t}`Mat15`
+:::{prf:theorem} Marstrand-Mattila Projection Theorem; cf. Theorem 5.8 in {cite:t}`Mat15`
 :label: theorem:marstrand_projection_original
 Let $0 < n < m$ and $X \subseteq \mathbb{R}^m$ be analytic. Then,
 

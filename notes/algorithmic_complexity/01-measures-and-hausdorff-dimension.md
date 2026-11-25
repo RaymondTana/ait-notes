@@ -105,7 +105,7 @@ or $+\infty$ if the infimum is taken over the empty set.
 
 Consider now how some sets fall between the cracks of the power functions $h_s$: a set of Hausdorff dimension $s$ could have $\mathcal{H}^s(X) \in \seq{0, +\infty}$ (i.e., be $s$-null or have infinite $\mathcal{H}^s$-measure). In either case, no power function $h_{s'}$ assigns $X$ a positive, finite measure. Still, it is possible that some dimension function does: call a dimension function $h$ an **exact gauge** for $X$ if $0 < \mathcal{H}^h(X) < +\infty$. In particular, if the gauge $h_s$ is exact for a set $X$, then it is common to call $X$ an **$s$-set**. Let's highlight one way of finding $s$-sets:
 
-:::{prf:theorem} C.f. Theorem 1 of {cite:t}`Bes52`
+:::{prf:theorem} Cf. Theorem 1 of {cite:t}`Bes52`
 :label: theorem:compact_non_null_compact_s_set_subset
 Every non-$s$-null, compact subset of Euclidean space has a compact subset which is an $s$-set.
 :::

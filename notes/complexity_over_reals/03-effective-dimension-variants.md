@@ -34,7 +34,7 @@ $$
 
 Both $I$ and $I_{r : s}$ inherit many of their expected properties such as a chain rule and symmetry from $K$ and $K_{r \mid s}$. In particular, a slight generalization to Theorem 4.10 in {cite:t}`CL14` for distinct precision-levels proves the chain rule for $I_{r : s}$.
 
-:::{prf:theorem} Chain Rule for Mutual Information, c.f. Theorem 4.10 of {cite:t}`CL14`
+:::{prf:theorem} Chain Rule for Mutual Information, cf. Theorem 4.10 of {cite:t}`CL14`
 :label: theorem:chain_rule_mutual_information_r_s
 For all $x \in \mathbb{R}^m$, $y \in \mathbb{R}^n$, and $r, s \in \omega$,
 

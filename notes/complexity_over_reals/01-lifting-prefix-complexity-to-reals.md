@@ -173,7 +173,7 @@ H_r(x) := \min \set{K(\ulcorner Q \urcorner)}{Q \in \mathcal{Q}^m \text{ and } Q
 \end{aligned}
 $$
 
-(or $+\infty$ if the minimum is taken over $\varnothing$) denote another lift of complexity to points in $\mathbb{R}^m$. Intuitively, this definition captures the idea that a point is *simple* if there are always sufficiently simple dyadic cubes in its vicinity. Clearly, $H_r(x) \geq^+ K_r(x)$, as the any dyadic cube $Q \subseteq B_{2^{-r}}(x)$ has its center in $B_{2^{-r}}(x)$, too. In fact, these two notions do not significantly differ.
+(or $+\infty$ if the minimum is taken over $\varnothing$) denote another lift of complexity to points in $\mathbb{R}^m$. Intuitively, this definition captures the idea that a point is *simple* if there are always sufficiently simple dyadic cubes in its vicinity. Clearly, $H_r(x) \geq^+ K_r(x)$, as any dyadic cube $Q \subseteq B_{2^{-r}}(x)$ has its center in $B_{2^{-r}}(x)$, too. In fact, these two notions do not significantly differ.
 
 :::{prf:proposition}
 :label: prop:H_and_K_Euclidean
@@ -208,7 +208,7 @@ H_r(x) \leq K(\ulcorner Q \urcorner) \leq K(\restrict{x}{r}) + K(r) + O(m \log m
 $$
 :::
 
-Yet another lift (which does not significantly differ from the rest) may defined as follows:
+Yet another lift (which does not significantly differ from the rest) may be defined as follows:
 
 $$
 \begin{aligned}
@@ -216,7 +216,7 @@ G_r(x) := \min \set{K(\ulcorner Q \urcorner)}{x \in Q \in \mathcal{Q}^m \text{ a
 \end{aligned}
 $$
 
-(or $+\infty$ if the minimum is taken over $\varnothing$). Intuitively, this definition captures the idea that a point is *simple* if there are sufficiently small and simple dyadic cubes covering it. Compared to $H_r(x)$, this fourth notion $G_r(x)$ minimizes prefix complexity over a smaller class of dyadic cubes, since $x \in Q$ and $\diam(Q) \leq 2^{-r}$ imply $Q \subseteq B_{2^{-r}}(x)$, but not vice versa. Nevertheless, we observe asymptotic coincidence between the two notions.
+(or $+\infty$ if the minimum is taken over $\varnothing$). Intuitively, this definition captures the idea that a point is *simple* if there are sufficiently small and simple dyadic cubes covering it. Compared to $H_r(x)$, the fourth notion $G_r(x)$ minimizes prefix complexity over a smaller class of dyadic cubes, since $x \in Q$ and $\diam(Q) \leq 2^{-r}$ imply $Q \subseteq B_{2^{-r}}(x)$, but not vice versa. Nevertheless, we observe asymptotic coincidence between the two notions.
 
 :::{prf:proposition}
 :label: prop:G_and_K_Euclidean
@@ -249,9 +249,9 @@ for some fixed $o(r)$ term in $r$ independent of $A$ and $x$.
 :::
 
 :::{prf:proof}
-Take any $q \in B_{2^{-r}}(x) \cap \mathbb{Q}^m$ minimizing $K(q)$. By a small geometric argument, at most $3^m$ dyadic cubes from $\mathcal{Q}^m_r$ intersecting $B_{2^{-r}}(x)$ may pass within $\pm 2^{-r}$ of $q$ along each axis simultaneously. So one may compute the rational center of $Q_r(x)$ using $q$, $r$, $m$ and an index of $Q_r(x)$ in a standard computable enumeration of these $3^m$ cubes. This shows $K(Q_r(x)) \leq K_r(x) + o(r)$.
+Take any $q \in B_{2^{-r}}(x) \cap \mathbb{Q}^m$ minimizing $K(q)$. By a small geometric argument, at most $3^m$ dyadic cubes from $\mathcal{Q}^m_r$ may pass within $\pm 2^{-r}$ of $q$ along each axis simultaneously. So we may compute the rational center of $Q_r(x)$ using $q$, $r$, $m$ and an index of $Q_r(x)$ in a standard computable enumeration of these $3^m$ cubes. This shows $K(Q_r(x)) \leq K_r(x) + o(r)$.
 
-In the other direction, take any $q \in Q_r(x) \cap \mathbb{Q}^m$ minimizing $K(q)$, and let $d := \ceil{\log \sqrt{m}}$. Of course, $q$ and $r$ compute $Q_r(q) = Q_r(x)$. And they list its $2^{md}$ subcubes in $\mathcal{Q}^m_{r + d}$. The singular subcube containing $x$ has a center which lies within $\frac{\sqrt{m}}{2} 2^{-(r + d)} \leq 2^{-(r + 1)}$ of $x$. Thus, descriptions for $q$, $r$, and an $md$-bit index produce a rational in $B_{2^{-r}}(x)$. This shows $K_r(x) \leq K(Q_r(x)) + o(r)$.
+In the other direction, take any $q \in Q_r(x) \cap \mathbb{Q}^m$ minimizing $K(q)$, and let $d := \ceil{\log \sqrt{m}}$. Of course, $q$ and $r$ compute $Q_r(q) = Q_r(x)$. And they list its $2^{md}$ subcubes in $\mathcal{Q}^m_{r + d}$. The unique subcube containing $x$ has a center which lies within $\frac{\sqrt{m}}{2} 2^{-(r + d)} \leq 2^{-(r + 1)}$ of $x$. Thus, descriptions for $q$, $r$, and an $md$-bit index produce a rational in $B_{2^{-r}}(x)$. This shows $K_r(x) \leq K(Q_r(x)) + o(r)$.
 :::
 
 The final variant begins with a definition: let a **rational closed ball** be a set 
@@ -374,11 +374,11 @@ So, $m$ is a discrete semimeasure on $\mathcal{Q}^n$ which is lower-semicomputab
 
 $$
 \begin{aligned}
-K^A(\ulcorner Q \urcorner) \leq^+ -\log m(Q) = -\log \nu(Q) + K(r),
+K^A(\ulcorner Q \urcorner) \leq^+ -\log m(Q) =^+ -\log \nu(Q) + K(r),
 \end{aligned}
 $$
 
-where the constant may depend on $M$ and $\nu$, but not on $Q$. Finally, let $d := \ceil{\frac{1}{2} \log n}$. From $\ulcorner Q_r(x) \urcorner$ and the $nd$-bit index of $Q_{r+d}(x)$ among the $2^{nd}$ cubes of $\mathcal{Q}^n_{r+d}$ inside $Q_r(x)$, we can compute the center $q$ of $Q_{r+d}(x)$, which satisfies $\abs{x - q} \leq \frac{\sqrt{n}}{2} 2^{-(r+d)} \leq 2^{-r}$. So $K^A_r(x) \leq^+ K^A(\ulcorner Q_r(x) \urcorner)$. (Passing through the set $Q_r(x)$ and Lemma [%s](#lemma:cube_vs_point_complexity) instead would cost a second $K(r)$, since the code $\ulcorner Q_r(x) \urcorner$ already knows $r$ but a rational point of $Q_r(x)$ does not.)
+where the constant may depend on $M$ and $\nu$, but not on $Q$. Finally, let $d := \ceil{\frac{1}{2} \log n}$. From $\ulcorner Q_r(x) \urcorner$ and the $nd$-bit index of $Q_{r+d}(x)$ among the $2^{nd}$ cubes of $\mathcal{Q}^n_{r+d}$ inside $Q_r(x)$, we can compute the center $q$ of $Q_{r+d}(x)$, which satisfies $\norm{x - q} \leq \frac{\sqrt{n}}{2} 2^{-(r + d)} \leq 2^{-r}$. So $K^A_r(x) \leq^+ K^A(\ulcorner Q_r(x) \urcorner)$. (Passing through the set $Q_r(x)$ and Lemma [%s](#lemma:cube_vs_point_complexity) instead would cost a second $K(r)$, since the code $\ulcorner Q_r(x) \urcorner$ already knows $r$ but a rational point of $Q_r(x)$ does not.)
 :::
 
 The reverse inequality fails pointwise: for Lebesgue measure $\lambda$ on $[0,1)^n$, we have $-\log \lambda(Q_r(x)) = nr$ for every $x \in [0,1)^n$, while $K_r(x) = O(\log r)$ whenever $x$ is computable. But it does hold almost everywhere!
@@ -400,13 +400,13 @@ $$
 \mathcal{S}_r := \set{Q \in \mathcal{Q}^n_r}{(\exists x \in Q) \left[\nu(Q) < 2^{-K(r)} \cdot 2^{-K^A_r(x)} \right]}.
 $$
 
-For each $Q \in \mathcal{S}_r$, fix such an $x_Q$, together with a rational $q_Q \in B_{2^{-r}}(x_Q)$ minimizing $K^A(q_Q)$. Each ball $B_{2^{-r}}(q)$ lies in a box of side-length $2^{1-r}$, which meets at most $3^n$ cubes from $\mathcal{Q}^n_r$. Thus, $q_Q$ is this $q$ for at most $3^n$ cubes $Q \in \mathcal{S}_r$. Then by applying the Kraft Inequality ([%s](#theorem:kraft_inequality)) twice,
+For each $Q \in \mathcal{S}_r$, fix such an $x_Q$, together with a rational $q_Q \in B_{2^{-r}}(x_Q)$ minimizing $K^A(q_Q)$. Each ball $B_{2^{-r}}(q)$ lies in a box of side-length $2^{1-r}$, which meets at most $3^n$ cubes from $\mathcal{Q}^n_r$. Thus, if $q = q_Q$, then $x_Q \in Q \cap B_{2^{-r}}(q)$, meaning $Q$ meets the box. Hence each rational $q$ equals $q_Q$ for at most $3^n$ cubes $Q \in \mathcal{S}_r$. Then by applying the Kraft Inequality ([%s](#theorem:kraft_inequality)) twice,
 
 $$
 \begin{aligned}
 \nu\p{\textstyle\bigcup \mathcal{S}_r} \leq \sum_{Q \in \mathcal{S}_r} \nu(Q) &\leq 2^{-K(r)} \sum_{Q \in \mathcal{S}_r} 2^{-K^A(q_Q)}\\
 &\leq 3^n \cdot 2^{-K(r)} \sum_{q \in \mathbb{Q}^n} 2^{-K^A(q)} \leq 3^n \cdot 2^{-K(r)},\\
-\implies \sum_{r \in \omega} \nu\p{\textstyle\bigcup \mathcal{S}_r} &\leq 3^n \sum_{r \in \omega} 2^{-K(r)} \leq 3^{-n}.
+\implies \sum_{r \in \omega} \nu\p{\textstyle\bigcup \mathcal{S}_r} &\leq 3^n \sum_{r \in \omega} 2^{-K(r)} \leq 3^n.
 \end{aligned}
 $$
 
